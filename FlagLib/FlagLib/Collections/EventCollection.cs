@@ -10,18 +10,17 @@ namespace FlagLib.Collections
     /// <typeparam name="T">Type of the elements in the <see cref="EventCollection&lt;T&gt;"/></typeparam>
     public class EventCollection<T> : ICollection<T>
     {
-        #region Members
-
         private List<T> internList;
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets the number of elements in the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
-        /// <value>The number of elements in the <see cref="EventCollection&lt;T&gt;"/>.</value>
+        /// <value>
+        /// The number of elements in the <see cref="EventCollection&lt;T&gt;"/>.
+        /// </value>
+        /// <returns>
+        /// The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        ///   </returns>
         public virtual int Count
         {
             get { return this.internList.Count; }
@@ -30,7 +29,6 @@ namespace FlagLib.Collections
         /// <summary>
         /// Gets or sets the <see cref="T"/> at the specified index.
         /// </summary>
-        /// <value></value>
         public virtual T this[int index]
         {
             get { return this.internList[index]; }
@@ -40,7 +38,9 @@ namespace FlagLib.Collections
         /// <summary>
         /// Gets or sets the capacity of the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
-        /// <value>The capacity.</value>
+        /// <value>
+        /// The capacity.
+        /// </value>
         public virtual int Capacity
         {
             get { return this.internList.Capacity; }
@@ -48,19 +48,15 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="EventCollection&lt;T&gt;"/> is read only.
+        /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
         /// </summary>
-        /// <value>
-        /// 	<c>true</c> if the <see cref="EventCollection&lt;T&gt;"/>e is read only; otherwise, <c>false</c>.
-        /// </value>
+        /// <returns>
+        /// true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+        ///   </returns>
         public virtual bool IsReadOnly
         {
             get { return false; }
         }
-
-        #endregion Properties
-
-        #region Events
 
         /// <summary>
         /// Occurs when an item has been added.
@@ -92,10 +88,6 @@ namespace FlagLib.Collections
         /// </summary>
         public event EventHandler ListClearing;
 
-        #endregion Events
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EventCollection&lt;T&gt;"/> class.
         /// </summary>
@@ -122,14 +114,13 @@ namespace FlagLib.Collections
         {
         }
 
-        #endregion Constructor
-
-        #region Public methods
-
         /// <summary>
         /// Adds the specified item to the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
         /// <param name="item">The item to add.</param>
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        ///   </exception>
         public virtual void Add(T item)
         {
             this.OnItemAdding(new EventCollectionEventArgs<T>(item, this.internList.Count));
@@ -141,7 +132,7 @@ namespace FlagLib.Collections
         /// Adds the collection to the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
         /// <param name="collection">The collection to add.</param>
-        /// <exception cref="System.ArgumentNullException" />
+        /// <exception cref="System.ArgumentNullException"/>
         public virtual void AddRange(IEnumerable<T> collection)
         {
             if (collection == null)
@@ -158,6 +149,9 @@ namespace FlagLib.Collections
         /// <summary>
         /// Removes all elements from the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        ///   </exception>
         public virtual void Clear()
         {
             this.OnListClearing(EventArgs.Empty);
@@ -170,7 +164,7 @@ namespace FlagLib.Collections
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>
-        /// 	<c>true</c> if the <see cref="EventCollection&lt;T&gt;"/> contains the specified item; otherwise, <c>false</c>.
+        ///   <c>true</c> if the <see cref="EventCollection&lt;T&gt;"/> contains the specified item; otherwise, <c>false</c>.
         /// </returns>
         public virtual bool Contains(T item)
         {
@@ -181,7 +175,9 @@ namespace FlagLib.Collections
         /// Returns the index of the specified item.
         /// </summary>
         /// <param name="item">The item to search.</param>
-        /// <returns>The index of the specified item</returns>
+        /// <returns>
+        /// The index of the specified item
+        /// </returns>
         public virtual int IndexOf(T item)
         {
             return this.internList.IndexOf(item);
@@ -191,7 +187,12 @@ namespace FlagLib.Collections
         /// Removes the specified item.
         /// </summary>
         /// <param name="item">The item to remove.</param>
-        /// <returns>True, if the item is successfully removed; otherwise, false.</returns>
+        /// <returns>
+        /// True, if the item is successfully removed; otherwise, false.
+        /// </returns>
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        ///   </exception>
         public virtual bool Remove(T item)
         {
             int index = this.internList.IndexOf(item);
@@ -241,10 +242,10 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the <see cref="EventList&lt;T&gt;"/>.
+        /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.Generic.IEnumerator&lt;T&gt"/> object that can be used to iterate through the collection.
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
         /// </returns>
         protected IEnumerator<T> GetEnumerator()
         {
@@ -279,10 +280,6 @@ namespace FlagLib.Collections
 
             this.OnItemRemoved(new EventCollectionEventArgs<T>(item, index));
         }
-
-        #endregion Public methods
-
-        #region Protected methods
 
         /// <summary>
         /// Raises the <see cref="E:ItemAdded"/> event.
@@ -355,7 +352,5 @@ namespace FlagLib.Collections
                 this.ListClearing.Invoke(this, e);
             }
         }
-
-        #endregion Protected methods
     }
 }
