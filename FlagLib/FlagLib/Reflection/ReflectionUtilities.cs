@@ -11,7 +11,7 @@ namespace FlagLib.Reflection
         /// <typeparam name="T"></typeparam>
         /// <param name="expression">The expression.</param>
         /// <returns></returns>
-        public static string GetMemberName<T>(Expression<Action<T>> expression)
+        public static string GetMemberName<T>(Expression<Func<T>> expression)
         {
             MemberExpression memberExpression = expression.Body as MemberExpression;
 
