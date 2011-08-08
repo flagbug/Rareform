@@ -11,13 +11,17 @@ namespace FlagLib.Collections
         /// <summary>
         /// Gets the item that was affected.
         /// </summary>
-        /// <value>The item that was affected.</value>
+        /// <value>
+        /// The item that was affected.
+        /// </value>
         public T Item { get; private set; }
 
         /// <summary>
         /// Gets the index of the item which was affected.
         /// </summary>
-        /// <value>The index of the item which was affected.</value>
+        /// <value>
+        /// The index of the item which was affected.
+        /// </value>
         public int Index { get; private set; }
 
         /// <summary>

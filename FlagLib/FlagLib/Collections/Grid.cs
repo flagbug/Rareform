@@ -16,22 +16,25 @@ namespace FlagLib.Collections
         /// <summary>
         /// Gets the total amount of rows.
         /// </summary>
-        /// <value>The total amount of rows.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The total amount of rows.
+        /// </value>
         public int RowCount { get; private set; }
 
         /// <summary>
         /// Gets the total amount of columns.
         /// </summary>
-        /// <value>The total amount of columns.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The total amount of columns.
+        /// </value>
         public int ColumnCount { get; private set; }
 
         /// <summary>
         /// Gets the total amount of cells.
         /// </summary>
-        /// <value>The total amount of cells.</value>
-        /// <remarks></remarks>
+        /// <value>
+        /// The total amount of cells.
+        /// </value>
         public int CellCount
         {
             get { return this.RowCount * this.ColumnCount; }
@@ -42,7 +45,6 @@ namespace FlagLib.Collections
         /// </summary>
         /// <param name="rows">The row count.</param>
         /// <param name="columns">The column count.</param>
-        /// <remarks></remarks>
         public Grid(int rows, int columns)
         {
             if (rows <= 0)
@@ -65,7 +67,6 @@ namespace FlagLib.Collections
         /// <summary>
         /// Gets or sets the element at the specified row and column.
         /// </summary>
-        /// <remarks></remarks>
         public T this[int row, int column]
         {
             get
@@ -94,7 +95,6 @@ namespace FlagLib.Collections
         /// <summary>
         /// Gets or sets the element at the specified index.
         /// </summary>
-        /// <remarks></remarks>
         public T this[int index]
         {
             get
@@ -109,10 +109,11 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets the enumerator.
+        /// Returns an enumerator that iterates through the collection.
         /// </summary>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// </returns>
         public IEnumerator<T> GetEnumerator()
         {
             return this.internFields.GetEnumerator();
@@ -121,8 +122,9 @@ namespace FlagLib.Collections
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
-        /// <returns>An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.</returns>
-        /// <remarks></remarks>
+        /// <returns>
+        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.internFields.GetEnumerator();
