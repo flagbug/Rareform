@@ -15,6 +15,9 @@ namespace FlagLib.Reflection
         {
             MemberExpression memberExpression = expression.Body as MemberExpression;
 
+            if (memberExpression == null)
+                throw new ArgumentException("The member is not valid.");
+
             return memberExpression.Member.Name;
         }
     }

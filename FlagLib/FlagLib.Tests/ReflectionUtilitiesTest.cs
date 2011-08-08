@@ -1,4 +1,5 @@
-﻿using FlagLib.Reflection;
+﻿using System;
+using FlagLib.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagLib.Tests
@@ -45,6 +46,18 @@ namespace FlagLib.Tests
             string actual;
 
             actual = ReflectionUtilities.GetMemberName(() => this.TestMember);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetMemberNameInvalidArgumentTest()
+        {
+            string expected = "TestMember";
+            string actual;
+
+            actual = ReflectionUtilities.GetMemberName(() => this);
 
             Assert.AreEqual(expected, actual);
         }
