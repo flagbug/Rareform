@@ -69,6 +69,7 @@
     <Compile Include="Measure\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patterns\ViewModelBase.cs" />
+    <Compile Include="Reflection\ReflectionUtilities.cs" />
     <Compile Include="Serialization\GenericXmlSerializer.cs" />
     <Compile Include="ValueConverters\BoolNegationValueConverter.cs" />
     <Compile Include="ValueConverters\CombiningConverter.cs" />
