@@ -23,5 +23,21 @@ namespace FlagLib.Extensions
         {
             return items.Any(item => value.Contains<T>(item));
         }
+
+        /// <summary>
+        /// Determines whether the specified
+        /// <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+        /// contains any of the specified items
+        /// </summary>
+        /// <typeparam name="T">The source type</typeparam>
+        /// <param name="value">The value.</param>
+        /// <param name="items">The items.</param>
+        /// <returns>
+        /// 	<c>true</c> if the specified value contains any of the specified items; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool ContainsAny<T>(this IEnumerable<T> value, IEnumerable<T> items)
+        {
+            return items.Any(item => value.Contains<T>(item));
+        }
     }
 }
