@@ -2,3 +2,6 @@ syntax: glob
 *.suo
 FlagLib/FlagLib/bin
 FlagLib/FlagLib/obj
+FlagLib/FlagLib.Tests/bin
+FlagLib/FlagLib.Tests/obj
+FlagLib/TestResults
