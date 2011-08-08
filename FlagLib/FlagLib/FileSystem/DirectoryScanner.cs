@@ -10,19 +10,15 @@ namespace FlagLib.FileSystem
     /// </summary>
     public class DirectoryScanner
     {
-        #region Members
-
         private List<FileInfo> filesFound = new List<FileInfo>();
         private volatile bool isStopped;
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets the scanned files.
         /// </summary>
-        /// <value>The scanned files.</value>
+        /// <value>
+        /// The scanned files.
+        /// </value>
         public IEnumerable<FileInfo> FilesFound
         {
             get { return this.filesFound; }
@@ -31,22 +27,22 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Gets the directory path.
         /// </summary>
-        /// <value>The directory path.</value>
+        /// <value>
+        /// The directory path.
+        /// </value>
         public string DirectoryPath { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the scanner is stopped.
         /// </summary>
-        /// <value>true if the scanner is stopped; otherwise, false.</value>
+        /// <value>
+        /// true if the scanner is stopped; otherwise, false.
+        /// </value>
         public bool IsStopped
         {
             get { return this.isStopped; }
             private set { this.isStopped = value; }
         }
-
-        #endregion Properties
-
-        #region Events
 
         /// <summary>
         /// Occurs when a file has been found.
@@ -73,10 +69,6 @@ namespace FlagLib.FileSystem
         /// </summary>
         public event EventHandler Finished;
 
-        #endregion Events
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryScanner"/> class.
         /// </summary>
@@ -85,10 +77,6 @@ namespace FlagLib.FileSystem
         {
             this.DirectoryPath = path;
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Starts the directory scanner.
@@ -107,10 +95,6 @@ namespace FlagLib.FileSystem
         {
             this.IsStopped = true;
         }
-
-        #endregion Public methods
-
-        #region Protected methods
 
         /// <summary>
         /// Raises the <see cref="E:FileFound"/> event.
@@ -172,10 +156,6 @@ namespace FlagLib.FileSystem
             }
         }
 
-        #endregion Protected methods
-
-        #region Private methods
-
         /// <summary>
         /// Scans a directory recursively.
         /// </summary>
@@ -229,7 +209,5 @@ namespace FlagLib.FileSystem
 
             this.OnDirectoryProceeded(EventArgs.Empty);
         }
-
-        #endregion Private methods
     }
 }

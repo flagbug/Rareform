@@ -8,7 +8,9 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Gets the found the directory.
         /// </summary>
-        /// <value>The found directory.</value>
+        /// <value>
+        /// The found directory.
+        /// </value>
         public DirectoryInfo Directory { get; private set; }
 
         /// <summary>

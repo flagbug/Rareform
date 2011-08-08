@@ -8,7 +8,9 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Gets the file.
         /// </summary>
-        /// <value>The file.</value>
+        /// <value>
+        /// The file.
+        /// </value>
         public FileInfo File { get; private set; }
 
         /// <summary>

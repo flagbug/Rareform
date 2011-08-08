@@ -6,10 +6,7 @@ namespace FlagLib.FileSystem
 {
     public class FileCopyOperation
     {
-        #region Constants
-
-        //constants that specify how the file is to be copied
-
+        //Constants that specify how the file is to be copied
         private const uint COPY_FILE_ALLOW_DECRYPTED_DESTINATION = 0x00000008;
 
         private const uint COPY_FILE_FAIL_IF_EXISTS = 0x00000001;
@@ -54,10 +51,6 @@ namespace FlagLib.FileSystem
         /// </summary>
         private const uint PROGRESS_QUIET = 3;
 
-        #endregion Constants
-
-        #region Methods
-
         /// <summary>
         /// The CopyProgressRoutine delegate is an application-defined callback function used with the CopyFileEx and MoveFileWithProgress functions.
         /// It is called when a portion of a copy or move operation is completed.
@@ -65,13 +58,15 @@ namespace FlagLib.FileSystem
         /// <param name="TotalFileSize">Total size of the file, in bytes.</param>
         /// <param name="TotalBytesTransferred">Total number of bytes transferred from the source file to the destination file since the copy operation began.</param>
         /// <param name="StreamSize">Total size of the current file stream, in bytes.</param>
-        /// <param name="StreamBytesTransferred">Total number of bytes in the current stream that have been transferred from the source file to the destination file since the copy operation began. </param>
+        /// <param name="StreamBytesTransferred">Total number of bytes in the current stream that have been transferred from the source file to the destination file since the copy operation began.</param>
         /// <param name="dwStreamNumber">Handle to the current stream. The first time CopyProgressRoutine is called, the stream number is 1.</param>
         /// <param name="dwCallbackReason">Reason that CopyProgressRoutine was called.</param>
         /// <param name="hSourceFile">Handle to the source file.</param>
         /// <param name="hDestinationFile">Handle to the destination file.</param>
         /// <param name="lpData">Argument passed to CopyProgressRoutine by the CopyFileEx or MoveFileWithProgress function.</param>
-        /// <returns>A value indicating how to proceed with the copy operation.</returns>
+        /// <returns>
+        /// A value indicating how to proceed with the copy operation.
+        /// </returns>
         protected uint CopyProgressCallback(long TotalFileSize, long TotalBytesTransferred, long StreamSize,
             long StreamBytesTransferred, uint dwStreamNumber, uint dwCallbackReason, IntPtr hSourceFile,
             IntPtr hDestinationFile, IntPtr lpData)
@@ -112,10 +107,6 @@ namespace FlagLib.FileSystem
             }
         }
 
-        #endregion Methods
-
-        #region Events
-
         /// <summary>
         /// Occurs when the copy progress has updated.
         /// </summary>
@@ -133,20 +124,24 @@ namespace FlagLib.FileSystem
             }
         }
 
-        #endregion Events
-
-        #region P/Invoke
-
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool CopyFileEx(string lpExistingFileName, string lpNewFileName,
             CopyProgressRoutine lpProgressRoutine, IntPtr lpData, bool pbCancel, uint dwCopyFlags);
-
-        #endregion P/Invoke
 
         /// <summary>
         /// The CopyProgressRoutine delegate is an application-defined callback function used with the CopyFileEx and MoveFileWithProgress functions.
         /// It is called when a portion of a copy or move operation is completed.
         /// </summary>
+        /// <param name="TotalFileSize">Total size of the file.</param>
+        /// <param name="TotalBytesTransferred">The total bytes transferred.</param>
+        /// <param name="StreamSize">Size of the stream.</param>
+        /// <param name="StreamBytesTransferred">The stream bytes transferred.</param>
+        /// <param name="dwStreamNumber">The stream number.</param>
+        /// <param name="dwCallbackReason">The callback reason.</param>
+        /// <param name="hSourceFile">The source file.</param>
+        /// <param name="hDestinationFile">The destination file.</param>
+        /// <param name="lpData">The data.</param>
+        /// <returns></returns>
         private delegate uint CopyProgressRoutine(long TotalFileSize, long TotalBytesTransferred, long StreamSize,
             long StreamBytesTransferred, uint dwStreamNumber, uint dwCallbackReason, IntPtr hSourceFile,
             IntPtr hDestinationFile, IntPtr lpData);

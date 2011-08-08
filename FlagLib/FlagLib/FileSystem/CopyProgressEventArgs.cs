@@ -10,19 +10,25 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Gets the total file size, in bytes, of the file being moved.
         /// </summary>
-        /// <value>The total file size.</value>
+        /// <value>
+        /// The total file size.
+        /// </value>
         public long TotalFileSize { get; private set; }
 
         /// <summary>
         /// Gets the total bytes transferred so far.
         /// </summary>
-        /// <value>The total bytes transferred.</value>
+        /// <value>
+        /// The total bytes transferred.
+        /// </value>
         public long TotalBytesTransferred { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the event should be canceled.
         /// </summary>
-        /// <value>True if the event should be canceled, False otherwise.</value>
+        /// <value>
+        /// True if the event should be canceled, False otherwise.
+        /// </value>
         public bool Cancel { get; set; }
 
         /// <summary>
