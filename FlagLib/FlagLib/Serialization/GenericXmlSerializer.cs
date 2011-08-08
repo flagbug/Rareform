@@ -91,9 +91,9 @@ namespace FlagLib.Serialization
         /// <typeparam name="T">The type of the serialized item</typeparam>
         /// <param name="path">The path of the file.</param>
         /// <returns>The deserialized item.</returns>
-        public static T ReadSingle<T>(string path)
+        public static T ReadSingle<T>(string path) where T : new()
         {
-            T item = default(T);
+            T item = new T();
 
             XmlSerializer serializer = new XmlSerializer(item.GetType());
             TextReader reader = new StreamReader(path);
