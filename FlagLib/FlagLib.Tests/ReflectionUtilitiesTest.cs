@@ -54,12 +54,14 @@ namespace FlagLib.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void GetMemberNameInvalidArgumentTest()
         {
-            string expected = "TestMember";
-            string actual;
+            ReflectionUtilities.GetMemberName(() => this);
+        }
 
-            actual = ReflectionUtilities.GetMemberName(() => this);
-
-            Assert.AreEqual(expected, actual);
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetMemberNameInvalidArgumentTest2()
+        {
+            ReflectionUtilities.GetMemberName(() => new int());
         }
     }
 }
