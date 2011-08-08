@@ -51,6 +51,22 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
+        public void GetMemberNameArgumentTest()
+        {
+            this.InternGetMemberNameArgumentTest(0);
+        }
+
+        private void InternGetMemberNameArgumentTest(int testArgument)
+        {
+            string expected = "testArgument";
+            string actual;
+
+            actual = ReflectionUtilities.GetMemberName(() => testArgument);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GetMemberNameInvalidArgumentTest()
         {
