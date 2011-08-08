@@ -58,6 +58,7 @@
     <Compile Include="Console\Drawing\Rectangle.cs" />
     <Compile Include="Console\Drawing\Shape.cs" />
     <Compile Include="Console\Drawing\VerticalLine.cs" />
+    <Compile Include="Extensions\ClassExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="FileSystem\CopyProgressEventArgs.cs" />
     <Compile Include="FileSystem\DirectoryEventArgs.cs" />
