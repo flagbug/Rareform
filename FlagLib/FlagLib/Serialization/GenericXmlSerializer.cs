@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace FlagLib.Serialization
 {
     /// <summary>
-    /// Provides a static and generic xml serializer to serialize IEnumerables an single objects
+    /// Provides a static and generic xml serializer to serialize collections an single objects
     /// </summary>
     public static class GenericXmlSerializer
     {
@@ -18,6 +18,12 @@ namespace FlagLib.Serialization
         /// <param name="path">The path of the file.</param>
         public static void SerializeCollection<T>(ICollection<T> collection, string path) where T : class, new()
         {
+            if (collection == null)
+                throw new ArgumentNullException("collection");
+
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             XmlSerializer serializer = new XmlSerializer(collection.GetType());
 
             using (TextWriter writer = new StreamWriter(path, false))
@@ -34,6 +40,12 @@ namespace FlagLib.Serialization
         /// <param name="path">The path of the file.</param>
         public static void SerializeItem<T>(T item, string path) where T : class, new()
         {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             XmlSerializer serializer = new XmlSerializer(item.GetType());
 
             using (TextWriter writer = new StreamWriter(path, false))
@@ -52,24 +64,16 @@ namespace FlagLib.Serialization
         /// </returns>
         public static ICollection<T> Deserializecollection<T>(string path) where T : class, new()
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             List<T> items = new List<T>();
 
             XmlSerializer serializer = new XmlSerializer(items.GetType());
-            TextReader reader = new StreamReader(path);
 
-            try
+            using (TextReader reader = new StreamReader(path))
             {
                 items = (List<T>)serializer.Deserialize(reader);
-            }
-
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-
-            finally
-            {
-                reader.Close();
             }
 
             return items;
@@ -85,24 +89,16 @@ namespace FlagLib.Serialization
         /// </returns>
         public static T DeserializeItem<T>(string path) where T : class, new()
         {
+            if (path == null)
+                throw new ArgumentNullException("path");
+
             T item = new T();
 
             XmlSerializer serializer = new XmlSerializer(item.GetType());
-            TextReader reader = new StreamReader(path);
 
-            try
+            using (TextReader reader = new StreamReader(path))
             {
                 item = (T)serializer.Deserialize(reader);
-            }
-
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
-
-            finally
-            {
-                reader.Close();
             }
 
             return item;
