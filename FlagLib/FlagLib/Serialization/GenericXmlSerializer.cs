@@ -11,24 +11,12 @@ namespace FlagLib.Serialization
     public static class GenericXmlSerializer
     {
         /// <summary>
-        /// Saves the specified items at the specified path.
-        /// </summary>
-        /// <typeparam name="T">Type of the items to serialize</typeparam>
-        /// <param name="items">The items tho serialize.</param>
-        /// <param name="path">The path of the file.</param>
-        [Obsolete("This method is not used any longer. Use GenericXmlSerialzier.SaveCollection instead.")]
-        public static void SaveEnumerable<T>(IEnumerable<T> items, string path)
-        {
-            SaveCollection<T>((ICollection<T>)items, path);
-        }
-
-        /// <summary>
         /// Saves the specified collection at the specified path.
         /// </summary>
         /// <typeparam name="T">Type of the items to serialize</typeparam>
         /// <param name="items">The items tho serialize.</param>
         /// <param name="path">The path of the file.</param>
-        public static void SaveCollection<T>(ICollection<T> items, string path)
+        public static void SaveCollection<T>(ICollection<T> items, string path) where T : new()
         {
             XmlSerializer serializer = new XmlSerializer(items.GetType());
 
@@ -44,7 +32,7 @@ namespace FlagLib.Serialization
         /// <typeparam name="T"></typeparam>
         /// <param name="item">The item to serialize.</param>
         /// <param name="path">The path of the file.</param>
-        public static void SaveSingle<T>(T item, string path)
+        public static void SaveSingle<T>(T item, string path) where T : new()
         {
             XmlSerializer serializer = new XmlSerializer(item.GetType());
 
@@ -60,7 +48,7 @@ namespace FlagLib.Serialization
         /// <typeparam name="T">The type of the serialized items</typeparam>
         /// <param name="path">The path of the file.</param>
         /// <returns>The deserialized items</returns>
-        public static IEnumerable<T> ReadEnumerable<T>(string path)
+        public static IEnumerable<T> ReadEnumerable<T>(string path) where T : new()
         {
             List<T> items = new List<T>();
 
