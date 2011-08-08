@@ -62,7 +62,7 @@ namespace FlagLib.Serialization
         /// <returns>
         /// The deserialized collection.
         /// </returns>
-        public static ICollection<T> Deserializecollection<T>(string path) where T : class, new()
+        public static ICollection<T> DeserializeCollection<T>(string path) where T : class, new()
         {
             if (path == null)
                 throw new ArgumentNullException("path");
