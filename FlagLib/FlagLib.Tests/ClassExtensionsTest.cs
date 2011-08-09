@@ -17,7 +17,7 @@ namespace FlagLib.Tests
         {
             object testObject = null;
 
-            testObject.ThrowIfIsNull("testClass");
+            testObject.ThrowIfIsNull("testObject");
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace FlagLib.Tests
         {
             object testObject = new object();
 
-            testObject.ThrowIfIsNull("testClass");
+            testObject.ThrowIfIsNull("testObject");
         }
     }
 }
