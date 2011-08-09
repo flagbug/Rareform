@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ClassExtensionsTest.cs" />
     <Compile Include="EnumerableExtensionsTest.cs" />
+    <Compile Include="IntegerExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionUtilitiesTest.cs" />
   </ItemGroup>
