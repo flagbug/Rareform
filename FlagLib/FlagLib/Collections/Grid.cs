@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FlagLib.Extensions;
 
 namespace FlagLib.Collections
 {
@@ -47,11 +48,8 @@ namespace FlagLib.Collections
         /// <param name="columns">The column count.</param>
         public Grid(int rows, int columns)
         {
-            if (rows <= 0)
-                throw new ArgumentOutOfRangeException("rows");
-
-            if (columns <= 0)
-                throw new ArgumentOutOfRangeException("columns");
+            rows.ThrowIfIsLessThan(1, "rows");
+            columns.ThrowIfIsLessThan(1, "columns");
 
             this.RowCount = rows;
             this.ColumnCount = columns;
