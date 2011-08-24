@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace FlagLib.IO
 {
     public class StreamCopyOperation
     {
+        private TimeSpan elapsedTime;
+        private long copiedBytes;
+
         /// <summary>
         /// Occurs when copy progress has changed.
         /// </summary>
@@ -17,7 +21,7 @@ namespace FlagLib.IO
         {
             get
             {
-                return 0;
+                return (int)(this.copiedBytes / this.elapsedTime.TotalSeconds);
             }
         }
 
@@ -83,6 +87,42 @@ namespace FlagLib.IO
             this.TargetStream = targetStream;
             this.BufferSize = bufferSize;
             this.UpdateInterval = dynamicUpdateInterval ? (int)Math.Pow(sourceStream.Length, 1.0 / 1.5) : 200;
+        }
+
+        /// <summary>
+        /// Copies the stream.
+        /// </summary>
+        public void CopyStream()
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            this.StartTime = DateTime.Now;
+
+            long bytesTotal = this.SourceStream.Length;
+            byte[] buffer = new byte[this.BufferSize];
+            int bytes;
+            int updateCounter = 0; //The updateCounter is needed to know when the CopyProgressChanged event shall be called
+
+            while ((bytes = this.SourceStream.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                this.TargetStream.Write(buffer, 0, bytes);
+
+                this.copiedBytes += bytes;
+                updateCounter += bytes;
+
+                if (updateCounter >= this.UpdateInterval)
+                {
+                    updateCounter = 0;
+
+                    this.elapsedTime = stopwatch.Elapsed;
+                    this.OnCopyProgressChanged(new CopyProgressEventArgs(bytesTotal, this.copiedBytes, this.AverageSpeed));
+                }
+            }
+
+            this.EndTime = DateTime.Now;
+            stopwatch.Stop();
+            this.elapsedTime = stopwatch.Elapsed;
+
+            this.OnCopyProgressChanged(new CopyProgressEventArgs(bytesTotal, this.copiedBytes, this.AverageSpeed));
         }
 
         /// <summary>

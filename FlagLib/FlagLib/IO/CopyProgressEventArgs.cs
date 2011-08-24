@@ -18,6 +18,11 @@ namespace FlagLib.IO
         public long TotalCopiedBytes { get; private set; }
 
         /// <summary>
+        /// Gets the average speed.
+        /// </summary>
+        public int AverageSpeed { get; private set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the operation should be canceled.
         /// </summary>
         /// <value>
@@ -30,10 +35,11 @@ namespace FlagLib.IO
         /// </summary>
         /// <param name="totalBytes">The total bytes.</param>
         /// <param name="copiedBytes">The total copied bytes.</param>
-        public CopyProgressEventArgs(long totalBytes, long totalCopiedBytes)
+        public CopyProgressEventArgs(long totalBytes, long totalCopiedBytes, int averageSpeed)
         {
             this.TotalBytes = totalBytes;
             this.TotalCopiedBytes = totalCopiedBytes;
+            this.AverageSpeed = averageSpeed;
         }
     }
 }

@@ -75,7 +75,7 @@ namespace FlagLib.IO
             {
                 case CALLBACK_CHUNK_FINISHED:
                     // Another part of the file was copied.
-                    CopyProgressEventArgs e = new CopyProgressEventArgs(TotalFileSize, TotalBytesTransferred);
+                    CopyProgressEventArgs e = new CopyProgressEventArgs(TotalFileSize, TotalBytesTransferred, 0);
                     OnCopyProgress(e);
                     return e.Cancel ? PROGRESS_CANCEL : PROGRESS_CONTINUE;
 
