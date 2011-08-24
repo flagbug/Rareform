@@ -101,8 +101,9 @@ namespace FlagLib.IO
             byte[] buffer = new byte[this.BufferSize];
             int bytes;
             int updateCounter = 0; //The updateCounter is needed to know when the CopyProgressChanged event shall be called
+            bool cancel = false;
 
-            while ((bytes = this.SourceStream.Read(buffer, 0, buffer.Length)) > 0)
+            while (!cancel && (bytes = this.SourceStream.Read(buffer, 0, buffer.Length)) > 0)
             {
                 this.TargetStream.Write(buffer, 0, bytes);
 
@@ -114,7 +115,15 @@ namespace FlagLib.IO
                     updateCounter = 0;
 
                     this.elapsedTime = stopwatch.Elapsed;
-                    this.OnCopyProgressChanged(new CopyProgressEventArgs(bytesTotal, this.copiedBytes, this.AverageSpeed));
+
+                    CopyProgressEventArgs eventArgs =
+                        new CopyProgressEventArgs(bytesTotal, this.copiedBytes, this.AverageSpeed);
+                    this.OnCopyProgressChanged(eventArgs);
+
+                    if (eventArgs.Cancel)
+                    {
+                        cancel = true;
+                    }
                 }
             }
 
