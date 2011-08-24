@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FlagLib.FileSystem
+namespace FlagLib.IO
 {
     public class DirectoryEventArgs : EventArgs
     {

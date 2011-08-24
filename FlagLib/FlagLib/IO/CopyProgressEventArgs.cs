@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlagLib.FileSystem
+namespace FlagLib.IO
 {
     /// <summary>
     /// Provides data for the CopyProgress event.

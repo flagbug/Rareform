@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security;
 
-namespace FlagLib.FileSystem
+namespace FlagLib.IO
 {
     /// <summary>
     /// Provides a directoy scanner to scan a directory recursively for files
@@ -99,7 +99,7 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Raises the <see cref="E:FileFound"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.FileEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FlagLib.IO.FileEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileFound(FileEventArgs e)
         {
             if (this.FileFound != null)
@@ -111,7 +111,7 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Raises the <see cref="E:DirectoryFound"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.DirectoryEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FlagLib.IO.DirectoryEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryFound(DirectoryEventArgs e)
         {
             if (this.DirectoryFound != null)
@@ -123,7 +123,7 @@ namespace FlagLib.FileSystem
         /// <summary>
         /// Raises the <see cref="E:DirectoryScanError"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagLib.FileSystem.DirectoryScanErrorEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FlagLib.IO.DirectoryScanErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryScanError(DirectoryScanErrorEventArgs e)
         {
             if (this.DirectoryScanError != null)

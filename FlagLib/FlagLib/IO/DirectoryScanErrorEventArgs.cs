@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlagLib.FileSystem
+namespace FlagLib.IO
 {
     public class DirectoryScanErrorEventArgs : EventArgs
     {

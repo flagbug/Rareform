@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace FlagLib.FileSystem
+namespace FlagLib.IO
 {
     public class FileCopyOperation
     {
