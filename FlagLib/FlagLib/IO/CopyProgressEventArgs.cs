@@ -8,38 +8,32 @@ namespace FlagLib.IO
     public class CopyProgressEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the total file size, in bytes, of the file being moved.
+        /// Gets the total byte number.
         /// </summary>
-        /// <value>
-        /// The total file size.
-        /// </value>
-        public long TotalFileSize { get; private set; }
+        public long TotalBytes { get; private set; }
 
         /// <summary>
-        /// Gets the total bytes transferred so far.
+        /// Gets the total copied bytes.
         /// </summary>
-        /// <value>
-        /// The total bytes transferred.
-        /// </value>
-        public long TotalBytesTransferred { get; private set; }
+        public long TotalCopiedBytes { get; private set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the event should be canceled.
+        /// Gets or sets a value indicating whether the operation should be canceled.
         /// </summary>
         /// <value>
-        /// True if the event should be canceled, False otherwise.
+        /// true if the operation should be canceled; otherwise, false.
         /// </value>
         public bool Cancel { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the CopyProgressEventArgs class.
+        /// Initializes a new instance of the <see cref="CopyProgressEventArgs"/> class.
         /// </summary>
-        /// <param name="totalFileSize">The total file size, in bytes.</param>
-        /// <param name="totalBytesTransferred">The total bytes transferred so far.</param>
-        public CopyProgressEventArgs(long totalFileSize, long totalBytesTransferred)
+        /// <param name="totalBytes">The total bytes.</param>
+        /// <param name="copiedBytes">The total copied bytes.</param>
+        public CopyProgressEventArgs(long totalBytes, long totalCopiedBytes)
         {
-            TotalFileSize = totalFileSize;
-            TotalBytesTransferred = totalBytesTransferred;
+            this.TotalBytes = totalBytes;
+            this.TotalCopiedBytes = totalCopiedBytes;
         }
     }
 }
