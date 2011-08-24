@@ -67,6 +67,7 @@
     <Compile Include="IO\FileCopyOperation.cs" />
     <Compile Include="IO\FileEventArgs.cs" />
     <Compile Include="IO\DirectoryScanErrorEventArgs.cs" />
+    <Compile Include="IO\StreamCopyOperation.cs" />
     <Compile Include="Measure\Position.cs" />
     <Compile Include="Measure\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
