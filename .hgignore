@@ -5,3 +5,5 @@ FlagLib/FlagLib/obj
 FlagLib/FlagLib.Tests/bin
 FlagLib/FlagLib.Tests/obj
 FlagLib/TestResults
+FlagLib/FlagLib.ConsoleTests/bin
+FlagLib/FlagLib.ConsoleTests/obj
