@@ -22,7 +22,7 @@ namespace FlagLib.ConsoleTests
                             System.Console.WriteLine(DateTime.Now.ToLongTimeString() + " " + e.AverageSpeed / 1024 / 1024 + " MB/s " + e.TotalCopiedBytes / 1024 / 1024 + " MB");
                         };
 
-                    operation.CopyStream();
+                    operation.Execute();
                 }
             }
         }

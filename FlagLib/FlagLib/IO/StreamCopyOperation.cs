@@ -66,10 +66,8 @@ namespace FlagLib.IO
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChaned"/> shall be raised.
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
+            : this(sourceStream, targetStream, bufferSize)
         {
-            this.SourceStream = sourceStream;
-            this.TargetStream = targetStream;
-            this.BufferSize = bufferSize;
             this.UpdateInterval = updateInterval;
         }
 
@@ -82,17 +80,28 @@ namespace FlagLib.IO
         /// <param name="dynamicUpdateInterval">if set to true, the operation uses an dynamic update interval, based on the stream length.;
         /// otherwise, it uses a predefined update interval</param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, bool dynamicUpdateInterval)
+            : this(sourceStream, targetStream, bufferSize)
+        {
+            this.UpdateInterval = dynamicUpdateInterval ? (int)Math.Pow(sourceStream.Length, 1.0 / 1.5) : 256 * 1024;
+        }
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="StreamCopyOperation"/> class from being created.
+        /// </summary>
+        /// <param name="sourceStream">The source stream.</param>
+        /// <param name="targetStream">The target stream.</param>
+        /// <param name="bufferSize">Size of the buffer.</param>
+        private StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize)
         {
             this.SourceStream = sourceStream;
             this.TargetStream = targetStream;
             this.BufferSize = bufferSize;
-            this.UpdateInterval = dynamicUpdateInterval ? (int)Math.Pow(sourceStream.Length, 1.0 / 1.5) : 200;
         }
 
         /// <summary>
-        /// Copies the stream.
+        /// Executes the stream copy operation.
         /// </summary>
-        public void CopyStream()
+        public void Execute()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             this.StartTime = DateTime.Now;
