@@ -3,43 +3,31 @@
 namespace FlagLib.Measure
 {
     /// <summary>
-    /// Provides a mutable size, which encapsulates a width and a lenght
+    /// Provides a immutable size, which encapsulates a width and a lenght
     /// </summary>
     [Serializable]
-    public class Size : ICloneable
+    public class Size : ICloneable, IEquatable<Size>
     {
-        #region Members
-
-        private int height;
-        private int width;
-
-        #endregion Members
-
-        #region Properties
+        private readonly int height;
+        private readonly int width;
 
         /// <summary>
-        /// Gets or sets the height.
+        /// Gets the height.
         /// </summary>
         /// <value>The height.</value>
         public int Height
         {
             get { return this.height; }
-            set { this.height = value; }
         }
 
         /// <summary>
-        /// Gets or sets the width.
+        /// Gets the width.
         /// </summary>
         /// <value>The width.</value>
         public int Width
         {
             get { return this.width; }
-            set { this.width = value; }
         }
-
-        #endregion Properties
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Size"/> class.
@@ -61,10 +49,6 @@ namespace FlagLib.Measure
             this.width = width;
         }
 
-        #endregion Constructor
-
-        #region Public methods
-
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
         /// </summary>
@@ -73,7 +57,7 @@ namespace FlagLib.Measure
         /// </returns>
         public object Clone()
         {
-            return new Size(this.width, this.height);
+            return new Size(this.Width, this.Height);
         }
 
         /// <summary>
@@ -82,7 +66,7 @@ namespace FlagLib.Measure
         /// <returns>A <see cref="System.Drawing.Size"/></returns>
         public System.Drawing.Size ToSystemDrawingSize()
         {
-            return new System.Drawing.Size(this.width, this.height);
+            return new System.Drawing.Size(this.Width, this.Height);
         }
 
         /// <summary>
@@ -97,7 +81,7 @@ namespace FlagLib.Measure
         /// </exception>
         public override bool Equals(object obj)
         {
-            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj == null) return false;
 
             Size size = obj as Size;
 
@@ -110,6 +94,18 @@ namespace FlagLib.Measure
         }
 
         /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(Size other)
+        {
+            return this == other;
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
@@ -117,9 +113,7 @@ namespace FlagLib.Measure
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return new { Height = this.Height, Width = this.Width }.GetHashCode();
         }
-
-        #endregion Public methods
     }
 }
