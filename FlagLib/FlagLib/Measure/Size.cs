@@ -3,7 +3,7 @@
 namespace FlagLib.Measure
 {
     /// <summary>
-    /// Provides a immutable size, which encapsulates a width and a lenght
+    /// Provides a immutable size, which encapsulates a width and a height
     /// </summary>
     [Serializable]
     public class Size : ICloneable, IEquatable<Size>
