@@ -64,7 +64,7 @@ namespace FlagLib.Measure
         /// <returns>A <see cref="System.Drawing.Point"/></returns>
         public System.Drawing.Point ToSystemDrawingPoint()
         {
-            return new System.Drawing.Point(this.X, this.X);
+            return new System.Drawing.Point(this.X, this.Y);
         }
 
         /// <summary>
