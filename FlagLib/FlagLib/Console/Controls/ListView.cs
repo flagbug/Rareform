@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FlagLib.Console.Controls
 {
@@ -14,7 +15,7 @@ namespace FlagLib.Console.Controls
         /// Gets the items.
         /// </summary>
         /// <value>The items.</value>
-        public Collection<T> Items
+        public ICollection<T> Items
         {
             get { return this.items; }
         }
