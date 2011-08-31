@@ -114,6 +114,22 @@ namespace FlagLib.Tests
         ///A test for Equals
         ///</summary>
         [TestMethod]
+        public void EqualsReferenceTest()
+        {
+            Position target = new Position(5, 15);
+            object obj = target;
+            bool expected = true;
+            bool actual;
+
+            actual = target.Equals(obj);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for Equals
+        ///</summary>
+        [TestMethod]
         public void GenericEqualsTest()
         {
             Position target = new Position(5, 15);
@@ -146,11 +162,27 @@ namespace FlagLib.Tests
         ///A test for Equals
         ///</summary>
         [TestMethod]
-        public void GenericEqualsnullTest()
+        public void GenericEqualsNullTest()
         {
             Position target = new Position(5, 15);
             Position position = null;
             bool expected = false;
+            bool actual;
+
+            actual = target.Equals(position);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for Equals
+        ///</summary>
+        [TestMethod]
+        public void GenericEqualsReferenceTest()
+        {
+            Position target = new Position(5, 15);
+            Position position = target;
+            bool expected = true;
             bool actual;
 
             actual = target.Equals(position);
@@ -189,7 +221,7 @@ namespace FlagLib.Tests
         /// <summary>
         ///A test for op_Addition
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void op_AdditionTest()
         {
             Position positionA = new Position(5, 15);
@@ -205,7 +237,7 @@ namespace FlagLib.Tests
         /// <summary>
         ///A test for op_Equality
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void op_EqualityTest()
         {
             Position positionA = new Position(5, 15);
@@ -219,17 +251,113 @@ namespace FlagLib.Tests
         }
 
         /// <summary>
-        ///A test for op_Inequality
+        ///A test for op_Equality
         ///</summary>
-        [TestMethod()]
-        public void op_InequalityTest()
+        [TestMethod]
+        public void op_EqualityInverseTest()
         {
             Position positionA = new Position(5, 15);
-            Position positionB = new Position(10, 30);
+            Position positionB = new Position(15, 5);
             bool expected = false;
             bool actual;
 
             actual = (positionA == positionB);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for op_Equality
+        ///</summary>
+        [TestMethod]
+        public void op_EqualityNullTest()
+        {
+            Position positionA = new Position(5, 15);
+            Position positionB = null;
+            bool expected = false;
+            bool actual;
+
+            actual = (positionA == positionB);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for op_Equality
+        ///</summary>
+        [TestMethod]
+        public void op_EqualityReferenceTest()
+        {
+            Position positionA = new Position(5, 15);
+            Position positionB = positionA;
+            bool expected = true;
+            bool actual;
+
+            actual = (positionA == positionB);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for op_Inequality
+        ///</summary>
+        [TestMethod]
+        public void op_InequalityTest()
+        {
+            Position positionA = new Position(5, 15);
+            Position positionB = new Position(10, 30);
+            bool expected = true;
+            bool actual;
+
+            actual = positionA != positionB;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for op_Inequality
+        ///</summary>
+        [TestMethod]
+        public void op_InequalityInverseTest()
+        {
+            Position positionA = new Position(5, 15);
+            Position positionB = new Position(5, 15);
+            bool expected = false;
+            bool actual;
+
+            actual = positionA != positionB;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for op_Inequality
+        ///</summary>
+        [TestMethod]
+        public void op_InequalityNullTest()
+        {
+            Position positionA = new Position(5, 15);
+            Position positionB = null;
+            bool expected = true;
+            bool actual;
+
+            actual = positionA != positionB;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for op_Inequality
+        ///</summary>
+        [TestMethod]
+        public void op_InequalityReferenceTest()
+        {
+            Position positionA = new Position(5, 15);
+            Position positionB = positionA;
+            bool expected = false;
+            bool actual;
+
+            actual = positionA != positionB;
 
             Assert.AreEqual(expected, actual);
         }
