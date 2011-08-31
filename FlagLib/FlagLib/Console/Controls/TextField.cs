@@ -40,7 +40,7 @@ namespace FlagLib.Console.Controls
         /// <summary>
         /// Occurs when the input has been entered.
         /// </summary>
-        public event EventHandler InputEntered;
+        public event EventHandler TextEntered;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextField"/> class.
@@ -61,6 +61,9 @@ namespace FlagLib.Console.Controls
             this.ScanInput();
         }
 
+        /// <summary>
+        /// Defocuses the control and stopps it's behaviour.
+        /// </summary>
         public void Defocus()
         {
             this.IsFocused = false;
@@ -97,9 +100,9 @@ namespace FlagLib.Console.Controls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnInputEntered(EventArgs e)
         {
-            if (this.InputEntered != null)
+            if (this.TextEntered != null)
             {
-                this.InputEntered.Invoke(this, e);
+                this.TextEntered.Invoke(this, e);
             }
         }
 
