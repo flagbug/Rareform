@@ -27,7 +27,7 @@ namespace FlagLib.Console.Controls
         /// <summary>
         /// Draws the control.
         /// </summary>
-        public override void Draw()
+        protected override void Draw()
         {
             List<string> words = new List<string>();
             words.AddRange(this.text.Split(' ')); //Split text into words

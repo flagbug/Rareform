@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlagLib.Collections;
 
 namespace FlagLib.Console.Controls
@@ -39,14 +40,19 @@ namespace FlagLib.Console.Controls
 
             if (this.IsVisible)
             {
-                foreach (Control control in this.controls)
+                foreach (Control control in this.controls.Where(control => control.IsVisible))
                 {
-                    if (control.IsVisible)
-                    {
-                        control.Update();
-                    }
+                    control.Update();
                 }
             }
+        }
+
+        /// <summary>
+        /// Draws the control.
+        /// </summary>
+        protected override void Draw()
+        {
+            //Container usually have nothing to draw
         }
 
         /// <summary>

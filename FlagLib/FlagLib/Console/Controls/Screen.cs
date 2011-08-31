@@ -25,12 +25,5 @@ namespace FlagLib.Console.Controls
         {
             get { return this; }
         }
-
-        /// <summary>
-        /// Draws the control.
-        /// </summary>
-        public override void Draw()
-        {
-        }
     }
 }

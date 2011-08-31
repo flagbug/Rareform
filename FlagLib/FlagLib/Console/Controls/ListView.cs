@@ -22,7 +22,7 @@ namespace FlagLib.Console.Controls
         /// <summary>
         /// Draws the control.
         /// </summary>
-        public override void Draw()
+        protected override void Draw()
         {
             for (int i = 0; i < this.items.Count; i++)
             {

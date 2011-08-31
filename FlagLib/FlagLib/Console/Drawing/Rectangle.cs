@@ -77,7 +77,7 @@ namespace FlagLib.Console.Drawing
             for (int y = this.Position.Y; y < this.Position.Y + this.Size.Width; y++)
             {
                 line.Draw();
-                line.Position.Y++;
+                line.Position = new Position(line.Position.X, line.Position.Y + 1);
             }
         }
 
@@ -86,18 +86,18 @@ namespace FlagLib.Console.Drawing
         /// </summary>
         private void DrawUnfilledRectangle()
         {
-            HorizontalLine xLine = new HorizontalLine((Position)this.Position.Clone(), this.Size.Width, this.Token);
+            HorizontalLine xLine = new HorizontalLine(this.Position, this.Size.Width, this.Token);
             xLine.BackgroundColor = this.BackgroundColor;
             xLine.ForegroundColor = this.ForegroundColor;
             xLine.Draw();
-            xLine.Position.Y += this.Size.Height - 1;
+            xLine.Position = new Position(xLine.Position.X, xLine.Position.Y + this.Size.Height - 1);
             xLine.Draw();
 
-            VerticalLine yLine = new VerticalLine((Position)this.Position.Clone(), this.Size.Height, this.Token);
+            VerticalLine yLine = new VerticalLine(this.Position, this.Size.Height, this.Token);
             yLine.BackgroundColor = this.BackgroundColor;
             yLine.ForegroundColor = this.ForegroundColor;
             yLine.Draw();
-            yLine.Position.X += this.Size.Width - 1;
+            yLine.Position = new Position(yLine.Position.X + this.Size.Width - 1, yLine.Position.Y);
             yLine.Draw();
         }
     }

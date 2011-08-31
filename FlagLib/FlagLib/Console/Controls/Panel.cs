@@ -5,11 +5,5 @@
     /// </summary>
     public class Panel : Container
     {
-        /// <summary>
-        /// Draws the control.
-        /// </summary>
-        public override void Draw()
-        {
-        }
     }
 }

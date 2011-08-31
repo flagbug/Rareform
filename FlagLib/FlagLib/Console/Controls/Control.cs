@@ -8,8 +8,6 @@ namespace FlagLib.Console.Controls
     /// </summary>
     public abstract class Control
     {
-        private bool isVisible = true;
-
         /// <summary>
         /// Gets or sets the parent control.
         /// </summary>
@@ -50,25 +48,7 @@ namespace FlagLib.Console.Controls
         /// Gets or sets a value indicating whether this <see cref="Control"/> is visible.
         /// </summary>
         /// <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
-        public virtual bool IsVisible
-        {
-            get { return this.isVisible; }
-
-            set
-            {
-                this.isVisible = value;
-
-                if (isVisible)
-                {
-                    this.Draw();
-                }
-
-                else
-                {
-                    this.Clear();
-                }
-            }
-        }
+        public virtual bool IsVisible { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Control"/> class.
@@ -84,9 +64,10 @@ namespace FlagLib.Console.Controls
         /// </summary>
         public virtual void Update()
         {
+            this.Clear();
+
             if (this.IsVisible)
             {
-                this.Clear();
                 this.Draw();
             }
         }
@@ -94,7 +75,7 @@ namespace FlagLib.Console.Controls
         /// <summary>
         /// Draws the control.
         /// </summary>
-        public abstract void Draw();
+        protected abstract void Draw();
 
         /// <summary>
         /// Clears the control's area.

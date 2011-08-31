@@ -69,7 +69,7 @@ namespace FlagLib.Console.Controls
         /// <summary>
         /// Draws the control.
         /// </summary>
-        public override void Draw()
+        protected override void Draw()
         {
             System.ConsoleColor saveBackgroundColor = System.Console.BackgroundColor;
             System.ConsoleColor saveForegroundColor = System.Console.ForegroundColor;
