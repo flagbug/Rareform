@@ -7,8 +7,6 @@ namespace FlagLib.Console.Drawing
     /// </summary>
     public abstract class Line : Shape, IArea
     {
-        #region Properties
-
         /// <summary>
         /// Gets or sets the lenght.
         /// </summary>
@@ -24,10 +22,6 @@ namespace FlagLib.Console.Drawing
             get { return this.Length; }
         }
 
-        #endregion Properties
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Line"/> class.
         /// </summary>
@@ -39,7 +33,5 @@ namespace FlagLib.Console.Drawing
         {
             this.Length = length;
         }
-
-        #endregion Constructor
     }
 }

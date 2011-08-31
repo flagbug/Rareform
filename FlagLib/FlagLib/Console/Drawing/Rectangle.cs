@@ -5,8 +5,6 @@ namespace FlagLib.Console.Drawing
 {
     public class Rectangle : Shape, IArea
     {
-        #region Properties
-
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Rectangle"/> is filled.
         /// </summary>
@@ -28,10 +26,6 @@ namespace FlagLib.Console.Drawing
             get { return this.Size.Height * this.Size.Width; }
         }
 
-        #endregion Properties
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> class.
         /// </summary>
@@ -45,10 +39,6 @@ namespace FlagLib.Console.Drawing
             this.Size = size;
             this.IsFilled = filled;
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Draws this rectangle.
@@ -74,10 +64,6 @@ namespace FlagLib.Console.Drawing
             System.Console.ForegroundColor = saveForeColor;
             System.Console.BackgroundColor = saveBackColor;
         }
-
-        #endregion Public methods
-
-        #region Private methods
 
         /// <summary>
         /// Draws a filled rectangle.
@@ -114,7 +100,5 @@ namespace FlagLib.Console.Drawing
             yLine.Position.X += this.Size.Width - 1;
             yLine.Draw();
         }
-
-        #endregion Private methods
     }
 }
