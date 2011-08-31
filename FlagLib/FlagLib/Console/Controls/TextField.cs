@@ -23,7 +23,7 @@ namespace FlagLib.Console.Controls
         /// Gets the input.
         /// </summary>
         /// <value>The input.</value>
-        public virtual string Input { get; private set; }
+        public virtual string Text { get; private set; }
 
         /// <summary>
         /// Gets or sets the length of the text field.
@@ -87,7 +87,7 @@ namespace FlagLib.Console.Controls
 
             System.Console.ForegroundColor = this.ForegroundColor;
             System.Console.SetCursorPosition(this.AbsolutePosition.X, this.AbsolutePosition.Y);
-            System.Console.Write(this.Input);
+            System.Console.Write(this.Text);
             System.Console.ForegroundColor = saveForegroundColor;
         }
 
@@ -120,15 +120,15 @@ namespace FlagLib.Console.Controls
                 {
                     if (key.Key == ConsoleKey.Backspace)
                     {
-                        if (this.Input.Length > 0)
+                        if (this.Text.Length > 0)
                         {
-                            this.Input = this.Input.Substring(0, this.Input.Length - 1);
+                            this.Text = this.Text.Substring(0, this.Text.Length - 1);
                         }
                     }
 
-                    else if (this.Input.Length < this.Length)
+                    else if (this.Text.Length < this.Length)
                     {
-                        this.Input += key.KeyChar.ToString();
+                        this.Text += key.KeyChar.ToString();
                     }
                 }
             }
