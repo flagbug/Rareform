@@ -6,7 +6,7 @@ namespace FlagLib.Measure
     /// Provides a immutable Position, which encapsulates a x and y coordinate
     /// </summary>
     [Serializable]
-    public class Position : ICloneable
+    public class Position : ICloneable, IEquatable<Position>
     {
         private readonly int x;
         private readonly int y;
@@ -133,7 +133,7 @@ namespace FlagLib.Measure
         /// </exception>
         public override bool Equals(object obj)
         {
-            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj == null) return false;
 
             Position position = obj as Position;
 
@@ -143,6 +143,18 @@ namespace FlagLib.Measure
             }
 
             return this == position;
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(Position other)
+        {
+            return this == other;
         }
 
         /// <summary>
