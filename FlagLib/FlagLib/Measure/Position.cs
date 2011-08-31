@@ -133,11 +133,9 @@ namespace FlagLib.Measure
         /// </exception>
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
-
             Position position = obj as Position;
 
-            if (position == null || this.GetType() != position.GetType())
+            if (position == null)
             {
                 return false;
             }
