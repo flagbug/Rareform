@@ -8,13 +8,7 @@ namespace FlagLib.Console.Controls
     /// </summary>
     public abstract class Control
     {
-        #region Members
-
         private bool isVisible = true;
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the parent control.
@@ -76,10 +70,6 @@ namespace FlagLib.Console.Controls
             }
         }
 
-        #endregion Properties
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Control"/> class.
         /// </summary>
@@ -88,10 +78,6 @@ namespace FlagLib.Console.Controls
             this.RelativePosition = new Position();
             this.Size = new Size();
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Updates the control if visible is set to true.
@@ -110,10 +96,6 @@ namespace FlagLib.Console.Controls
         /// </summary>
         public abstract void Draw();
 
-        #endregion Public methods
-
-        #region Protected methods
-
         /// <summary>
         /// Clears the control's area.
         /// </summary>
@@ -122,7 +104,5 @@ namespace FlagLib.Console.Controls
             Rectangle eraseArea = new Rectangle(this.AbsolutePosition, this.Size, ' ', true);
             eraseArea.Draw();
         }
-
-        #endregion Protected methods
     }
 }

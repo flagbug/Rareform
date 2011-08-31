@@ -9,8 +9,6 @@ namespace FlagLib.Console.Controls
     /// <typeparam name="T">Type of the item that the user can select</typeparam>
     public class Menu<T> : Control, IFocusable
     {
-        #region Properties
-
         /// <summary>
         /// Gets the items.
         /// </summary>
@@ -77,10 +75,6 @@ namespace FlagLib.Console.Controls
         /// <value>true if focused; otherwise, false.</value>
         public virtual bool IsFocused { get; set; }
 
-        #endregion Properties
-
-        #region Events
-
         /// <summary>
         /// Occurs when a item has been chosen.
         /// </summary>
@@ -90,10 +84,6 @@ namespace FlagLib.Console.Controls
         /// Occurs when the selection has been changed.
         /// </summary>
         public event EventHandler<MenuEventArgs<T>> SelectionChanged;
-
-        #endregion Events
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Menu&lt;T&gt;"/> class.
@@ -108,10 +98,6 @@ namespace FlagLib.Console.Controls
             this.SelectionBackgroundColor = ConsoleColor.White;
             this.SelectionForegroundColor = ConsoleColor.Black;
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Draws the control.
@@ -157,10 +143,6 @@ namespace FlagLib.Console.Controls
         {
             this.IsFocused = false;
         }
-
-        #endregion Public methods
-
-        #region Protected methods
 
         /// <summary>
         /// Scans the input (after the item got focused).
@@ -215,7 +197,5 @@ namespace FlagLib.Console.Controls
                 this.SelectionChanged.Invoke(this, e);
             }
         }
-
-        #endregion Protected methods
     }
 }

@@ -7,8 +7,6 @@ namespace FlagLib.Console.Controls
     /// </summary>
     public class TextField : Control, IFocusable
     {
-        #region Properties
-
         /// <summary>
         /// Gets or sets the color of the foreground.
         /// </summary>
@@ -39,18 +37,10 @@ namespace FlagLib.Console.Controls
         /// <value>true if focused; otherwise, false.</value>
         public virtual bool IsFocused { get; set; }
 
-        #endregion Properties
-
-        #region Events
-
         /// <summary>
         /// Occurs when the input has been entered.
         /// </summary>
         public event EventHandler InputEntered;
-
-        #endregion Events
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextField"/> class.
@@ -60,10 +50,6 @@ namespace FlagLib.Console.Controls
             this.ForegroundColor = ConsoleColor.Black;
             this.BackgroundColor = ConsoleColor.White;
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Focuses the control and executes it's behaviour (e.g the selection of a menu or the input of a textfield)
@@ -104,10 +90,6 @@ namespace FlagLib.Console.Controls
             System.Console.Write(this.Input);
             System.Console.ForegroundColor = saveForegroundColor;
         }
-
-        #endregion Public methods
-
-        #region Protected methods
 
         /// <summary>
         /// Raises the <see cref="E:InputEntered"/> event.
@@ -154,7 +136,5 @@ namespace FlagLib.Console.Controls
 
             this.OnInputEntered(EventArgs.Empty);
         }
-
-        #endregion Protected methods
     }
 }

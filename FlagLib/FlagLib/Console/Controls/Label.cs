@@ -8,13 +8,7 @@ namespace FlagLib.Console.Controls
     /// </summary>
     public class Label : Control
     {
-        #region Members
-
         private string text = String.Empty;
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the text.
@@ -29,10 +23,6 @@ namespace FlagLib.Console.Controls
                 this.Update();
             }
         }
-
-        #endregion Properties
-
-        #region Public methods
 
         /// <summary>
         /// Draws the control.
@@ -73,7 +63,5 @@ namespace FlagLib.Console.Controls
                 System.Console.Write(lines[i]);
             }
         }
-
-        #endregion Public methods
     }
 }

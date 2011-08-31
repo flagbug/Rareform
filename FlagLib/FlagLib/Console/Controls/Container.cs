@@ -9,13 +9,7 @@ namespace FlagLib.Console.Controls
     /// </summary>
     public abstract class Container : Control
     {
-        #region Members
-
         private EventCollection<Control> controls = new EventCollection<Control>();
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets the underlying controls.
@@ -26,10 +20,6 @@ namespace FlagLib.Console.Controls
             get { return this.controls; }
         }
 
-        #endregion Properties
-
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Container"/> class.
         /// </summary>
@@ -39,10 +29,6 @@ namespace FlagLib.Console.Controls
             this.controls.ItemRemoved += new EventHandler<EventCollectionEventArgs<Control>>(controls_ItemRemoved);
             this.controls.ListClearing += new EventHandler(controls_BeforeListCleared);
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Updates the container and it's child controls if visible is set to true.
@@ -62,10 +48,6 @@ namespace FlagLib.Console.Controls
                 }
             }
         }
-
-        #endregion Public methods
-
-        #region Private methods
 
         /// <summary>
         /// Handles the BeforeListCleared event of the controls control.
@@ -99,7 +81,5 @@ namespace FlagLib.Console.Controls
         {
             e.Item.Parent = this;
         }
-
-        #endregion Private methods
     }
 }

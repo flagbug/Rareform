@@ -8,13 +8,7 @@ namespace FlagLib.Console.Controls
     /// <typeparam name="T">Type of the item that gets displayed</typeparam>
     public class ListView<T> : Control
     {
-        #region Members
-
         private Collection<T> items = new Collection<T>();
-
-        #endregion Members
-
-        #region Properties
 
         /// <summary>
         /// Gets the items.
@@ -24,10 +18,6 @@ namespace FlagLib.Console.Controls
         {
             get { return this.items; }
         }
-
-        #endregion Properties
-
-        #region Public methods
 
         /// <summary>
         /// Draws the control.
@@ -40,7 +30,5 @@ namespace FlagLib.Console.Controls
                 System.Console.Write(this.items[i].ToString());
             }
         }
-
-        #endregion Public methods
     }
 }
