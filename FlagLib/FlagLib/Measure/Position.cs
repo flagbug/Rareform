@@ -3,49 +3,37 @@
 namespace FlagLib.Measure
 {
     /// <summary>
-    /// Provides a mutable Position, which encapsulates a x and y coordinate
+    /// Provides a immutable Position, which encapsulates a x and y coordinate
     /// </summary>
     [Serializable]
     public class Position : ICloneable
     {
-        #region Private members
-
-        private int x;
-        private int y;
-
-        #endregion Private members
-
-        #region Public properties
+        private readonly int x;
+        private readonly int y;
 
         /// <summary>
-        /// Gets or sets the x coordinate
+        /// Gets the x coordinate
         /// </summary>
         public int X
         {
             get { return this.x; }
-            set { this.x = value; }
         }
 
         /// <summary>
-        /// Gets or sets the y coordinate
+        /// Gets the y coordinate
         /// </summary>
         public int Y
         {
             get { return this.y; }
-            set { this.y = value; }
         }
-
-        #endregion Public properties
-
-        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Position"/> class with the coordinates (0|0).
         /// </summary>
         public Position()
         {
-            this.X = 0;
-            this.Y = 0;
+            this.x = 0;
+            this.y = 0;
         }
 
         /// <summary>
@@ -55,13 +43,9 @@ namespace FlagLib.Measure
         /// <param name="y">The y coordinate</param>
         public Position(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            this.x = x;
+            this.y = y;
         }
-
-        #endregion Constructor
-
-        #region Public methods
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -80,7 +64,7 @@ namespace FlagLib.Measure
         /// <returns>A <see cref="System.Drawing.Point"/></returns>
         public System.Drawing.Point ToSystemDrawingPoint()
         {
-            return new System.Drawing.Point(this.x, this.y);
+            return new System.Drawing.Point(this.X, this.X);
         }
 
         /// <summary>
@@ -169,9 +153,7 @@ namespace FlagLib.Measure
         /// </returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return new { X = this.X, Y = this.Y }.GetHashCode();
         }
-
-        #endregion Public methods
     }
 }
