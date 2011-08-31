@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace FlagLib.Console.Controls
 {
@@ -9,11 +9,16 @@ namespace FlagLib.Console.Controls
     /// <typeparam name="T">Type of the item that the user can select</typeparam>
     public class Menu<T> : Control, IFocusable
     {
+        private List<MenuItem<T>> items;
+
         /// <summary>
         /// Gets the items.
         /// </summary>
         /// <value>The items.</value>
-        public Collection<MenuItem<T>> Items { get; private set; }
+        public ICollection<MenuItem<T>> Items
+        {
+            get { return this.items; }
+        }
 
         /// <summary>
         /// Gets or sets the index of the selected.
@@ -29,7 +34,7 @@ namespace FlagLib.Console.Controls
         {
             get
             {
-                return this.Items[this.SelectedIndex];
+                return this.items[this.SelectedIndex];
             }
         }
 
@@ -90,7 +95,7 @@ namespace FlagLib.Console.Controls
         /// </summary>
         public Menu()
         {
-            this.Items = new Collection<MenuItem<T>>();
+            this.items = new List<MenuItem<T>>();
             this.UpKey = ConsoleKey.UpArrow;
             this.DownKey = ConsoleKey.DownArrow;
             this.ForegroundColor = ConsoleColor.Gray;
@@ -116,7 +121,7 @@ namespace FlagLib.Console.Controls
 
                 System.Console.SetCursorPosition(this.AbsolutePosition.X, this.AbsolutePosition.Y + i);
 
-                System.Console.WriteLine(this.Items[i].Name);
+                System.Console.WriteLine(this.items[i].Name);
 
                 if (this.SelectedIndex == i)
                 {
