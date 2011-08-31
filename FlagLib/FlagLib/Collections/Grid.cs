@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using FlagLib.Extensions;
 
@@ -69,22 +68,22 @@ namespace FlagLib.Collections
         {
             get
             {
-                if (row < 0 || row >= this.RowCount)
-                    throw new IndexOutOfRangeException("The row index mus't be greater than zero and less than " + this.RowCount);
+                row.ThrowIfIsLessThan(0, "row");
+                row.ThrowIfIsGreaterThan(this.RowCount - 1, "row");
 
-                if (column < 0 || column >= this.ColumnCount)
-                    throw new IndexOutOfRangeException("The column index mus't be greater than zero and less than " + this.ColumnCount);
+                column.ThrowIfIsLessThan(0, "column");
+                column.ThrowIfIsGreaterThan(this.ColumnCount - 1, "column");
 
                 return this[row * this.ColumnCount + column];
             }
 
             set
             {
-                if (row < 0 || row >= this.RowCount)
-                    throw new IndexOutOfRangeException("The row index mus't be greater than zero and less than " + this.RowCount);
+                row.ThrowIfIsLessThan(0, "row");
+                row.ThrowIfIsGreaterThan(this.RowCount - 1, "row");
 
-                if (column < 0 || column >= this.ColumnCount)
-                    throw new IndexOutOfRangeException("The column index mus't be greater than zero and less than " + this.ColumnCount);
+                column.ThrowIfIsLessThan(0, "column");
+                column.ThrowIfIsGreaterThan(this.ColumnCount - 1, "column");
 
                 this[row * this.ColumnCount + column] = value;
             }
