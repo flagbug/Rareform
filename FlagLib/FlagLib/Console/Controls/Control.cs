@@ -55,6 +55,7 @@ namespace FlagLib.Console.Controls
         /// </summary>
         public Control()
         {
+            this.IsVisible = true;
             this.RelativePosition = new Position();
             this.Size = new Size();
         }
