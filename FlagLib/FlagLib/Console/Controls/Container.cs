@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FlagLib.Collections;
 
 namespace FlagLib.Console.Controls
@@ -40,7 +39,7 @@ namespace FlagLib.Console.Controls
 
             if (this.IsVisible)
             {
-                foreach (Control control in this.controls.Where(control => control.IsVisible))
+                foreach (Control control in this.controls)
                 {
                     control.Update();
                 }
