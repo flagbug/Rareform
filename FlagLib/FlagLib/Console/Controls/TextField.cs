@@ -95,14 +95,14 @@ namespace FlagLib.Console.Controls
         }
 
         /// <summary>
-        /// Raises the <see cref="E:InputEntered"/> event.
+        /// Raises the <see cref="E:TextEntered"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnInputEntered(EventArgs e)
+        protected virtual void OnTextEntered(EventArgs e)
         {
             if (this.TextEntered != null)
             {
-                this.TextEntered.Invoke(this, e);
+                this.TextEntered(this, e);
             }
         }
 
@@ -137,7 +137,7 @@ namespace FlagLib.Console.Controls
             }
             while (key.Key != ConsoleKey.Enter && this.IsVisible);
 
-            this.OnInputEntered(EventArgs.Empty);
+            this.OnTextEntered(EventArgs.Empty);
         }
     }
 }
