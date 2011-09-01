@@ -8,21 +8,11 @@ namespace FlagLib.Console.Controls
     /// </summary>
     public class Label : Control
     {
-        private string text = String.Empty;
-
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
         /// <value>The text.</value>
-        public string Text
-        {
-            get { return this.text; }
-            set
-            {
-                this.text = value;
-                this.Update();
-            }
-        }
+        public string Text { get; set; }
 
         /// <summary>
         /// Draws the control.
@@ -30,7 +20,7 @@ namespace FlagLib.Console.Controls
         protected override void Draw()
         {
             List<string> words = new List<string>();
-            words.AddRange(this.text.Split(' ')); //Split text into words
+            words.AddRange(this.Text.Split(' ')); //Split text into words
 
             List<string> lines = new List<string>();
 
@@ -55,7 +45,7 @@ namespace FlagLib.Console.Controls
 
                 lines.Add(line);
             }
-            while (words.Count > 0);
+            while (words.Count > 0 && lines.Count < this.Size.Height);
 
             for (int i = 0; i < lines.Count; i++)
             {
