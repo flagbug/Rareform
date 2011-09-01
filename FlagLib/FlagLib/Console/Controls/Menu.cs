@@ -39,16 +39,16 @@ namespace FlagLib.Console.Controls
         }
 
         /// <summary>
-        /// Gets or sets up key.
+        /// Gets the up keys.
         /// </summary>
         /// <value>Up key.</value>
-        public ConsoleKey UpKey { get; set; }
+        public ICollection<ConsoleKey> UpKeys { get; private set; }
 
         /// <summary>
-        /// Gets or sets down key.
+        /// Gets the down keys.
         /// </summary>
         /// <value>Down key.</value>
-        public ConsoleKey DownKey { get; set; }
+        public ICollection<ConsoleKey> DownKeys { get; private set; }
 
         /// <summary>
         /// Gets or sets the color of the foreground.
@@ -96,8 +96,8 @@ namespace FlagLib.Console.Controls
         public Menu()
         {
             this.items = new List<MenuItem<T>>();
-            this.UpKey = ConsoleKey.UpArrow;
-            this.DownKey = ConsoleKey.DownArrow;
+            this.UpKeys = new List<ConsoleKey> { ConsoleKey.UpArrow };
+            this.DownKeys = new List<ConsoleKey> { ConsoleKey.DownArrow };
             this.ForegroundColor = ConsoleColor.Gray;
             this.BackgroundColor = ConsoleColor.Black;
             this.SelectionBackgroundColor = ConsoleColor.White;
@@ -162,13 +162,13 @@ namespace FlagLib.Console.Controls
 
                 pressedKey = System.Console.ReadKey(true).Key;
 
-                if (pressedKey == this.UpKey && this.SelectedIndex > 0)
+                if (this.UpKeys.Contains(pressedKey) && this.SelectedIndex > 0)
                 {
                     this.SelectedIndex--;
                     this.OnSelectionChanged(new MenuEventArgs<T>(this.SelectedItem));
                 }
 
-                else if (pressedKey == this.DownKey && this.SelectedIndex < this.Items.Count - 1)
+                else if (this.DownKeys.Contains(pressedKey) && this.SelectedIndex < this.Items.Count - 1)
                 {
                     this.SelectedIndex++;
                     this.OnSelectionChanged(new MenuEventArgs<T>(this.SelectedItem));
