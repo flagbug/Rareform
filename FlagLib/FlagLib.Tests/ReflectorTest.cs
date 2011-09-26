@@ -9,7 +9,7 @@ namespace FlagLib.Tests
     ///to contain all ReflectionUtilitiesTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ReflectionUtilitiesTest
+    public class ReflectorTest
     {
         private int testMember = 0;
 
