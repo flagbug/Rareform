@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using FlagLib.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -64,6 +65,24 @@ namespace FlagLib.Tests
             actual = Reflector.GetMemberName(() => testArgument);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetMemberNameExpressionTest()
+        {
+            object testMember = new object();
+
+            string expected = "testMember";
+            string actual;
+
+            actual = this.InternGetMemberNameExpressionTest(() => testMember);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        private string InternGetMemberNameExpressionTest<T>(Expression<Func<T>> expression)
+        {
+            return Reflector.GetMemberName(expression);
         }
 
         [TestMethod]

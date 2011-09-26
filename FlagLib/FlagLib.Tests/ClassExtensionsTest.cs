@@ -21,11 +21,28 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ThrowIfNullExpressionReflectionTest()
+        {
+            object testObject = null;
+
+            testObject.ThrowIfNull(() => testObject);
+        }
+
+        [TestMethod]
         public void ThrowIfNullInverseTest()
         {
             object testObject = new object();
 
             testObject.ThrowIfNull("testObject");
+        }
+
+        [TestMethod]
+        public void ThrowIfNullExpressionReflectionReverseTest()
+        {
+            object testObject = new object();
+
+            testObject.ThrowIfNull(() => testObject);
         }
     }
 }
