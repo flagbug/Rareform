@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FlagLib.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -89,7 +91,7 @@ namespace FlagLib.Tests
             Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
 
             int expected = 10;
-            int actual = target.ColumnCount;
+            int actual = target.Columns;
 
             Assert.AreEqual(expected, actual);
         }
@@ -102,7 +104,7 @@ namespace FlagLib.Tests
             Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
 
             int expected = 5;
-            int actual = target.RowCount;
+            int actual = target.Rows;
 
             Assert.AreEqual(expected, actual);
         }
@@ -111,7 +113,7 @@ namespace FlagLib.Tests
         public void ItemTest()
         {
             int rows = 5;
-            int columns = 10;
+            int columns = 4;
 
             Grid<int> target = new Grid<int>(rows, columns);
 
@@ -122,7 +124,7 @@ namespace FlagLib.Tests
             int actual;
 
             target[row, column] = expected;
-            actual = target[row, column];
+            actual = target[14];
 
             Assert.AreEqual(expected, actual);
         }
@@ -144,6 +146,35 @@ namespace FlagLib.Tests
             actual = target[cell];
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TraverseTest()
+        {
+            List<int> expected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            List<int> actual = new List<int>();
+
+            Grid<int> target = new Grid<int>(4, 3);
+            target[0, 0] = 0;
+            target[0, 1] = 1;
+            target[0, 2] = 2;
+            target[1, 0] = 3;
+            target[1, 1] = 4;
+            target[1, 2] = 5;
+            target[2, 0] = 6;
+            target[2, 1] = 7;
+            target[2, 2] = 8;
+            target[3, 0] = 9;
+            target[3, 1] = 10;
+            target[3, 2] = 11;
+
+            target.Traverse((column, row) =>
+                {
+                    int debug = target[row, column];
+                    actual.Add(debug);
+                });
+
+            Assert.IsTrue(actual.SequenceEqual(expected));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FlagLib.Extensions;
 
@@ -14,12 +15,9 @@ namespace FlagLib.Collections
         private List<T> internFields;
 
         /// <summary>
-        /// Gets the total amount of rows.
+        /// Gets the height of the grid.
         /// </summary>
-        /// <value>
-        /// The total amount of rows.
-        /// </value>
-        public int RowCount { get; private set; }
+        public int Rows { get; private set; }
 
         /// <summary>
         /// Gets the total amount of columns.
@@ -27,7 +25,7 @@ namespace FlagLib.Collections
         /// <value>
         /// The total amount of columns.
         /// </value>
-        public int ColumnCount { get; private set; }
+        public int Columns { get; private set; }
 
         /// <summary>
         /// Gets the total amount of cells.
@@ -37,7 +35,7 @@ namespace FlagLib.Collections
         /// </value>
         public int CellCount
         {
-            get { return this.RowCount * this.ColumnCount; }
+            get { return this.Rows * this.Columns; }
         }
 
         /// <summary>
@@ -50,8 +48,8 @@ namespace FlagLib.Collections
             rows.ThrowIfIsLessThan(1, "rows");
             columns.ThrowIfIsLessThan(1, "columns");
 
-            this.RowCount = rows;
-            this.ColumnCount = columns;
+            this.Rows = rows;
+            this.Columns = columns;
 
             this.internFields = new List<T>(rows * columns);
 
@@ -69,23 +67,23 @@ namespace FlagLib.Collections
             get
             {
                 row.ThrowIfIsLessThan(0, "row");
-                row.ThrowIfIsGreaterThan(this.RowCount - 1, "row");
+                row.ThrowIfIsGreaterThan(this.Rows - 1, "row");
 
                 column.ThrowIfIsLessThan(0, "column");
-                column.ThrowIfIsGreaterThan(this.ColumnCount - 1, "column");
+                column.ThrowIfIsGreaterThan(this.Columns - 1, "column");
 
-                return this[row * this.ColumnCount + column];
+                return this[row * this.Columns + column];
             }
 
             set
             {
                 row.ThrowIfIsLessThan(0, "row");
-                row.ThrowIfIsGreaterThan(this.RowCount - 1, "row");
+                row.ThrowIfIsGreaterThan(this.Rows - 1, "row");
 
                 column.ThrowIfIsLessThan(0, "column");
-                column.ThrowIfIsGreaterThan(this.ColumnCount - 1, "column");
+                column.ThrowIfIsGreaterThan(this.Columns - 1, "column");
 
-                this[row * this.ColumnCount + column] = value;
+                this[row * this.Columns + column] = value;
             }
         }
 
@@ -102,6 +100,24 @@ namespace FlagLib.Collections
             set
             {
                 this.internFields[index] = value;
+            }
+        }
+
+        /// <summary>
+        /// Traverses each row of the grid item per item from the origin and executes the specified action.
+        /// </summary>
+        /// <param name="action">
+        /// The action to execute, the first argument is the current column,
+        /// the second argument is the current row.
+        /// </param>
+        public void Traverse(Action<int, int> action)
+        {
+            for (int row = 0; row < this.Rows - 1; row++)
+            {
+                for (int column = 0; column < this.Columns - 1; column++)
+                {
+                    action(column, row);
+                }
             }
         }
 
