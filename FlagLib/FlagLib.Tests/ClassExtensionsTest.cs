@@ -13,19 +13,19 @@ namespace FlagLib.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowIfIsNullTest()
+        public void ThrowIfNullTest()
         {
             object testObject = null;
 
-            testObject.ThrowIfIsNull("testObject");
+            testObject.ThrowIfNull("testObject");
         }
 
         [TestMethod]
-        public void ThrowIfIsNullInverseTest()
+        public void ThrowIfNullInverseTest()
         {
             object testObject = new object();
 
-            testObject.ThrowIfIsNull("testObject");
+            testObject.ThrowIfNull("testObject");
         }
     }
 }

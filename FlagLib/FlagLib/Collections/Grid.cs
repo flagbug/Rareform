@@ -45,8 +45,8 @@ namespace FlagLib.Collections
         /// <param name="columns">The column count.</param>
         public Grid(int rows, int columns)
         {
-            rows.ThrowIfIsLessThan(1, "rows");
-            columns.ThrowIfIsLessThan(1, "columns");
+            rows.ThrowIfLessThan(1, "rows");
+            columns.ThrowIfLessThan(1, "columns");
 
             this.Rows = rows;
             this.Columns = columns;
@@ -66,22 +66,22 @@ namespace FlagLib.Collections
         {
             get
             {
-                row.ThrowIfIsLessThan(0, "row");
-                row.ThrowIfIsGreaterThan(this.Rows - 1, "row");
+                row.ThrowIfLessThan(0, "row");
+                row.ThrowIfGreaterThan(this.Rows - 1, "row");
 
-                column.ThrowIfIsLessThan(0, "column");
-                column.ThrowIfIsGreaterThan(this.Columns - 1, "column");
+                column.ThrowIfLessThan(0, "column");
+                column.ThrowIfGreaterThan(this.Columns - 1, "column");
 
                 return this[row * this.Columns + column];
             }
 
             set
             {
-                row.ThrowIfIsLessThan(0, "row");
-                row.ThrowIfIsGreaterThan(this.Rows - 1, "row");
+                row.ThrowIfLessThan(0, "row");
+                row.ThrowIfGreaterThan(this.Rows - 1, "row");
 
-                column.ThrowIfIsLessThan(0, "column");
-                column.ThrowIfIsGreaterThan(this.Columns - 1, "column");
+                column.ThrowIfLessThan(0, "column");
+                column.ThrowIfGreaterThan(this.Columns - 1, "column");
 
                 this[row * this.Columns + column] = value;
             }

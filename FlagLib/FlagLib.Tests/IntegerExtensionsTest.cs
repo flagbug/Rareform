@@ -13,48 +13,48 @@ namespace FlagLib.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfIsGreaterThanTest()
+        public void ThrowIfGreaterThanTest()
         {
             int value = 10;
             int limit = 9;
 
             string parameterName = "value";
 
-            value.ThrowIfIsGreaterThan(limit, parameterName);
+            value.ThrowIfGreaterThan(limit, parameterName);
         }
 
         [TestMethod]
-        public void ThrowIfIsGreaterThanInverseTest()
+        public void ThrowIfGreaterThanInverseTest()
         {
             int value = 9;
             int limit = 10;
 
             string parameterName = "value";
 
-            value.ThrowIfIsGreaterThan(limit, parameterName);
+            value.ThrowIfGreaterThan(limit, parameterName);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfIsLessThanTest()
+        public void ThrowIfLessThanTest()
         {
             int value = 9;
             int limit = 10;
 
             string parameterName = "value";
 
-            value.ThrowIfIsLessThan(limit, parameterName);
+            value.ThrowIfLessThan(limit, parameterName);
         }
 
         [TestMethod]
-        public void ThrowIfIsLessThanInverseTest()
+        public void ThrowIfLessThanInverseTest()
         {
             int value = 10;
             int limit = 9;
 
             string parameterName = "value";
 
-            value.ThrowIfIsLessThan(limit, parameterName);
+            value.ThrowIfLessThan(limit, parameterName);
         }
     }
 }

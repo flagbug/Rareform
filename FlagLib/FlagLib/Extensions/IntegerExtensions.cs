@@ -10,9 +10,9 @@ namespace FlagLib.Extensions
         /// <param name="value">The value.</param>
         /// <param name="limit">The limit.</param>
         /// <param name="parameterName">Name of the parameter.</param>
-        public static void ThrowIfIsGreaterThan(this int value, int limit, string parameterName)
+        public static void ThrowIfGreaterThan(this int value, int limit, string parameterName)
         {
-            parameterName.ThrowIfIsNull("parameterName");
+            parameterName.ThrowIfNull("parameterName");
 
             if (value > limit)
                 throw new ArgumentOutOfRangeException(parameterName, "Value must be less than" + limit);
@@ -24,9 +24,9 @@ namespace FlagLib.Extensions
         /// <param name="value">The value.</param>
         /// <param name="limit">The limit.</param>
         /// <param name="parameterName">Name of the parameter.</param>
-        public static void ThrowIfIsLessThan(this int value, int limit, string parameterName)
+        public static void ThrowIfLessThan(this int value, int limit, string parameterName)
         {
-            parameterName.ThrowIfIsNull("parameterName");
+            parameterName.ThrowIfNull("parameterName");
 
             if (value < limit)
                 throw new ArgumentOutOfRangeException(parameterName, "Value must be greater than" + limit);
