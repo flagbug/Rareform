@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FlagLib.Extensions;
 
 namespace FlagLib.Collections
@@ -53,10 +54,7 @@ namespace FlagLib.Collections
 
             this.internFields = new List<T>(rows * columns);
 
-            for (int i = 0; i < this.CellCount; i++)
-            {
-                this.internFields.Add(default(T));
-            }
+            this.internFields.AddRange(Enumerable.Repeat(default(T), this.CellCount));
         }
 
         /// <summary>
