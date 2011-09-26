@@ -110,9 +110,9 @@ namespace FlagLib.Collections
         /// </param>
         public void Traverse(Action<int, int> action)
         {
-            for (int row = 0; row < this.Rows - 1; row++)
+            for (int row = 0; row < this.Rows; row++)
             {
-                for (int column = 0; column < this.Columns - 1; column++)
+                for (int column = 0; column < this.Columns; column++)
                 {
                     action(column, row);
                 }
