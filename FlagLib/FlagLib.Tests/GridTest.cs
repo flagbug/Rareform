@@ -117,14 +117,14 @@ namespace FlagLib.Tests
 
             Grid<int> target = new Grid<int>(rows, columns);
 
-            int row = 3;
-            int column = 3;
+            int row = 2;
+            int column = 2;
 
             int expected = 25;
             int actual;
 
             target[row, column] = expected;
-            actual = target[14];
+            actual = target[10];
 
             Assert.AreEqual(expected, actual);
         }
