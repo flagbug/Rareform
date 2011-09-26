@@ -8,17 +8,17 @@ namespace FlagLib.IO
     public class CopyProgressEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the total byte number.
+        /// Gets the total numer of bytes.
         /// </summary>
         public long TotalBytes { get; private set; }
 
         /// <summary>
-        /// Gets the total copied bytes.
+        /// Gets the number of copied bytes.
         /// </summary>
         public long TotalCopiedBytes { get; private set; }
 
         /// <summary>
-        /// Gets the average speed.
+        /// Gets the average speed in bytes per second.
         /// </summary>
         public int AverageSpeed { get; private set; }
 
@@ -33,8 +33,8 @@ namespace FlagLib.IO
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyProgressEventArgs"/> class.
         /// </summary>
-        /// <param name="totalBytes">The total bytes.</param>
-        /// <param name="copiedBytes">The total copied bytes.</param>
+        /// <param name="totalBytes">The total number of bytes.</param>
+        /// <param name="copiedBytes">The number of copied bytes.</param>
         public CopyProgressEventArgs(long totalBytes, long totalCopiedBytes, int averageSpeed)
         {
             this.TotalBytes = totalBytes;
