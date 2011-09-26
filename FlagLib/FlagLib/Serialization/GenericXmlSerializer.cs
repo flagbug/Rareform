@@ -16,7 +16,7 @@ namespace FlagLib.Serialization
         /// <typeparam name="T">Type of the items to serialize</typeparam>
         /// <param name="collection">The items tho serialize.</param>
         /// <param name="path">The path of the file.</param>
-        public static void SerializeCollection<T>(ICollection<T> collection, string path) where T : class, new()
+        public static void SerializeCollection<T>(ICollection<T> collection, string path) where T : class
         {
             if (collection == null)
                 throw new ArgumentNullException("collection");
@@ -38,7 +38,7 @@ namespace FlagLib.Serialization
         /// <typeparam name="T"></typeparam>
         /// <param name="item">The item to serialize.</param>
         /// <param name="path">The path of the file.</param>
-        public static void SerializeItem<T>(T item, string path) where T : class, new()
+        public static void SerializeItem<T>(T item, string path) where T : class
         {
             if (item == null)
                 throw new ArgumentNullException("item");
