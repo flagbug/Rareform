@@ -19,7 +19,7 @@ namespace FlagLib.Tests
             int rows = 5;
             int columns = 10;
 
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace FlagLib.Tests
             int rows = 0;
             int columns = 10;
 
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace FlagLib.Tests
             int rows = 5;
             int columns = 0;
 
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace FlagLib.Tests
             int rows = 5;
             int columns = 10;
 
-            Grid<int> target = new Grid<int>(rows, columns);
+            Grid<int> target = new Grid<int>(columns, rows);
 
             foreach (int value in target)
             {
@@ -62,7 +62,7 @@ namespace FlagLib.Tests
             int rows = 5;
             int columns = 10;
 
-            Grid<string> target = new Grid<string>(rows, columns);
+            Grid<string> target = new Grid<string>(columns, rows);
 
             foreach (string value in target)
             {
@@ -75,7 +75,7 @@ namespace FlagLib.Tests
         {
             int rows = 5;
             int columns = 10;
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
 
             int expected = 50;
             int actual = target.CellCount;
@@ -88,7 +88,7 @@ namespace FlagLib.Tests
         {
             int rows = 5;
             int columns = 10;
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
 
             int expected = 10;
             int actual = target.Columns;
@@ -101,7 +101,7 @@ namespace FlagLib.Tests
         {
             int rows = 5;
             int columns = 10;
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(rows, columns);
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
 
             int expected = 5;
             int actual = target.Rows;
@@ -115,7 +115,7 @@ namespace FlagLib.Tests
             int rows = 5;
             int columns = 4;
 
-            Grid<int> target = new Grid<int>(rows, columns);
+            Grid<int> target = new Grid<int>(columns, rows);
 
             int row = 2;
             int column = 2;
@@ -123,7 +123,7 @@ namespace FlagLib.Tests
             int expected = 25;
             int actual;
 
-            target[row, column] = expected;
+            target[column, row] = expected;
             actual = target[10];
 
             Assert.AreEqual(expected, actual);
@@ -135,7 +135,7 @@ namespace FlagLib.Tests
             int rows = 5;
             int columns = 10;
 
-            Grid<int> target = new Grid<int>(rows, columns);
+            Grid<int> target = new Grid<int>(columns, rows);
 
             int cell = 9;
 
@@ -154,23 +154,23 @@ namespace FlagLib.Tests
             List<int> expected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             List<int> actual = new List<int>();
 
-            Grid<int> target = new Grid<int>(4, 3);
+            Grid<int> target = new Grid<int>(3, 4);
             target[0, 0] = 0;
-            target[0, 1] = 1;
-            target[0, 2] = 2;
-            target[1, 0] = 3;
+            target[1, 0] = 1;
+            target[2, 0] = 2;
+            target[0, 1] = 3;
             target[1, 1] = 4;
-            target[1, 2] = 5;
-            target[2, 0] = 6;
-            target[2, 1] = 7;
+            target[2, 1] = 5;
+            target[0, 2] = 6;
+            target[1, 2] = 7;
             target[2, 2] = 8;
-            target[3, 0] = 9;
-            target[3, 1] = 10;
-            target[3, 2] = 11;
+            target[0, 3] = 9;
+            target[1, 3] = 10;
+            target[2, 3] = 11;
 
             target.Traverse((column, row) =>
                 {
-                    int debug = target[row, column];
+                    int debug = target[column, row];
                     actual.Add(debug);
                 });
 

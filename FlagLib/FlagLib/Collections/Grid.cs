@@ -42,9 +42,9 @@ namespace FlagLib.Collections
         /// <summary>
         /// Initializes a new instance of the <see cref="Grid&lt;T&gt;"/> class.
         /// </summary>
-        /// <param name="rows">The row count.</param>
         /// <param name="columns">The column count.</param>
-        public Grid(int rows, int columns)
+        /// <param name="rows">The row count.</param>
+        public Grid(int columns, int rows)
         {
             rows.ThrowIfLessThan(1, "rows");
             columns.ThrowIfLessThan(1, "columns");
@@ -58,9 +58,9 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets or sets the element at the specified row and column.
+        /// Gets or sets the element at the specified column and row.
         /// </summary>
-        public T this[int row, int column]
+        public T this[int column, int row]
         {
             get
             {
