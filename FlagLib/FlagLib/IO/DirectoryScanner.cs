@@ -72,7 +72,7 @@ namespace FlagLib.IO
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryScanner"/> class.
         /// </summary>
-        /// <param name="path">The path of the directory to search.</param>
+        /// <param name="path">The path of the directory to scan.</param>
         public DirectoryScanner(string path)
         {
             this.DirectoryPath = path;
@@ -193,18 +193,18 @@ namespace FlagLib.IO
 
                 else
                 {
-                    this.OnDirectoryScanError(new DirectoryScanErrorEventArgs(rootDirectory.FullName, DirectoryScanErrorEventArgs.DirectoryScanErrorType.DirectoryNotFoundError));
+                    this.OnDirectoryScanError(new DirectoryScanErrorEventArgs(rootDirectory.FullName, DirectoryScanErrorType.DirectoryNotFoundError));
                 }
             }
 
             catch (UnauthorizedAccessException)
             {
-                this.OnDirectoryScanError(new DirectoryScanErrorEventArgs(rootPath, DirectoryScanErrorEventArgs.DirectoryScanErrorType.AccessError));
+                this.OnDirectoryScanError(new DirectoryScanErrorEventArgs(rootPath, DirectoryScanErrorType.AccessError));
             }
 
             catch (SecurityException)
             {
-                this.OnDirectoryScanError(new DirectoryScanErrorEventArgs(rootPath, DirectoryScanErrorEventArgs.DirectoryScanErrorType.SecurityError));
+                this.OnDirectoryScanError(new DirectoryScanErrorEventArgs(rootPath, DirectoryScanErrorType.SecurityError));
             }
 
             this.OnDirectoryProceeded(EventArgs.Empty);

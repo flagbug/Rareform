@@ -46,6 +46,7 @@
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="IO\CopyProgressEventArgs.cs" />
     <Compile Include="IO\DirectoryEventArgs.cs" />
+    <Compile Include="IO\DirectoryScanErrorType.cs" />
     <Compile Include="IO\DirectoryScanner.cs" />
     <Compile Include="IO\FileCopyOperation.cs" />
     <Compile Include="IO\FileEventArgs.cs" />

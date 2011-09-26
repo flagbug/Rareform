@@ -4,13 +4,6 @@ namespace FlagLib.IO
 {
     public class DirectoryScanErrorEventArgs : EventArgs
     {
-        public enum DirectoryScanErrorType
-        {
-            SecurityError,
-            AccessError,
-            DirectoryNotFoundError
-        }
-
         /// <summary>
         /// Gets the type of the error.
         /// </summary>
