@@ -23,7 +23,7 @@ namespace FlagLib.Tests
             string expected = "testMember";
             string actual;
 
-            actual = ReflectionUtilities.GetMemberName(() => testMember);
+            actual = Reflector.GetMemberName(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -34,7 +34,7 @@ namespace FlagLib.Tests
             string expected = "testMember";
             string actual;
 
-            actual = ReflectionUtilities.GetMemberName(() => this.testMember);
+            actual = Reflector.GetMemberName(() => this.testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -45,7 +45,7 @@ namespace FlagLib.Tests
             string expected = "TestMember";
             string actual;
 
-            actual = ReflectionUtilities.GetMemberName(() => this.TestMember);
+            actual = Reflector.GetMemberName(() => this.TestMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -61,7 +61,7 @@ namespace FlagLib.Tests
             string expected = "testArgument";
             string actual;
 
-            actual = ReflectionUtilities.GetMemberName(() => testArgument);
+            actual = Reflector.GetMemberName(() => testArgument);
 
             Assert.AreEqual(expected, actual);
         }
@@ -70,14 +70,14 @@ namespace FlagLib.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void GetMemberNameInvalidArgumentTest()
         {
-            ReflectionUtilities.GetMemberName(() => this);
+            Reflector.GetMemberName(() => this);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GetMemberNameInvalidArgumentTest2()
         {
-            ReflectionUtilities.GetMemberName(() => new int());
+            Reflector.GetMemberName(() => new int());
         }
     }
 }

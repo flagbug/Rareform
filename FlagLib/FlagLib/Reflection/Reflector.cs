@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace FlagLib.Reflection
 {
-    public static class ReflectionUtilities
+    public static class Reflector
     {
         /// <summary>
         /// Gets the name of a member which is passed via the expression.
