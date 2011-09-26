@@ -5,10 +5,11 @@ using System.Collections.Generic;
 namespace FlagLib.Collections
 {
     /// <summary>
-    /// Represents a generic <see cref="EventCollection&lt;T&gt;"/> which raises events when items are added and deleted
+    /// Represents a generic <see cref="EventCollection&lt;T&gt;"/> which raises <para />
+    /// events when items are added and deleted.
     /// </summary>
-    /// <typeparam name="T">Type of the elements in the <see cref="EventCollection&lt;T&gt;"/></typeparam>
-    public class EventCollection<T> : ICollection<T>
+    /// <typeparam name="T">The type of the elements in the <see cref="EventCollection&lt;T&gt;"/></typeparam>
+    public class EventCollection<T> : IList<T>
     {
         private List<T> internList;
 
