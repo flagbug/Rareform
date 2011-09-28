@@ -44,6 +44,7 @@
     <Compile Include="Extensions\ClassExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
+    <Compile Include="Extensions\LongExtensions.cs" />
     <Compile Include="IO\CopyProgressEventArgs.cs" />
     <Compile Include="IO\DirectoryEventArgs.cs" />
     <Compile Include="IO\DirectoryScanErrorType.cs" />
