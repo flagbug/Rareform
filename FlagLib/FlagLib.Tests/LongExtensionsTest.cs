@@ -25,8 +25,8 @@ namespace FlagLib.Tests
         [TestMethod]
         public void ToSizeStringKiloByteTest()
         {
-            long size = 1048;
-            string expected = "2,00 KB";
+            long size = 1024;
+            string expected = "1,00 KB";
             string actual;
 
             actual = size.ToSizeString();
