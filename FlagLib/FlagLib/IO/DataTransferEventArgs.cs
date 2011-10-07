@@ -20,7 +20,7 @@ namespace FlagLib.IO
         /// <summary>
         /// Gets the average speed in bytes per second.
         /// </summary>
-        public int AverageSpeed { get; set; }
+        public long AverageSpeed { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the operation should be canceled.

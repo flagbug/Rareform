@@ -17,11 +17,11 @@ namespace FlagLib.IO
         /// <summary>
         /// Gets the average speed in bytes per second.
         /// </summary>
-        public int AverageSpeed
+        public long AverageSpeed
         {
             get
             {
-                return (int)(this.copiedBytes / this.elapsedTime.TotalSeconds);
+                return (long)(this.copiedBytes / this.elapsedTime.TotalSeconds);
             }
         }
 
