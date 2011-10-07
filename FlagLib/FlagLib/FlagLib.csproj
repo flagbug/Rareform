@@ -59,7 +59,6 @@
     <Compile Include="Reflection\Reflector.cs" />
     <Compile Include="Serialization\GenericXmlSerializer.cs" />
     <Compile Include="ValueConverters\BoolNegationValueConverter.cs" />
-    <Compile Include="ValueConverters\CombiningConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
