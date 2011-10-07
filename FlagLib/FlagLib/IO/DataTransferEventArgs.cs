@@ -3,9 +3,9 @@
 namespace FlagLib.IO
 {
     /// <summary>
-    /// Provides data for the CopyProgress event.
+    /// Encapsulates informations from a data transfer update.
     /// </summary>
-    public class CopyProgressEventArgs : EventArgs
+    public class DataTransferEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the total numer of bytes.
@@ -15,12 +15,12 @@ namespace FlagLib.IO
         /// <summary>
         /// Gets the number of copied bytes.
         /// </summary>
-        public long TotalCopiedBytes { get; private set; }
+        public long TransferredBytes { get; private set; }
 
         /// <summary>
         /// Gets the average speed in bytes per second.
         /// </summary>
-        public int AverageSpeed { get; private set; }
+        public int AverageSpeed { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the operation should be canceled.
@@ -31,15 +31,14 @@ namespace FlagLib.IO
         public bool Cancel { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CopyProgressEventArgs"/> class.
+        /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
         /// </summary>
         /// <param name="totalBytes">The total number of bytes.</param>
-        /// <param name="copiedBytes">The number of copied bytes.</param>
-        public CopyProgressEventArgs(long totalBytes, long totalCopiedBytes, int averageSpeed)
+        /// <param name="copiedBytes">The number of transferred bytes.</param>
+        public DataTransferEventArgs(long totalBytes, long transferredBytes)
         {
             this.TotalBytes = totalBytes;
-            this.TotalCopiedBytes = totalCopiedBytes;
-            this.AverageSpeed = averageSpeed;
+            this.TransferredBytes = transferredBytes;
         }
     }
 }

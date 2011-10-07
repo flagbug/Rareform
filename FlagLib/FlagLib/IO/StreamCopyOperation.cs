@@ -12,7 +12,7 @@ namespace FlagLib.IO
         /// <summary>
         /// Occurs when copy progress has changed.
         /// </summary>
-        public event EventHandler<CopyProgressEventArgs> CopyProgressChanged;
+        public event EventHandler<DataTransferEventArgs> CopyProgressChanged;
 
         /// <summary>
         /// Gets the average speed in bytes per second.
@@ -125,8 +125,11 @@ namespace FlagLib.IO
 
                     this.elapsedTime = stopwatch.Elapsed;
 
-                    CopyProgressEventArgs eventArgs =
-                        new CopyProgressEventArgs(bytesTotal, this.copiedBytes, this.AverageSpeed);
+                    DataTransferEventArgs eventArgs =
+                        new DataTransferEventArgs(bytesTotal, this.copiedBytes);
+
+                    eventArgs.AverageSpeed = this.AverageSpeed;
+
                     this.OnCopyProgressChanged(eventArgs);
 
                     if (eventArgs.Cancel)
@@ -140,14 +143,19 @@ namespace FlagLib.IO
             stopwatch.Stop();
             this.elapsedTime = stopwatch.Elapsed;
 
-            this.OnCopyProgressChanged(new CopyProgressEventArgs(bytesTotal, this.copiedBytes, this.AverageSpeed));
+            DataTransferEventArgs args =
+                new DataTransferEventArgs(bytesTotal, this.copiedBytes);
+
+            args.AverageSpeed = this.AverageSpeed;
+
+            this.OnCopyProgressChanged(args);
         }
 
         /// <summary>
         /// Raises the <see cref="E:CopyProgressChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="FlagLib.IO.CopyProgressEventArgs"/> instance containing the event data.</param>
-        protected void OnCopyProgressChanged(CopyProgressEventArgs e)
+        /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
+        protected void OnCopyProgressChanged(DataTransferEventArgs e)
         {
             if (this.CopyProgressChanged != null)
             {
