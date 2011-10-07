@@ -1,5 +1,5 @@
 ﻿using System;
-using FlagLib.Patterns;
+using FlagLib.Patterns.MVVM;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagLib.Tests
