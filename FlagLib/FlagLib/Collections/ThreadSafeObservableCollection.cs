@@ -6,6 +6,10 @@ using System.Windows.Threading;
 
 namespace FlagLib.Collections
 {
+    /// <summary>
+    /// Provides a thread save observable collection.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ThreadSafeObservableCollection<T> : IList<T>, INotifyCollectionChanged
     {
         private IList<T> collection = new List<T>();
@@ -22,9 +26,9 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Adds the specified item.
+        /// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
         /// </summary>
-        /// <param name="item">The item.</param>
+        /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
         /// <exception cref="T:System.NotSupportedException">
         /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
         ///   </exception>

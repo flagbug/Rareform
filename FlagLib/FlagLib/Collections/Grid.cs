@@ -42,8 +42,8 @@ namespace FlagLib.Collections
         /// <summary>
         /// Initializes a new instance of the <see cref="Grid&lt;T&gt;"/> class.
         /// </summary>
-        /// <param name="columns">The column count.</param>
-        /// <param name="rows">The row count.</param>
+        /// <param name="columns">The number of columns.</param>
+        /// <param name="rows">The number of rows.</param>
         public Grid(int columns, int rows)
         {
             rows.ThrowIfLessThan(1, "rows");

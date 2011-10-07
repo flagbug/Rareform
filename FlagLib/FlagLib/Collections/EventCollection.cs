@@ -14,13 +14,10 @@ namespace FlagLib.Collections
         private List<T> internList;
 
         /// <summary>
-        /// Gets the number of elements in the <see cref="EventCollection&lt;T&gt;"/>.
+        /// Gets the number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
-        /// <value>
-        /// The number of elements in the <see cref="EventCollection&lt;T&gt;"/>.
-        /// </value>
         /// <returns>
-        /// The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// The number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.
         ///   </returns>
         public virtual int Count
         {
@@ -28,8 +25,18 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="T"/> at the specified index.
+        /// Gets or sets the element at the specified index.
         /// </summary>
+        /// <returns>
+        /// The element at the specified index.
+        ///   </returns>
+        ///
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
+        ///   </exception>
+        ///
+        /// <exception cref="T:System.NotSupportedException">
+        /// The property is set and the  <see cref="EventCollection&lt;T&gt;"/> is read-only.
+        ///   </exception>
         public virtual T this[int index]
         {
             get { return this.internList[index]; }
@@ -37,7 +44,7 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets or sets the capacity of the <see cref="EventCollection&lt;T&gt;"/>.
+        /// Gets or sets the capacity.
         /// </summary>
         /// <value>
         /// The capacity.
@@ -49,10 +56,9 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// Gets a value indicating whether the <see cref="EventCollection&lt;T&gt;"/> is read-only.
         /// </summary>
-        /// <returns>
-        /// true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+        /// <returns>true if the  <see cref="EventCollection&lt;T&gt;"/> is read-only; otherwise, false.
         ///   </returns>
         public virtual bool IsReadOnly
         {
@@ -116,11 +122,11 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Adds the specified item to the <see cref="EventCollection&lt;T&gt;"/>.
+        /// Adds an item to the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
-        /// <param name="item">The item to add.</param>
+        /// <param name="item">The object to add to the <see cref="EventCollection&lt;T&gt;"/>.</param>
         /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// The <see cref="EventCollection&lt;T&gt;"/> is read-only.
         ///   </exception>
         public virtual void Add(T item)
         {
@@ -148,10 +154,10 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Removes all elements from the <see cref="EventCollection&lt;T&gt;"/>.
+        /// Removes all items from the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
         /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// The <see cref="EventCollection&lt;T&gt;"/> is read-only.
         ///   </exception>
         public virtual void Clear()
         {
@@ -161,11 +167,11 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Determines whether the <see cref="EventCollection&lt;T&gt;"/> contains the specified item.
+        /// Determines whether the <see cref="EventCollection&lt;T&gt;"/> contains a specific value.
         /// </summary>
-        /// <param name="item">The item.</param>
+        /// <param name="item">The object to locate in the <see cref="EventCollection&lt;T&gt;"/>.</param>
         /// <returns>
-        ///   <c>true</c> if the <see cref="EventCollection&lt;T&gt;"/> contains the specified item; otherwise, <c>false</c>.
+        /// true if <paramref name="item"/> is found in the <see cref="EventCollection&lt;T&gt;"/>; otherwise, false.
         /// </returns>
         public virtual bool Contains(T item)
         {
@@ -173,11 +179,11 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Returns the index of the specified item.
+        /// Determines the index of a specific item in the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
-        /// <param name="item">The item to search.</param>
+        /// <param name="item">The object to locate in the <see cref="EventCollection&lt;T&gt;"/>.</param>
         /// <returns>
-        /// The index of the specified item
+        /// The index of <paramref name="item"/> if found in the list; otherwise, -1.
         /// </returns>
         public virtual int IndexOf(T item)
         {
@@ -185,14 +191,14 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Removes the specified item.
+        /// Removes the first occurrence of a specific object from the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
-        /// <param name="item">The item to remove.</param>
+        /// <param name="item">The object to remove from the <see cref="EventCollection&lt;T&gt;"/>.</param>
         /// <returns>
-        /// True, if the item is successfully removed; otherwise, false.
+        /// true if <paramref name="item"/> was successfully removed from the <see cref="EventCollection&lt;T&gt;"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
         /// </returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// The <see cref="EventCollection&lt;T&gt;"/> is read-only.
         ///   </exception>
         public virtual bool Remove(T item)
         {
@@ -221,10 +227,10 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the <see cref="EventList&lt;T&gt;"/>.
+        /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.Generic.IEnumerator&lt;T&gt;"/> object that can be used to iterate through the collection.
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
         /// </returns>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
@@ -232,7 +238,7 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the <see cref="EventCollection&lt;T&gt;"/>.
+        /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
         /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
@@ -254,10 +260,16 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Inserts the item at the specified index.
+        /// Inserts an item to the <see cref="EventCollection&lt;T&gt;"/> at the specified index.
         /// </summary>
-        /// <param name="index">The index.</param>
-        /// <param name="item">The item.</param>
+        /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+        /// <param name="item">The object to insert into the <see cref="EventCollection&lt;T&gt;"/>.</param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
+        ///   </exception>
+        ///
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+        ///   </exception>
         public virtual void Insert(int index, T item)
         {
             this.OnItemAdding(new EventCollectionEventArgs<T>(item, index));
@@ -268,9 +280,15 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Removes the item at the specified index.
+        /// Removes the <see cref="EventCollection&lt;T&gt;"/> item at the specified index.
         /// </summary>
-        /// <param name="index">The index of the item to remove.</param>
+        /// <param name="index">The zero-based index of the item to remove.</param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
+        ///   </exception>
+        ///
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="EventCollection&lt;T&gt;"/> is read-only.
+        ///   </exception>
         public virtual void RemoveAt(int index)
         {
             T item = this.internList[index];

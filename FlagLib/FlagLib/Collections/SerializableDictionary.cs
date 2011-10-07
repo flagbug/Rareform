@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace FlagLib.Collections
@@ -17,7 +19,7 @@ namespace FlagLib.Collections
         /// <returns>
         /// An <see cref="T:System.Xml.Schema.XmlSchema"/> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)"/> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)"/> method.
         /// </returns>
-        public System.Xml.Schema.XmlSchema GetSchema()
+        public XmlSchema GetSchema()
         {
             return null;
         }
@@ -26,7 +28,7 @@ namespace FlagLib.Collections
         /// Generates an object from its XML representation.
         /// </summary>
         /// <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the object is deserialized.</param>
-        public void ReadXml(System.Xml.XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
             XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
             XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
@@ -60,7 +62,7 @@ namespace FlagLib.Collections
         /// Converts an object into its XML representation.
         /// </summary>
         /// <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
-        public void WriteXml(System.Xml.XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
             XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
             XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));

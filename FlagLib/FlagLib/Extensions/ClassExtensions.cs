@@ -11,7 +11,7 @@ namespace FlagLib.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="object">The object.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
+        /// <param name="parameterName">The parameter name.</param>
         public static void ThrowIfNull<T>(this T @object, string parameterName) where T : class
         {
             if (@object == null)
