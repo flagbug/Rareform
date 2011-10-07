@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using FlagLib.Extensions;
 
-namespace FlagLib.Patterns
+namespace FlagLib.Patterns.MVVM
 {
     public class RelayCommand : ICommand
     {

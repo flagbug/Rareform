@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace FlagLib.Patterns
+namespace FlagLib.Patterns.MVVM
 {
     /// <summary>
     /// Provides an abstract and generic view model base class, <para />

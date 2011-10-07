@@ -53,9 +53,9 @@
     <Compile Include="IO\FileEventArgs.cs" />
     <Compile Include="IO\DirectoryScanErrorEventArgs.cs" />
     <Compile Include="IO\StreamCopyOperation.cs" />
-    <Compile Include="Patterns\RelayCommand.cs" />
+    <Compile Include="Patterns\MVVM\RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Patterns\ViewModelBase.cs" />
+    <Compile Include="Patterns\MVVM\ViewModelBase.cs" />
     <Compile Include="Reflection\Reflector.cs" />
     <Compile Include="Serialization\GenericXmlSerializer.cs" />
     <Compile Include="ValueConverters\BoolNegationValueConverter.cs" />
