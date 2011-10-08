@@ -13,8 +13,8 @@ namespace FlagLib.Serialization
         /// <summary>
         /// Serializes the specified collection at the specified path.
         /// </summary>
-        /// <typeparam name="T">Type of the items to serialize</typeparam>
-        /// <param name="collection">The items tho serialize.</param>
+        /// <typeparam name="T">Type of the items to serialize.</typeparam>
+        /// <param name="collection">The items to serialize.</param>
         /// <param name="path">The path of the file.</param>
         public static void SerializeCollection<T>(ICollection<T> collection, string path) where T : class
         {
