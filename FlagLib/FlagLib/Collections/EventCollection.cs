@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FlagLib.Extensions;
 
 namespace FlagLib.Collections
 {
@@ -109,6 +110,8 @@ namespace FlagLib.Collections
         /// <param name="collection">The collection which gets copied into the <see cref="EventCollection&lt;T&gt;"/>.</param>
         public EventCollection(IEnumerable<T> collection)
         {
+            collection.ThrowIfNull(() => collection);
+
             this.internList = new List<T>(collection);
         }
 
@@ -142,8 +145,7 @@ namespace FlagLib.Collections
         /// <exception cref="System.ArgumentNullException"/>
         public virtual void AddRange(IEnumerable<T> collection)
         {
-            if (collection == null)
-                throw new ArgumentNullException("collection");
+            collection.ThrowIfNull(() => collection);
 
             foreach (T item in collection)
             {
