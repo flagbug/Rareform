@@ -15,7 +15,7 @@ namespace FlagLib.IO
         /// <summary>
         /// Occurs when copy progress has changed.
         /// </summary>
-        public event EventHandler<DataTransferEventArgs> CopyProgressChanged;
+        public event EventHandler<DataTransferEventArgs<Stream, Stream>> CopyProgressChanged;
 
         /// <summary>
         /// Gets the average speed in bytes per second.
@@ -128,10 +128,7 @@ namespace FlagLib.IO
 
                     this.elapsedTime = stopwatch.Elapsed;
 
-                    DataTransferEventArgs eventArgs =
-                        new DataTransferEventArgs(bytesTotal, this.copiedBytes);
-
-                    eventArgs.AverageSpeed = this.AverageSpeed;
+                    var eventArgs = this.CreateEventArgs();
 
                     this.OnCopyProgressChanged(eventArgs);
 
@@ -146,24 +143,34 @@ namespace FlagLib.IO
             stopwatch.Stop();
             this.elapsedTime = stopwatch.Elapsed;
 
-            DataTransferEventArgs args =
-                new DataTransferEventArgs(bytesTotal, this.copiedBytes);
-
-            args.AverageSpeed = this.AverageSpeed;
-
-            this.OnCopyProgressChanged(args);
+            this.OnCopyProgressChanged(this.CreateEventArgs());
         }
 
         /// <summary>
         /// Raises the <see cref="E:CopyProgressChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
-        protected void OnCopyProgressChanged(DataTransferEventArgs e)
+        protected void OnCopyProgressChanged(DataTransferEventArgs<Stream, Stream> e)
         {
             if (this.CopyProgressChanged != null)
             {
                 this.CopyProgressChanged(this, e);
             }
+        }
+
+        /// <summary>
+        /// Creates the event args.
+        /// </summary>
+        /// <returns></returns>
+        private DataTransferEventArgs<Stream, Stream> CreateEventArgs()
+        {
+            var eventArgs = new DataTransferEventArgs<Stream, Stream>(this.SourceStream.Length, this.copiedBytes);
+
+            eventArgs.AverageSpeed = this.AverageSpeed;
+            eventArgs.Source = this.SourceStream;
+            eventArgs.Destination = this.TargetStream;
+
+            return eventArgs;
         }
     }
 }
