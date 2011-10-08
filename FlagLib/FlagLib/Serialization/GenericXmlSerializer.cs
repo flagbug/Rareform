@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using FlagLib.Extensions;
 
 namespace FlagLib.Serialization
 {
@@ -18,11 +18,8 @@ namespace FlagLib.Serialization
         /// <param name="path">The path of the file.</param>
         public static void SerializeCollection<T>(ICollection<T> collection, string path) where T : class
         {
-            if (collection == null)
-                throw new ArgumentNullException("collection");
-
-            if (path == null)
-                throw new ArgumentNullException("path");
+            collection.ThrowIfNull(() => collection);
+            path.ThrowIfNull(() => path);
 
             XmlSerializer serializer = new XmlSerializer(collection.GetType());
 
@@ -40,11 +37,8 @@ namespace FlagLib.Serialization
         /// <param name="path">The path of the file.</param>
         public static void SerializeItem<T>(T item, string path) where T : class
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
-
-            if (path == null)
-                throw new ArgumentNullException("path");
+            item.ThrowIfNull(() => item);
+            path.ThrowIfNull(() => path);
 
             XmlSerializer serializer = new XmlSerializer(item.GetType());
 
@@ -64,8 +58,7 @@ namespace FlagLib.Serialization
         /// </returns>
         public static ICollection<T> DeserializeCollection<T>(string path) where T : class, new()
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             List<T> items = new List<T>();
 
@@ -89,8 +82,7 @@ namespace FlagLib.Serialization
         /// </returns>
         public static T DeserializeItem<T>(string path) where T : class, new()
         {
-            if (path == null)
-                throw new ArgumentNullException("path");
+            path.ThrowIfNull(() => path);
 
             T item = new T();
 

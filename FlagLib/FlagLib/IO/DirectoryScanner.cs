@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
+using FlagLib.Extensions;
 
 namespace FlagLib.IO
 {
@@ -75,6 +76,8 @@ namespace FlagLib.IO
         /// <param name="path">The path of the directory to scan.</param>
         public DirectoryScanner(string path)
         {
+            path.ThrowIfNull(() => path);
+
             this.DirectoryPath = path;
         }
 
@@ -162,6 +165,8 @@ namespace FlagLib.IO
         /// <param name="rootPath">The root path.</param>
         private void ScanDirectories(string rootPath)
         {
+            rootPath.ThrowIfNull(() => rootPath);
+
             if (this.IsStopped) { return; }
 
             DirectoryInfo rootDirectory = new DirectoryInfo(rootPath);

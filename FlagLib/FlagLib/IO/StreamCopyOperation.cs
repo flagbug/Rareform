@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using FlagLib.Extensions;
 
 namespace FlagLib.IO
 {
@@ -71,6 +72,8 @@ namespace FlagLib.IO
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
+            updateInterval.ThrowIfLessThan(1, "updateInterval");
+
             this.UpdateInterval = updateInterval;
         }
 
@@ -96,6 +99,10 @@ namespace FlagLib.IO
         /// <param name="bufferSize">Size of the buffer.</param>
         private StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize)
         {
+            sourceStream.ThrowIfNull(() => sourceStream);
+            targetStream.ThrowIfNull(() => targetStream);
+            bufferSize.ThrowIfLessThan(1, "bufferSize");
+
             this.SourceStream = sourceStream;
             this.TargetStream = targetStream;
             this.BufferSize = bufferSize;
