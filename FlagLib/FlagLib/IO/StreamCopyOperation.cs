@@ -4,6 +4,9 @@ using System.IO;
 
 namespace FlagLib.IO
 {
+    /// <summary>
+    /// Provides an operation to copy a stream to another stream.
+    /// </summary>
     public class StreamCopyOperation
     {
         private TimeSpan elapsedTime;
