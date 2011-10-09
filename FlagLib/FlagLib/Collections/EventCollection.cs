@@ -9,7 +9,7 @@ namespace FlagLib.Collections
     /// Represents a generic <see cref="EventCollection&lt;T&gt;"/> which raises <para />
     /// events when items are added and deleted.
     /// </summary>
-    /// <typeparam name="T">The type of the elements in the <see cref="EventCollection&lt;T&gt;"/></typeparam>
+    /// <typeparam name="T">The type of elements in the <see cref="EventCollection&lt;T&gt;"/></typeparam>
     public class EventCollection<T> : IList<T>
     {
         private List<T> internList;

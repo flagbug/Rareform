@@ -16,24 +16,18 @@ namespace FlagLib.Collections
         private List<T> internFields;
 
         /// <summary>
-        /// Gets the height of the grid.
+        /// Gets the number of rows.
         /// </summary>
         public int Rows { get; private set; }
 
         /// <summary>
-        /// Gets the total amount of columns.
+        /// Gets the number of columns.
         /// </summary>
-        /// <value>
-        /// The total amount of columns.
-        /// </value>
         public int Columns { get; private set; }
 
         /// <summary>
-        /// Gets the total amount of cells.
+        /// Gets the number of cells.
         /// </summary>
-        /// <value>
-        /// The total amount of cells.
-        /// </value>
         public int CellCount
         {
             get { return this.Rows * this.Columns; }

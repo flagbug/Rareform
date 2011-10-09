@@ -28,7 +28,7 @@ namespace FlagLib.Collections
         /// Initializes a new instance of the <see cref="EventCollectionEventArgs&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="item">The item that was affected.</param>
-        /// <param name="index">The index of the item which was affected.</param>
+        /// <param name="index">The index of the item that was affected.</param>
         public EventCollectionEventArgs(T item, int index)
         {
             this.Item = item;

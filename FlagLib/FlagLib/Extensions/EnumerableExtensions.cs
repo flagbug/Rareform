@@ -9,35 +9,39 @@ namespace FlagLib.Extensions
     public static class EnumerableExtensions
     {
         /// <summary>
-        /// Determines whether the specified
-        /// <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" />
-        /// contains any of the specified items
+        /// Determines whether a sequence contains any of the specified items by using the default equality comparer.
         /// </summary>
-        /// <typeparam name="T">The source type</typeparam>
-        /// <param name="value">The value.</param>
-        /// <param name="items">The items.</param>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence in which to locate one of the items.</param>
+        /// <param name="items">The items to locate in the sequence.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified value contains any of the specified items; otherwise, <c>false</c>.
+        ///   <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
         /// </returns>
-        public static bool ContainsAny<T>(this IEnumerable<T> value, params T[] items)
+        /// <exception cref="System.ArgumentNullException">source or items is null.</exception>
+        public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, params TSource[] items)
         {
-            return items.Any(item => value.Contains<T>(item));
+            source.ThrowIfNull(() => source);
+            items.ThrowIfNull(() => items);
+
+            return items.Any(item => source.Contains<TSource>(item));
         }
 
         /// <summary>
-        /// Determines whether the specified
-        /// <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" />
-        /// contains any of the specified items
+        /// Determines whether a sequence contains any of the specified items by using the default equality comparer.
         /// </summary>
-        /// <typeparam name="T">The source type</typeparam>
-        /// <param name="value">The value.</param>
-        /// <param name="items">The items.</param>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence in which to locate one of the items.</param>
+        /// <param name="items">The items to locate in the sequence.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified value contains any of the specified items; otherwise, <c>false</c>.
+        ///   <c>true</c> if the sequence contains any of the specified items; otherwise, <c>false</c>.
         /// </returns>
-        public static bool ContainsAny<T>(this IEnumerable<T> value, IEnumerable<T> items)
+        /// <exception cref="System.ArgumentNullException">source or items is null.</exception>
+        public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> items)
         {
-            return items.Any(item => value.Contains<T>(item));
+            source.ThrowIfNull(() => source);
+            items.ThrowIfNull(() => items);
+
+            return items.Any(item => source.Contains<TSource>(item));
         }
     }
 }
