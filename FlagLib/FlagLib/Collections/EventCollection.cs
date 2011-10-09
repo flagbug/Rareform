@@ -72,7 +72,7 @@ namespace FlagLib.Collections
         public event EventHandler<EventCollectionEventArgs<T>> ItemAdded;
 
         /// <summary>
-        /// Occurs before the item has been item added.
+        /// Occurs before an item has been added.
         /// </summary>
         public event EventHandler<EventCollectionEventArgs<T>> ItemAdding;
 
@@ -82,19 +82,19 @@ namespace FlagLib.Collections
         public event EventHandler<EventCollectionEventArgs<T>> ItemRemoved;
 
         /// <summary>
-        /// Occurs before the item has been removed.
+        /// Occurs before an item has been removed.
         /// </summary>
         public event EventHandler<EventCollectionEventArgs<T>> ItemRemoving;
 
         /// <summary>
-        /// Occurs when the list has been cleared.
+        /// Occurs when the <see cref="EventCollection&lt;T&gt;"/> has been cleared.
         /// </summary>
-        public event EventHandler ListCleared;
+        public event EventHandler Cleared;
 
         /// <summary>
-        /// Occurs before the list has been cleared.
+        /// Occurs before the <see cref="EventCollection&lt;T&gt;"/> has been cleared.
         /// </summary>
-        public event EventHandler ListClearing;
+        public event EventHandler Clearing;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventCollection&lt;T&gt;"/> class.
@@ -163,9 +163,9 @@ namespace FlagLib.Collections
         ///   </exception>
         public virtual void Clear()
         {
-            this.OnListClearing(EventArgs.Empty);
+            this.OnClearing(EventArgs.Empty);
             this.internList.Clear();
-            this.OnListCleared(EventArgs.Empty);
+            this.OnCleared(EventArgs.Empty);
         }
 
         /// <summary>
@@ -354,11 +354,11 @@ namespace FlagLib.Collections
         /// Raises the <see cref="E:ListCleared"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnListCleared(EventArgs e)
+        protected virtual void OnCleared(EventArgs e)
         {
-            if (this.ListCleared != null)
+            if (this.Cleared != null)
             {
-                this.ListCleared.Invoke(this, e);
+                this.Cleared.Invoke(this, e);
             }
         }
 
@@ -366,11 +366,11 @@ namespace FlagLib.Collections
         /// Raises the <see cref="E:BeforeListCleared"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnListClearing(EventArgs e)
+        protected virtual void OnClearing(EventArgs e)
         {
-            if (this.ListClearing != null)
+            if (this.Clearing != null)
             {
-                this.ListClearing.Invoke(this, e);
+                this.Clearing.Invoke(this, e);
             }
         }
     }
