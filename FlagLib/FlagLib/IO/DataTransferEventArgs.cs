@@ -8,7 +8,7 @@ namespace FlagLib.IO
     public class DataTransferEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the total numer of bytes.
+        /// Gets the total number of bytes.
         /// </summary>
         public long TotalBytes { get; private set; }
 
@@ -28,6 +28,10 @@ namespace FlagLib.IO
         /// <value>
         /// true if the operation should be canceled; otherwise, false.
         /// </value>
+        /// <remarks>
+        /// Note that the caller of this class is responsible for the implementation cancelable
+        /// data transfer and the set of this property may not work as expected.
+        /// </remarks>
         public bool Cancel { get; set; }
 
         /// <summary>

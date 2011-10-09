@@ -5,10 +5,21 @@ namespace FlagLib.Extensions
     public static class LongExtensions
     {
         /// <summary>
-        /// Formats the value to a size string.
+        /// Formats the value to a string, which has the appropriate size-suffix.
         /// </summary>
         /// <param name="size">The value.</param>
-        /// <returns>A formated string with the appropriate size-suffix.</returns>
+        /// <returns>
+        /// A formatted string with the appropriate size-suffix.
+        /// </returns>
+        /// <remarks>
+        /// The formatting is based on 1024-byte splitting.
+        /// This means, that the suffix changes every power of 1024,
+        /// till 1024^12 (Terabyte).
+        /// </remarks>
+        /// <example>
+        /// For a value of 1, the result string is "1 B".
+        /// For a value of 1024, the result string is "1 KB".
+        /// </example>
         public static string ToSizeString(this long size)
         {
             string[] suffix = { "B", "KB", "MB", "GB", "TB" };

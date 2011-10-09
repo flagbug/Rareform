@@ -96,7 +96,7 @@ namespace FlagLib.IO
         /// </summary>
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
-        /// <param name="bufferSize">Size of the buffer.</param>
+        /// <param name="bufferSize">The size of the buffer.</param>
         private StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize)
         {
             sourceStream.ThrowIfNull(() => sourceStream);

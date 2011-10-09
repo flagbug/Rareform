@@ -6,10 +6,10 @@ namespace FlagLib.IO
     public class DirectoryEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the found the directory.
+        /// Gets the directorys that has been found.
         /// </summary>
         /// <value>
-        /// The found directory.
+        /// The directory that has been found.
         /// </value>
         public DirectoryInfo Directory { get; private set; }
 

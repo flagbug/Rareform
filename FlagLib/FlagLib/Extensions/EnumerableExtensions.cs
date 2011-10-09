@@ -4,7 +4,7 @@ using System.Linq;
 namespace FlagLib.Extensions
 {
     /// <summary>
-    /// Extension methods for <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" />
+    /// Extension methods for the <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" /> interface.
     /// </summary>
     public static class EnumerableExtensions
     {
