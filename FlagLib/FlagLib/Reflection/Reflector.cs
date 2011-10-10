@@ -26,11 +26,21 @@ namespace FlagLib.Reflection
     public static class Reflector
     {
         /// <summary>
-        /// Gets the name of a member which is passed via the expression.
+        /// Gets the name of the member that is passed via the expression.
         /// </summary>
-        /// <typeparam name="T">Type of the member.</typeparam>
+        /// <typeparam name="T">The type of the member.</typeparam>
         /// <param name="expression">The expression which contains the member.</param>
-        /// <returns>The members name.</returns>
+        /// <returns>
+        /// The members name.
+        /// </returns>
+        /// <example>
+        /// The method can be used as following:
+        ///   <code>
+        /// int myMember = 0;
+        /// string name = Reflector.GetMembername(() =&gt; myMember);
+        /// Console.Write(name); // Output: myMember
+        ///   </code>
+        ///   </example>
         public static string GetMemberName<T>(Expression<Func<T>> expression)
         {
             expression.ThrowIfNull(() => expression);
