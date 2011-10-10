@@ -42,7 +42,7 @@ namespace FlagLib.Serialization
         /// Deserializes the collection from the specified path.
         /// </summary>
         /// <typeparam name="T">The type of the serialized items</typeparam>
-        /// <param name="path">The path of the file.</param>
+        /// <param name="path">The path of the file with the deserialized data.</param>
         /// <returns>
         /// The deserialized collection.
         /// </returns>
@@ -50,23 +50,14 @@ namespace FlagLib.Serialization
         {
             path.ThrowIfNull(() => path);
 
-            List<T> items = new List<T>();
-
-            XmlSerializer serializer = new XmlSerializer(items.GetType());
-
-            using (TextReader reader = new StreamReader(path))
-            {
-                items = (List<T>)serializer.Deserialize(reader);
-            }
-
-            return items;
+            return (ICollection<T>)GenericXmlSerializer.InternDeserialize<T>(path);
         }
 
         /// <summary>
         /// Deserializes the item at the specified path.
         /// </summary>
         /// <typeparam name="T">The type of the serialized item</typeparam>
-        /// <param name="path">The path of the file.</param>
+        /// <param name="path">The path of the file with the serialized data.</param>
         /// <returns>
         /// The deserialized item.
         /// </returns>
@@ -76,21 +67,14 @@ namespace FlagLib.Serialization
 
             T item = new T();
 
-            XmlSerializer serializer = new XmlSerializer(item.GetType());
-
-            using (TextReader reader = new StreamReader(path))
-            {
-                item = (T)serializer.Deserialize(reader);
-            }
-
-            return item;
+            return GenericXmlSerializer.InternDeserialize<T>(path);
         }
 
         /// <summary>
         /// Executes the intern Serialize method.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="object">The @object to serialize.</param>
+        /// <param name="object">The object to serialize.</param>
         /// <param name="path">The path of the file.</param>
         private static void InternalSerialize<T>(T @object, string path) where T : class
         {
@@ -103,6 +87,28 @@ namespace FlagLib.Serialization
             {
                 serializer.Serialize(writer, @object);
             }
+        }
+
+        /// <summary>
+        /// Executes the intern Deserialize method.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path">The path of the file with the serialized data.</param>
+        /// <returns></returns>
+        private static T InternDeserialize<T>(string path) where T : class, new()
+        {
+            path.ThrowIfNull(() => path);
+
+            T @object = new T();
+
+            XmlSerializer serializer = new XmlSerializer(@object.GetType());
+
+            using (TextReader reader = new StreamReader(path))
+            {
+                @object = (T)serializer.Deserialize(reader);
+            }
+
+            return @object;
         }
     }
 }
