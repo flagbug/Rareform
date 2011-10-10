@@ -14,7 +14,7 @@ namespace FlagLib.Tests
     public class GridTest
     {
         [TestMethod]
-        public void GridConstructorTest()
+        public void GridConstructor_NoParameters_Success()
         {
             int rows = 5;
             int columns = 10;
@@ -24,7 +24,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GridConstructorZeroRowsTest()
+        public void GridConstructor_ZeroRowsAsParameter_ThrowsArgumentOutOfRangeException()
         {
             int rows = 0;
             int columns = 10;
@@ -34,7 +34,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GridConstructorZeroColumnsTest()
+        public void GridConstructor_ZeroColumnsAsParameter_ThrowsArgumentOutOfRangeException()
         {
             int rows = 5;
             int columns = 0;
@@ -43,7 +43,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void GridConstructorValueTypeTest()
+        public void GridConstructor_StandardParameters_ValueTypesAreZero()
         {
             int rows = 5;
             int columns = 10;
@@ -57,7 +57,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void GridConstructorReferenceTypeTest()
+        public void GridConstructor_StandardParameters_ReferenceTypesAreNull()
         {
             int rows = 5;
             int columns = 10;
@@ -71,7 +71,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void CellCountTest()
+        public void CellCount_ConstructorWithStandardParameters_Succeed()
         {
             int rows = 5;
             int columns = 10;
@@ -84,7 +84,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ColumnCountTest()
+        public void ColumnCount_ConstructorWithStandardParameters_Succeed()
         {
             int rows = 5;
             int columns = 10;
@@ -97,7 +97,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void RowCountTest()
+        public void RowCount_ConstructorWithStandardParameters_Succeed()
         {
             int rows = 5;
             int columns = 10;
@@ -110,7 +110,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ItemTest()
+        public void SingleIndexer_ConstructorWithStandardParameters_Succeed()
         {
             int rows = 5;
             int columns = 4;
@@ -130,7 +130,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ItemTest1()
+        public void DualIndexer_ConstructorWithStandardParameters_Succeed()
         {
             int rows = 5;
             int columns = 10;
@@ -149,7 +149,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void TraverseTest()
+        public void Traverse_ConstructorWithStandardParameters_OrderIsEqual()
         {
             List<int> expected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             List<int> actual = new List<int>();

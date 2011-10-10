@@ -13,7 +13,7 @@ namespace FlagLib.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowIfNullTest()
+        public void ThrowIfNull_NullObjectWithStringParameter_ThrowsArgumentNullExeption()
         {
             object testObject = null;
 
@@ -22,7 +22,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowIfNullExpressionReflectionTest()
+        public void ThrowIfNull_NullObjectWithExpressionParameter_ThrowsArgumentNullExeption()
         {
             object testObject = null;
 
@@ -30,7 +30,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ThrowIfNullInverseTest()
+        public void ThrowIfNull_NotNullObjectWithStringParameter_Success()
         {
             object testObject = new object();
 
@@ -38,7 +38,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ThrowIfNullExpressionReflectionReverseTest()
+        public void ThrowIfNull_NotNullObjectWithExpressionParameter_Success()
         {
             object testObject = new object();
 

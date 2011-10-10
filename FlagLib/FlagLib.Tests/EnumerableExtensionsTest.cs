@@ -13,7 +13,7 @@ namespace FlagLib.Tests
     public class EnumerableExtensionsTest
     {
         [TestMethod]
-        public void ContainsAnyIEnumerableTest()
+        public void ContainsAny_IEnumerableAsParameter_ReturnsTrue()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
             IEnumerable<int> items = new List<int> { 1, 2 };
@@ -27,7 +27,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ContainsAnyIEnumerableNotTest()
+        public void ContainsAny_IEnumerableAsParameter_ReturnsFalse()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
             IEnumerable<int> items = new List<int> { 6, 7 };
@@ -42,7 +42,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ContainsAnyIEnumerableNullTest()
+        public void ContainsAny_NullAsParameter_ThrowsArgumentNullExeption()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
             IEnumerable<int> items = null;
@@ -51,7 +51,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ContainsAnyParamaterTest()
+        public void ContainsAny_ParamsAsParameter_ReturnsTrue()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
@@ -64,7 +64,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ContainsAnyPrameterNotTest()
+        public void ContainsAny_ParamsAsParameter_ReturnsFalse()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
@@ -78,7 +78,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ContainsAnyParameterNullTest()
+        public void ContainsAny_ParamsAsParameter_ThrowsArgumentNullExeption()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 

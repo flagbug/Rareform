@@ -13,7 +13,7 @@ namespace FlagLib.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfGreaterThanTest()
+        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
         {
             int value = 10;
             int limit = 9;
@@ -25,7 +25,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfGreaterThanExpressionTest()
+        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
             int value = 10;
             int limit = 9;
@@ -34,7 +34,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ThrowIfGreaterThanInverseTest()
+        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
             int value = 9;
             int limit = 10;
@@ -45,7 +45,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ThrowIfGreaterThanInverseExpressionTest()
+        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
         {
             int value = 9;
             int limit = 10;
@@ -55,7 +55,7 @@ namespace FlagLib.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfLessThanTest()
+        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
         {
             int value = 9;
             int limit = 10;
@@ -66,7 +66,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ThrowIfLessThanInverseTest()
+        public void ThrowIfLEsThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
             int value = 10;
             int limit = 9;
