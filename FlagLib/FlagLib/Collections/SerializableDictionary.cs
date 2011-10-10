@@ -8,7 +8,7 @@ using FlagLib.Extensions;
 namespace FlagLib.Collections
 {
     /// <summary>
-    /// Provides a serializable dictionary
+    /// Provides a serializable dictionary.
     /// </summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>

@@ -3,9 +3,9 @@
 namespace FlagLib.Collections
 {
     /// <summary>
-    /// Provides a collection which raises events when items get added or removed
+    /// Provides data for the events of the <see cref="EventCollection&lt;T&gt;"/> class.
     /// </summary>
-    /// <typeparam name="T">Type of the items</typeparam>
+    /// <typeparam name="T">The type of the item.</typeparam>
     public class EventCollectionEventArgs<T> : EventArgs
     {
         /// <summary>

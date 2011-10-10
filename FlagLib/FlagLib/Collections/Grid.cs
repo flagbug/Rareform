@@ -7,10 +7,9 @@ using FlagLib.Extensions;
 namespace FlagLib.Collections
 {
     /// <summary>
-    /// Provides a generic grid with rows and columns
+    /// Provides a generic grid with rows and columns.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <remarks></remarks>
+    /// <typeparam name="T">The type of the items in the <see cref="Grid&lt;T&gt;"/>.</typeparam>
     public class Grid<T> : IEnumerable<T>
     {
         private List<T> internFields;

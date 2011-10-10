@@ -7,9 +7,9 @@ namespace FlagLib.Collections
 {
     /// <summary>
     /// Represents a generic <see cref="EventCollection&lt;T&gt;"/> which raises <para />
-    /// events when items are added and deleted.
+    /// events when items are added or deleted.
     /// </summary>
-    /// <typeparam name="T">The type of elements in the <see cref="EventCollection&lt;T&gt;"/></typeparam>
+    /// <typeparam name="T">The type of elements in the <see cref="EventCollection&lt;T&gt;"/>.</typeparam>
     public class EventCollection<T> : IList<T>
     {
         private List<T> internList;
@@ -33,7 +33,7 @@ namespace FlagLib.Collections
         ///   </returns>
         ///
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
-        ///   </exception>
+        ///  </exception>
         ///
         /// <exception cref="T:System.NotSupportedException">
         /// The property is set and the  <see cref="EventCollection&lt;T&gt;"/> is read-only.
