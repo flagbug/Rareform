@@ -38,7 +38,7 @@ namespace FlagLib.Extensions
 
             string name = Reflector.GetMemberName(parameterName);
 
-            value.ThrowIfGreaterThan(limit, parameterName);
+            value.ThrowIfGreaterThan(limit, name);
         }
 
         /// <summary>
