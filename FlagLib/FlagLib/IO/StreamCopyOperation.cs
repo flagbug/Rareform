@@ -139,7 +139,6 @@ namespace FlagLib.IO
             Stopwatch stopwatch = Stopwatch.StartNew();
             this.StartTime = DateTime.Now;
 
-            long bytesTotal = this.SourceStream.Length;
             byte[] buffer = new byte[this.BufferSize];
             int bytes;
             int updateCounter = 0; //The updateCounter is needed to know when the CopyProgressChanged event shall be called
