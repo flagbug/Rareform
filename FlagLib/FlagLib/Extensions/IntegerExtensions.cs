@@ -16,7 +16,7 @@ namespace FlagLib.Extensions
 
             if (value > limit)
             {
-                throw new ArgumentOutOfRangeException(parameterName, "Value must be less than" + limit);
+                throw new ArgumentOutOfRangeException(parameterName, "Value must be less than" + limit.ToString());
             }
         }
 
@@ -32,7 +32,7 @@ namespace FlagLib.Extensions
 
             if (value < limit)
             {
-                throw new ArgumentOutOfRangeException(parameterName, "Value must be greater than" + limit);
+                throw new ArgumentOutOfRangeException(parameterName, "Value must be greater than" + limit.ToString());
             }
         }
     }
