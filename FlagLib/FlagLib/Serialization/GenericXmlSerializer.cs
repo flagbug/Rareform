@@ -84,8 +84,6 @@ namespace FlagLib.Serialization
         {
             path.ThrowIfNull(() => path);
 
-            T item = new T();
-
             return GenericXmlSerializer.InternDeserialize<T>(path);
         }
 
