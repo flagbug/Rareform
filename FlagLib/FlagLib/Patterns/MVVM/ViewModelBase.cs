@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using FlagLib.Extensions;
 
 namespace FlagLib.Patterns.MVVM
 {
@@ -23,6 +24,8 @@ namespace FlagLib.Patterns.MVVM
         /// <param name="propertySelector">The property selector.</param>
         protected void OnPropertyChanged<TValue>(Expression<Func<T, TValue>> propertySelector)
         {
+            propertySelector.ThrowIfNull(() => propertySelector);
+
             if (PropertyChanged != null)
             {
                 MemberExpression memberExpression = propertySelector.Body as MemberExpression;

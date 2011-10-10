@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using FlagLib.Extensions;
 
 namespace FlagLib.Reflection
 {
@@ -13,6 +14,8 @@ namespace FlagLib.Reflection
         /// <returns>The members name.</returns>
         public static string GetMemberName<T>(Expression<Func<T>> expression)
         {
+            expression.ThrowIfNull(() => expression);
+
             MemberExpression memberExpression = expression.Body as MemberExpression;
 
             if (memberExpression == null)
