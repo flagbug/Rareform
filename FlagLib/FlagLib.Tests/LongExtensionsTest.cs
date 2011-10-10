@@ -11,7 +11,7 @@ namespace FlagLib.Tests
     public class LongExtensionsTest
     {
         [TestMethod]
-        public void ToSizeStringByteTest()
+        public void ToSizeString_ParameterIsByte_ReturnsByteString()
         {
             long size = 512;
             string expected = "512 B";
@@ -23,7 +23,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ToSizeStringKiloByteTest()
+        public void ToSizeString_ParameterIsKiloByte_ReturnsKiloByteString()
         {
             long size = 1024;
             string expected = "1,00 KB";
@@ -35,7 +35,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ToSizeStringMegaByteTest()
+        public void ToSizeString_ParameterIsMegaByte_ReturnsMegaByteString()
         {
             long size = 1024 * 1024;
             string expected = "1,00 MB";
@@ -47,7 +47,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ToSizeStringGigaByteTest()
+        public void ToSizeString_ParameterIsByte_ReturnsByteString()
         {
             long size = 1024 * 1024 * 1024;
             string expected = "1,00 GB";
@@ -59,7 +59,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ToSizeStringTeraByteTest()
+        public void ToSizeString_ParameterIsTeraByte_ReturnsTeraByteString()
         {
             long size = 1024L * 1024L * 1024L * 1024L;
 

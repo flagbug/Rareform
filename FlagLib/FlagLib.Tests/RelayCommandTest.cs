@@ -12,7 +12,7 @@ namespace FlagLib.Tests
     public class RelayCommandTest
     {
         [TestMethod]
-        public void CanExecuteTest()
+        public void CanExecute_PredicateReturnsTrue_ReturnsTrue()
         {
             bool expected = true;
             bool actual;
@@ -34,7 +34,7 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ExecuteTest()
+        public void Execute_CanExecuteIsTrue_Succeeds()
         {
             bool expected = true;
             bool actual;
