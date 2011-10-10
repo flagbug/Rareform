@@ -8,6 +8,10 @@ namespace FlagLib.IO
     /// <summary>
     /// Provides an operation to copy a stream to another stream.
     /// </summary>
+    /// <remarks>
+    /// Note that this class does not dispose the streams,
+    /// the caller has to do it himself.
+    /// </remarks>
     public class StreamCopyOperation
     {
         private TimeSpan elapsedTime;
