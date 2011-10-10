@@ -24,6 +24,16 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ThrowIfGreaterThanExpressionTest()
+        {
+            int value = 10;
+            int limit = 9;
+
+            value.ThrowIfGreaterThan(limit, () => value);
+        }
+
+        [TestMethod]
         public void ThrowIfGreaterThanInverseTest()
         {
             int value = 9;
@@ -32,6 +42,15 @@ namespace FlagLib.Tests
             string parameterName = "value";
 
             value.ThrowIfGreaterThan(limit, parameterName);
+        }
+
+        [TestMethod]
+        public void ThrowIfGreaterThanInverseExpressionTest()
+        {
+            int value = 9;
+            int limit = 10;
+
+            value.ThrowIfGreaterThan(limit, () => value);
         }
 
         [TestMethod]
