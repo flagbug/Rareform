@@ -30,7 +30,7 @@ namespace FlagLib.Patterns.MVVM
             {
                 MemberExpression memberExpression = propertySelector.Body as MemberExpression;
 
-                if (memberExpression != null)
+                if (memberExpression != null && this.PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs(memberExpression.Member.Name));
                 }
