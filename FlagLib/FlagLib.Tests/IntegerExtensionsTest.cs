@@ -66,7 +66,17 @@ namespace FlagLib.Tests
         }
 
         [TestMethod]
-        public void ThrowIfLEsThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
+        {
+            int value = 9;
+            int limit = 10;
+
+            value.ThrowIfLessThan(limit, () => value);
+        }
+
+        [TestMethod]
+        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
             int value = 10;
             int limit = 9;
@@ -74,6 +84,15 @@ namespace FlagLib.Tests
             string parameterName = "value";
 
             value.ThrowIfLessThan(limit, parameterName);
+        }
+
+        [TestMethod]
+        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
+        {
+            int value = 10;
+            int limit = 9;
+
+            value.ThrowIfLessThan(limit, () => value);
         }
     }
 }
