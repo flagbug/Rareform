@@ -21,12 +21,7 @@ namespace FlagLib.Serialization
             collection.ThrowIfNull(() => collection);
             path.ThrowIfNull(() => path);
 
-            XmlSerializer serializer = new XmlSerializer(collection.GetType());
-
-            using (TextWriter writer = new StreamWriter(path, false))
-            {
-                serializer.Serialize(writer, collection);
-            }
+            GenericXmlSerializer.InternalSerialize(collection, path);
         }
 
         /// <summary>
@@ -40,12 +35,7 @@ namespace FlagLib.Serialization
             item.ThrowIfNull(() => item);
             path.ThrowIfNull(() => path);
 
-            XmlSerializer serializer = new XmlSerializer(item.GetType());
-
-            using (TextWriter writer = new StreamWriter(path, false))
-            {
-                serializer.Serialize(writer, item);
-            }
+            GenericXmlSerializer.InternalSerialize(item, path);
         }
 
         /// <summary>
@@ -94,6 +84,25 @@ namespace FlagLib.Serialization
             }
 
             return item;
+        }
+
+        /// <summary>
+        /// Executes the intern Serialize method.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="object">The @object to serialize.</param>
+        /// <param name="path">The path of the file.</param>
+        private static void InternalSerialize<T>(T @object, string path) where T : class
+        {
+            @object.ThrowIfNull(() => @object);
+            path.ThrowIfNull(() => path);
+
+            XmlSerializer serializer = new XmlSerializer(@object.GetType());
+
+            using (TextWriter writer = new StreamWriter(path, false))
+            {
+                serializer.Serialize(writer, @object);
+            }
         }
     }
 }
