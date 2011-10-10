@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq.Expressions;
+using FlagLib.Reflection;
 
 namespace FlagLib.Extensions
 {
@@ -21,6 +23,25 @@ namespace FlagLib.Extensions
         }
 
         /// <summary>
+        /// Throws an <see cref="System.ArgumentOutOfRangeException"/> if the value is greater than the limit.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <param name="limit">The exclusive limit.</param>
+        /// <param name="parameterName">The expression that contains the name of the parameter.</param>
+        /// <remarks>
+        /// This method lets the caller define the parameter name as expression,
+        /// so that it can be checked at compile time.
+        /// </remarks>
+        public static void ThrowIfGreaterThan<T>(this int value, int limit, Expression<Func<T>> parameterName)
+        {
+            parameterName.ThrowIfNull(() => parameterName);
+
+            string name = Reflector.GetMemberName(parameterName);
+
+            value.ThrowIfGreaterThan(limit, parameterName);
+        }
+
+        /// <summary>
         /// Throws an <see cref="System.ArgumentOutOfRangeException"/> if the value is less than the limit.
         /// </summary>
         /// <param name="value">The value to check.</param>
@@ -34,6 +55,25 @@ namespace FlagLib.Extensions
             {
                 throw new ArgumentOutOfRangeException(parameterName, "Value must be greater than" + limit.ToString());
             }
+        }
+
+        /// <summary>
+        /// Throws an <see cref="System.ArgumentOutOfRangeException"/> if the value is less than the limit.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <param name="limit">The exclusive limit.</param>
+        /// <param name="parameterName">The expression that contains the name of the parameter.</param>
+        /// <remarks>
+        /// This method lets the caller define the parameter name as expression,
+        /// so that it can be checked at compile time.
+        /// </remarks>
+        public static void ThrowIfLessThan<T>(this int value, int limit, Expression<Func<T>> parameterName)
+        {
+            parameterName.ThrowIfNull(() => parameterName);
+
+            string name = Reflector.GetMemberName(parameterName);
+
+            value.ThrowIfLessThan(limit, name);
         }
     }
 }
