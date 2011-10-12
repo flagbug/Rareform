@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -31,7 +31,7 @@ namespace FlagLib.Tests
     ///to contain all EnumerableExtensionsTest Unit Tests
     ///</summary>
     [TestClass]
-    public class EnumerableExtensionsTest
+    public class IEnumerableExtensionsTest
     {
         [TestMethod]
         public void ContainsAny_IEnumerableAsParameter_ReturnsTrue()

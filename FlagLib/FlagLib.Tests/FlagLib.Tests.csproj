@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassExtensionsTest.cs" />
-    <Compile Include="EnumerableExtensionsTest.cs" />
+    <Compile Include="IEnumerableExtensionsTest.cs" />
     <Compile Include="GridTest.cs" />
     <Compile Include="IComparableExtensionsTest.cs" />
     <Compile Include="LongExtensionsTest.cs" />
