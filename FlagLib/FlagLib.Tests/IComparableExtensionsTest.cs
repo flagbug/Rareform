@@ -33,7 +33,7 @@ namespace FlagLib.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
         {
-            var value = (IComparable<int>)10;
+            int value = 10;
             int limit = 9;
 
             string parameterName = "value";
@@ -45,7 +45,7 @@ namespace FlagLib.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
-            var value = (IComparable<int>)10;
+            int value = 10;
             int limit = 9;
 
             try
@@ -65,7 +65,7 @@ namespace FlagLib.Tests
         [TestMethod]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
-            var value = (IComparable<int>)9;
+            int value = 9;
             int limit = 10;
 
             string parameterName = "value";
@@ -76,7 +76,7 @@ namespace FlagLib.Tests
         [TestMethod]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
         {
-            var value = (IComparable<int>)9;
+            int value = 9;
             int limit = 10;
 
             value.ThrowIfGreaterThan(limit, () => value);
@@ -86,7 +86,7 @@ namespace FlagLib.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
         {
-            var value = (IComparable<int>)9;
+            int value = 9;
             int limit = 10;
 
             string parameterName = "value";
@@ -98,7 +98,7 @@ namespace FlagLib.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
-            var value = (IComparable<int>)9;
+            int value = 9;
             int limit = 10;
 
             try
@@ -118,7 +118,7 @@ namespace FlagLib.Tests
         [TestMethod]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
-            var value = (IComparable<int>)10;
+            int value = 10;
             int limit = 9;
 
             string parameterName = "value";
@@ -129,7 +129,7 @@ namespace FlagLib.Tests
         [TestMethod]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
         {
-            var value = (IComparable<int>)10;
+            int value = 10;
             int limit = 9;
 
             value.ThrowIfLessThan(limit, () => value);
