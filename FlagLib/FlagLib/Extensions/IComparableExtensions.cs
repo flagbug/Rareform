@@ -57,9 +57,10 @@ namespace FlagLib.Extensions
         {
             parameterName.ThrowIfNull(() => parameterName);
 
-            string name = Reflector.GetMemberName(parameterName);
-
-            value.ThrowIfGreaterThan(limit, name);
+            if (value.CompareTo(limit) == 1)
+            {
+                throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), "Value must be less than" + limit.ToString());
+            }
         }
 
         /// <summary>
@@ -92,9 +93,10 @@ namespace FlagLib.Extensions
         {
             parameterName.ThrowIfNull(() => parameterName);
 
-            string name = Reflector.GetMemberName(parameterName);
-
-            value.ThrowIfLessThan(limit, name);
+            if (value.CompareTo(limit) == -1)
+            {
+                throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), "Value must be greater than" + limit.ToString());
+            }
         }
     }
 }
