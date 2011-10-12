@@ -25,6 +25,9 @@ using FlagLib.Reflection;
 
 namespace FlagLib.Extensions
 {
+    /// <summary>
+    /// Provides extension methods for the <see cref="System.IComparable&lt;T&gt;" /> interface.
+    /// </summary>
     public static class IComparableExtensions
     {
         /// <summary>
