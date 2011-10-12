@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -63,6 +64,23 @@ namespace FlagLib.Extensions
             items.ThrowIfNull(() => items);
 
             return items.Any(item => source.Contains<TSource>(item));
+        }
+
+        /// <summary>
+        /// Executes the specified action on each item of the sequence.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements in the source.</typeparam>
+        /// <param name="source">The sequence to execute the action.</param>
+        /// <param name="action">The action to execute.</param>
+        public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
+        {
+            source.ThrowIfNull(() => source);
+            action.ThrowIfNull(() => action);
+
+            foreach (TSource item in source)
+            {
+                action(item);
+            }
         }
     }
 }

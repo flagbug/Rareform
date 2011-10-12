@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FlagLib.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -104,6 +105,21 @@ namespace FlagLib.Tests
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
             IEnumerableExtensions.ContainsAny(value, null);
+        }
+
+        [TestMethod]
+        public void ForEach_ActionAsParameter_HasEqualSequence()
+        {
+            IEnumerable<int> expected = new List<int> { 1, 2, 3, 4, 5 };
+
+            var actual = new List<int>();
+
+            expected.ForEach((param) =>
+                {
+                    actual.Add(param);
+                });
+
+            Assert.IsTrue(expected.SequenceEqual(actual));
         }
     }
 }
