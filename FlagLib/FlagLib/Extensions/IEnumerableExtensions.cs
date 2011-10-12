@@ -27,7 +27,7 @@ namespace FlagLib.Extensions
     /// <summary>
     /// Extension methods for the <see cref="System.Collections.Generic.IEnumerable&lt;T&gt;" /> interface.
     /// </summary>
-    public static class EnumerableExtensions
+    public static class IEnumerableExtensions
     {
         /// <summary>
         /// Determines whether a sequence contains any of the specified items by using the default equality comparer.
