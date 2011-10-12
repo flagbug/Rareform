@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -27,7 +27,7 @@ using FlagLib.Extensions;
 namespace FlagLib.Serialization
 {
     /// <summary>
-    /// Provides a static and generic xml serializer to serialize collections an single objects
+    /// Provides a static and generic xml serializer to serialize collections an single objects.
     /// </summary>
     public static class GenericXmlSerializer
     {

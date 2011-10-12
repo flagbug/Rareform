@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -25,6 +25,11 @@ using FlagLib.Extensions;
 
 namespace FlagLib.Patterns.MVVM
 {
+    /// <summary>
+    /// Represents an <see cref="System.Windows.Input.ICommand"/> which takes
+    /// a <see cref="System.Action"/> as Execute method and a <see cref="System.Predicate"/>
+    /// as CanExecute method.
+    /// </summary>
     public class RelayCommand : ICommand
     {
         readonly Action<object> execute;

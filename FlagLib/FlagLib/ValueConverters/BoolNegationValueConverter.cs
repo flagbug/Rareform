@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -25,7 +25,8 @@ using System.Windows.Data;
 namespace FlagLib.ValueConverters
 {
     /// <summary>
-    /// Negates a boolean value
+    /// Provides a <see cref="System.Windows.Data.IValueConverter"/> which
+    /// negates a boolean value.
     /// </summary>
     public class BoolNegationValueConverter : IValueConverter
     {

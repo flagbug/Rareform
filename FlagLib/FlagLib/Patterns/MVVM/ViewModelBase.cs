@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -27,10 +27,10 @@ using FlagLib.Extensions;
 namespace FlagLib.Patterns.MVVM
 {
     /// <summary>
-    /// Provides an abstract and generic view model base class, <para />
-    /// which implements the <see cref="INotifyPropertyChanged"/> interface
+    /// Provides an abstract and generic view model base class, which
+    /// implements the <see cref="INotifyPropertyChanged"/> interface.
     /// </summary>
-    /// <typeparam name="T">Type of the concrete view model</typeparam>
+    /// <typeparam name="T">Type of the concrete view model.</typeparam>
     public abstract class ViewModelBase<T> : INotifyPropertyChanged
     {
         /// <summary>
