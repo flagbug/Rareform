@@ -43,7 +43,7 @@ namespace FlagLib.Tests
             bool expected = true;
             bool actual;
 
-            actual = IEnumerableExtensions.ContainsAny(value, items);
+            actual = value.ContainsAny(items);
 
             Assert.AreEqual(expected, actual);
         }
@@ -57,7 +57,7 @@ namespace FlagLib.Tests
             bool expected = false;
             bool actual;
 
-            actual = IEnumerableExtensions.ContainsAny(value, items);
+            actual = value.ContainsAny(items);
 
             Assert.AreEqual(expected, actual);
         }
@@ -69,7 +69,7 @@ namespace FlagLib.Tests
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
             IEnumerable<int> items = null;
 
-            IEnumerableExtensions.ContainsAny(value, items);
+            value.ContainsAny(items);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace FlagLib.Tests
             bool expected = true;
             bool actual;
 
-            actual = IEnumerableExtensions.ContainsAny(value, 1, 2);
+            actual = value.ContainsAny(1, 2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -93,7 +93,7 @@ namespace FlagLib.Tests
             bool expected = false;
             bool actual;
 
-            actual = IEnumerableExtensions.ContainsAny(value, 6, 7);
+            actual = value.ContainsAny(6, 7);
 
             Assert.AreEqual(expected, actual);
         }
@@ -104,7 +104,7 @@ namespace FlagLib.Tests
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
-            IEnumerableExtensions.ContainsAny(value, null);
+            value.ContainsAny(null);
         }
 
         [TestMethod]
