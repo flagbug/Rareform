@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -24,6 +24,9 @@ using System.IO;
 
 namespace FlagLib.IO
 {
+    /// <summary>
+    /// Provides data for the <see cref="FlagLib.IO.DirectoryScanner.DirectoryFound"/> event.
+    /// </summary>
     public class DirectoryEventArgs : EventArgs
     {
         /// <summary>
@@ -37,7 +40,7 @@ namespace FlagLib.IO
         /// <summary>
         /// Initializes a new instance of the <see cref="DirectoryEventArgs"/> class.
         /// </summary>
-        /// <param name="directory">The found directory.</param>
+        /// <param name="directory">The directory that has been found.</param>
         public DirectoryEventArgs(DirectoryInfo directory)
         {
             this.Directory = directory;
