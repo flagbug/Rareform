@@ -53,6 +53,7 @@
     <Compile Include="ClassExtensionsTest.cs" />
     <Compile Include="EnumerableExtensionsTest.cs" />
     <Compile Include="GridTest.cs" />
+    <Compile Include="IComparableExtensionsTest.cs" />
     <Compile Include="IntegerExtensionsTest.cs" />
     <Compile Include="LongExtensionsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
