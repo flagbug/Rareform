@@ -20,6 +20,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
 using FlagLib.Extensions;
@@ -71,7 +72,7 @@ namespace FlagLib.Serialization
         {
             path.ThrowIfNull(() => path);
 
-            return (ICollection<T>)GenericXmlSerializer.InternDeserialize<T>(path);
+            return (ICollection<T>)GenericXmlSerializer.InternDeserialize<Collection<T>>(path);
         }
 
         /// <summary>
