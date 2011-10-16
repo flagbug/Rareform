@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -32,7 +32,7 @@ namespace FlagLib.IO
     /// </summary>
     public class DirectoryScanner
     {
-        private List<FileInfo> filesFound = new List<FileInfo>();
+        private readonly List<FileInfo> filesFound;
         private volatile bool isStopped;
 
         /// <summary>
@@ -100,6 +100,7 @@ namespace FlagLib.IO
             path.ThrowIfNull(() => path);
 
             this.DirectoryPath = path;
+            this.filesFound = new List<FileInfo>();
         }
 
         /// <summary>
@@ -190,7 +191,7 @@ namespace FlagLib.IO
 
             if (this.IsStopped) { return; }
 
-            DirectoryInfo rootDirectory = new DirectoryInfo(rootPath);
+            var rootDirectory = new DirectoryInfo(rootPath);
 
             try
             {

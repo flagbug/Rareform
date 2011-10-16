@@ -27,7 +27,7 @@ namespace FlagLib.Patterns.MVVM
 {
     /// <summary>
     /// Represents an <see cref="System.Windows.Input.ICommand"/> which takes
-    /// a <see cref="System.Action"/> as Execute method and a <see cref="System.Predicate"/>
+    /// a <see cref="System.Action"/> as Execute method and a <see cref="Predicate{T}"/>
     /// as CanExecute method.
     /// </summary>
     public class RelayCommand : ICommand
@@ -66,7 +66,7 @@ namespace FlagLib.Patterns.MVVM
         /// </returns>
         public bool CanExecute(object parameter)
         {
-            return canExecute == null ? true : canExecute(parameter);
+            return canExecute == null || canExecute(parameter);
         }
 
         /// <summary>

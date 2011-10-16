@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -33,7 +33,7 @@ namespace FlagLib.Collections
     /// <typeparam name="T">The type of elements in the <see cref="EventCollection&lt;T&gt;"/>.</typeparam>
     public class EventCollection<T> : IList<T>
     {
-        private List<T> internList;
+        private readonly List<T> internList;
 
         /// <summary>
         /// Gets the number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.

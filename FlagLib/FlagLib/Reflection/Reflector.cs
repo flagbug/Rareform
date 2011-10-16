@@ -50,7 +50,7 @@ namespace FlagLib.Reflection
         {
             expression.ThrowIfNull(() => expression);
 
-            MemberExpression memberExpression = expression.Body as MemberExpression;
+            var memberExpression = expression.Body as MemberExpression;
 
             if (memberExpression == null)
                 throw new ArgumentException("The member is not valid.");

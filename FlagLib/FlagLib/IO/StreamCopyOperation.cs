@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -63,7 +63,7 @@ namespace FlagLib.IO
         public int BufferSize { get; private set; }
 
         /// <summary>
-        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChaned"/> shall be raised.
+        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged"/> shall be raised.
         /// </summary>
         public int UpdateInterval { get; private set; }
 
@@ -93,7 +93,7 @@ namespace FlagLib.IO
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChaned"/> shall be raised.
+        /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChanged"/> shall be raised.</param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
@@ -178,7 +178,7 @@ namespace FlagLib.IO
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CopyProgressChanged"/> event.
+        /// Raises the <see cref="CopyProgressChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         protected void OnCopyProgressChanged(DataTransferEventArgs<Stream, Stream> e)
@@ -195,11 +195,12 @@ namespace FlagLib.IO
         /// <returns></returns>
         private DataTransferEventArgs<Stream, Stream> CreateEventArgs()
         {
-            var eventArgs = new DataTransferEventArgs<Stream, Stream>(this.SourceStream.Length, this.copiedBytes);
-
-            eventArgs.AverageSpeed = this.AverageSpeed;
-            eventArgs.Source = this.SourceStream;
-            eventArgs.Destination = this.TargetStream;
+            var eventArgs = new DataTransferEventArgs<Stream, Stream>(this.SourceStream.Length, this.copiedBytes)
+                                {
+                                    AverageSpeed = this.AverageSpeed,
+                                    Source = this.SourceStream,
+                                    Destination = this.TargetStream
+                                };
 
             return eventArgs;
         }

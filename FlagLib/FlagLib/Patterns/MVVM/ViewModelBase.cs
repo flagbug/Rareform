@@ -49,7 +49,7 @@ namespace FlagLib.Patterns.MVVM
 
             if (PropertyChanged != null)
             {
-                MemberExpression memberExpression = propertySelector.Body as MemberExpression;
+                var memberExpression = propertySelector.Body as MemberExpression;
 
                 if (memberExpression != null && this.PropertyChanged != null)
                 {

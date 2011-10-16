@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -33,7 +33,7 @@ namespace FlagLib.Collections
     /// <typeparam name="T">The type of the items in the <see cref="Grid&lt;T&gt;"/>.</typeparam>
     public class Grid<T> : IEnumerable<T>
     {
-        private List<T> internFields;
+        private readonly List<T> internFields;
 
         /// <summary>
         /// Gets the number of rows.

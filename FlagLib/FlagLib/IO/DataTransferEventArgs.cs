@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -59,7 +59,7 @@ namespace FlagLib.IO
         /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
         /// </summary>
         /// <param name="totalBytes">The total number of bytes.</param>
-        /// <param name="copiedBytes">The number of transferred bytes.</param>
+        /// <param name="transferredBytes">The transferred bytes.</param>
         public DataTransferEventArgs(long totalBytes, long transferredBytes)
         {
             this.TotalBytes = totalBytes;
@@ -94,7 +94,7 @@ namespace FlagLib.IO
         /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
         /// </summary>
         /// <param name="totalBytes">The total number of bytes.</param>
-        /// <param name="copiedBytes">The number of transferred bytes.</param>
+        /// <param name="transferredBytes">The transferred bytes.</param>
         public DataTransferEventArgs(long totalBytes, long transferredBytes)
             : base(totalBytes, transferredBytes)
         { }

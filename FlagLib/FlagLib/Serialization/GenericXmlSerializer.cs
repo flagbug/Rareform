@@ -72,7 +72,7 @@ namespace FlagLib.Serialization
         {
             path.ThrowIfNull(() => path);
 
-            return (ICollection<T>)GenericXmlSerializer.InternDeserialize<Collection<T>>(path);
+            return GenericXmlSerializer.InternDeserialize<Collection<T>>(path);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace FlagLib.Serialization
             @object.ThrowIfNull(() => @object);
             path.ThrowIfNull(() => path);
 
-            XmlSerializer serializer = new XmlSerializer(@object.GetType());
+            var serializer = new XmlSerializer(@object.GetType());
 
             using (TextWriter writer = new StreamWriter(path, false))
             {
@@ -121,7 +121,7 @@ namespace FlagLib.Serialization
 
             T @object = new T();
 
-            XmlSerializer serializer = new XmlSerializer(@object.GetType());
+            var serializer = new XmlSerializer(@object.GetType());
 
             using (TextReader reader = new StreamReader(path))
             {

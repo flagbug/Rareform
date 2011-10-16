@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -34,10 +34,14 @@ namespace FlagLib.Collections
     /// <typeparam name="T">The type of elements in the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.</typeparam>
     public class ThreadSafeObservableCollection<T> : IList<T>, INotifyCollectionChanged
     {
-        private IList<T> collection;
-        private Dispatcher dispatcher;
+        private readonly IList<T> collection;
+        private readonly Dispatcher dispatcher;
+        private readonly ReaderWriterLock syncLock;
+
+        /// <summary>
+        /// Occurs when the collection changes.
+        /// </summary>
         public event NotifyCollectionChangedEventHandler CollectionChanged;
-        private ReaderWriterLock syncLock;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> class.
@@ -65,7 +69,7 @@ namespace FlagLib.Collections
 
             else
             {
-                this.dispatcher.BeginInvoke((Action)(() => { this.InternAdd(item); }));
+                this.dispatcher.BeginInvoke((Action)(() => this.InternAdd(item)));
             }
         }
 
@@ -84,7 +88,7 @@ namespace FlagLib.Collections
 
             else
             {
-                this.dispatcher.BeginInvoke((Action)(() => { this.InternClear(); }));
+                this.dispatcher.BeginInvoke(new Action(this.InternClear));
             }
         }
 
@@ -237,7 +241,7 @@ namespace FlagLib.Collections
 
             else
             {
-                this.dispatcher.BeginInvoke((Action)(() => { this.InternInsert(index, item); }));
+                this.dispatcher.BeginInvoke((Action)(() => this.InternInsert(index, item)));
             }
         }
 
@@ -260,7 +264,7 @@ namespace FlagLib.Collections
 
             else
             {
-                this.dispatcher.BeginInvoke((Action)(() => { this.InternRemoveAt(index); }));
+                this.dispatcher.BeginInvoke((Action)(() => this.InternRemoveAt(index)));
             }
         }
 
