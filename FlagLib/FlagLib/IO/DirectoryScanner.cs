@@ -36,11 +36,8 @@ namespace FlagLib.IO
         private volatile bool isStopped;
 
         /// <summary>
-        /// Gets the scanned files.
+        /// Gets the found files.
         /// </summary>
-        /// <value>
-        /// The scanned files.
-        /// </value>
         public IEnumerable<FileInfo> FilesFound
         {
             get { return this.filesFound; }
@@ -49,9 +46,6 @@ namespace FlagLib.IO
         /// <summary>
         /// Gets the directory path.
         /// </summary>
-        /// <value>
-        /// The directory path.
-        /// </value>
         public string DirectoryPath { get; private set; }
 
         /// <summary>

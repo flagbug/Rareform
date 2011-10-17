@@ -45,7 +45,7 @@ namespace FlagLib.Extensions
             source.ThrowIfNull(() => source);
             items.ThrowIfNull(() => items);
 
-            return items.Any(item => source.Contains<TSource>(item));
+            return items.Any(item => source.Contains(item));
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace FlagLib.Extensions
             source.ThrowIfNull(() => source);
             items.ThrowIfNull(() => items);
 
-            return items.Any(item => source.Contains<TSource>(item));
+            return items.Any(item => source.Contains(item));
         }
 
         /// <summary>
