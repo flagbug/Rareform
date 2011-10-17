@@ -29,13 +29,27 @@ namespace FlagLib.Extensions
     public static class EventHandlerExtensions
     {
         /// <summary>
-        /// Raises the specified event handler.
+        /// Raises the event handler.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The type of the event args.</typeparam>
         /// <param name="handler">The event handler.</param>
         /// <param name="sender">The sender.</param>
         /// <param name="eventArgs">The event args.</param>
-        public static void Raise<T>(this EventHandler handler, object sender, T eventArgs) where T : EventArgs
+        public static void Raise<T>(this EventHandler<T> handler, object sender, T eventArgs) where T : EventArgs
+        {
+            if (handler != null)
+            {
+                handler(sender, eventArgs);
+            }
+        }
+
+        /// <summary>
+        /// Raises the event handler.
+        /// </summary>
+        /// <param name="handler">The event handler.</param>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The event args.</param>
+        public static void Raise(this EventHandler handler, object sender, EventArgs eventArgs)
         {
             if (handler != null)
             {

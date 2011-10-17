@@ -21,6 +21,7 @@
 
 using System;
 using FlagLib.Extensions;
+using FlagLib.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FlagLib.Tests
@@ -33,6 +34,7 @@ namespace FlagLib.Tests
     public class EventHandlerExtensionsTest
     {
         private event EventHandler TestEvent;
+        private event EventHandler<DataTransferEventArgs> TestEventGeneric;
 
         [TestMethod]
         public void RaiseTest()
@@ -42,6 +44,23 @@ namespace FlagLib.Tests
             this.TestEvent += (sender, e) => handled = true;
 
             this.TestEvent.Raise(this, EventArgs.Empty);
+
+            Assert.IsTrue(handled);
+        }
+
+        [TestMethod]
+        public void RaiseTestGeneric()
+        {
+            bool handled = false;
+
+            this.TestEventGeneric += (sender, e) =>
+            {
+                Assert.AreEqual(e.TotalBytes, 1);
+                Assert.AreEqual(e.TransferredBytes, 100);
+                handled = true;
+            };
+
+            this.TestEventGeneric.Raise(this, new DataTransferEventArgs(1, 100));
 
             Assert.IsTrue(handled);
         }
