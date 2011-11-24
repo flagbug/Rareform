@@ -36,6 +36,7 @@
     <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collections\CircularBuffer.cs" />
     <Compile Include="Collections\EventCollection.cs" />
     <Compile Include="Collections\EventCollectionEventArgs.cs" />
     <Compile Include="Collections\Grid.cs" />
