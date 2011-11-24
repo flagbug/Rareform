@@ -72,7 +72,7 @@ namespace FlagLib.Collections
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace FlagLib.Collections
         /// </summary>
         /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
         ///   </returns>
-        public bool IsReadOnly
+        bool ICollection<T>.IsReadOnly
         {
             get { return false; }
         }
