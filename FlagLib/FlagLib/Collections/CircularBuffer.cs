@@ -34,6 +34,9 @@ namespace FlagLib.Collections
         private readonly List<T> buffer;
         private int position;
 
+        /// <summary>
+        /// Gets the capacity of the buffer.
+        /// </summary>
         public int Capacity
         {
             get { return this.buffer.Capacity; }
