@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FlagLib.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -73,6 +74,19 @@ namespace FlagLib.Tests
 
             Assert.IsTrue(target.Capacity == 3);
             Assert.IsTrue(target.Count == 0);
+        }
+
+        [TestMethod]
+        public void Remove_RemoveSecondItem_OrderIsRight()
+        {
+            var target = new CircularBuffer<int>(4) { 1, 2, 3, 4 };
+
+            target.Remove(2);
+
+            var expected = new List<int> { 1, 3, 4 };
+
+            Assert.IsTrue(target.SequenceEqual(expected));
+            Assert.IsTrue(target.Capacity == 4);
         }
     }
 }
