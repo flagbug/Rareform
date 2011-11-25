@@ -55,6 +55,7 @@ namespace FlagLib.Extensions
         /// <remarks>
         /// This method lets the caller define the parameter name as expression,
         /// so that it can be checked at compile time.
+        /// Note that the evaluation of the parameter name at runtime is an expensive operation.
         /// </remarks>
         public static void ThrowIfGreaterThan<T, TFunc>(this IComparable<T> value, T limit, Expression<Func<TFunc>> parameterName)
         {
@@ -91,6 +92,7 @@ namespace FlagLib.Extensions
         /// <remarks>
         /// This method lets the caller define the parameter name as expression,
         /// so that it can be checked at compile time.
+        /// Note that the evaluation of the parameter name at runtime is an expensive operation.
         /// </remarks>
         public static void ThrowIfLessThan<T, TFunc>(this IComparable<T> value, T limit, Expression<Func<TFunc>> parameterName)
         {

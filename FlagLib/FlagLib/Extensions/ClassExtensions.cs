@@ -50,6 +50,11 @@ namespace FlagLib.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="object">The object to check.</param>
         /// <param name="parameterName">The expression, which resolves to the parameter name.</param>
+        /// <remarks>
+        /// This method lets the caller define the parameter name as expression,
+        /// so that it can be checked at compile time.
+        /// Note that the evaluation of the parameter name at runtime is an expensive operation.
+        /// </remarks>
         public static void ThrowIfNull<T>(this T @object, Expression<Func<T>> parameterName) where T : class
         {
             if (@object == null)
