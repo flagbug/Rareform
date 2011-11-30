@@ -88,5 +88,22 @@ namespace FlagLib.Tests
             Assert.IsTrue(target.SequenceEqual(expected));
             Assert.IsTrue(target.Capacity == 4);
         }
+
+        [TestMethod]
+        public void Remove_RemoveSecondItemAndAddTwoItems_OrderIsRight()
+        {
+            //Create a circular buffer where the first item is overridden
+            var target = new CircularBuffer<int>(3) { 1, 2, 3, 4 };
+
+            target.Remove(2);
+
+            target.Add(5);
+            target.Add(6);
+
+            var expected = new List<int> { 6, 3, 5 };
+
+            Assert.IsTrue(target.SequenceEqual(expected));
+            Assert.IsTrue(target.Capacity == 3);
+        }
     }
 }
