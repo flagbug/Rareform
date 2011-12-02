@@ -60,6 +60,7 @@
     <Compile Include="Reflection\Reflector.cs" />
     <Compile Include="Serialization\GenericXmlSerializer.cs" />
     <Compile Include="ValueConverters\BoolNegationValueConverter.cs" />
+    <Compile Include="WPF\PasswordBoxBinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
