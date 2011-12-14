@@ -50,8 +50,8 @@ namespace FlagLib.IO
         /// true if the operation should be canceled; otherwise, false.
         /// </value>
         /// <remarks>
-        /// Note that the caller of this class is responsible for the implementation cancelable
-        /// data transfer and the set of this property may not work as expected.
+        /// Note that the caller of this class is responsible for the implementation of the
+        /// cancelable data transfer operation and the setter of this property may not work as expected.
         /// </remarks>
         public bool Cancel { get; set; }
 
