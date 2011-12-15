@@ -28,7 +28,7 @@ using FlagLib.Extensions;
 namespace FlagLib.IO
 {
     /// <summary>
-    /// Provides a directoy scanner to scan a directory recursively for files
+    /// Provides a directoy scanner to scan a directory recursively for files and directories.
     /// </summary>
     public class DirectoryScanner
     {
