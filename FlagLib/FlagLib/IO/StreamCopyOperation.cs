@@ -141,7 +141,7 @@ namespace FlagLib.IO
             Stopwatch stopwatch = Stopwatch.StartNew();
             this.StartTime = DateTime.Now;
 
-            byte[] buffer = new byte[this.BufferSize];
+            var buffer = new byte[this.BufferSize];
             int bytes;
             int updateCounter = 0; //The updateCounter is needed to know when the CopyProgressChanged event shall be called
             bool cancel = false;
@@ -183,10 +183,7 @@ namespace FlagLib.IO
         /// <param name="e">The <see cref="FlagLib.IO.DataTransferEventArgs"/> instance containing the event data.</param>
         protected void OnCopyProgressChanged(DataTransferEventArgs<Stream, Stream> e)
         {
-            if (this.CopyProgressChanged != null)
-            {
-                this.CopyProgressChanged(this, e);
-            }
+            this.CopyProgressChanged.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -195,12 +192,13 @@ namespace FlagLib.IO
         /// <returns></returns>
         private DataTransferEventArgs<Stream, Stream> CreateEventArgs()
         {
-            var eventArgs = new DataTransferEventArgs<Stream, Stream>(this.SourceStream.Length, this.copiedBytes)
-                                {
-                                    AverageSpeed = this.AverageSpeed,
-                                    Source = this.SourceStream,
-                                    Destination = this.TargetStream
-                                };
+            var eventArgs =
+                new DataTransferEventArgs<Stream, Stream>(this.SourceStream.Length, this.copiedBytes)
+                    {
+                        AverageSpeed = this.AverageSpeed,
+                        Source = this.SourceStream,
+                        Destination = this.TargetStream
+                    };
 
             return eventArgs;
         }
