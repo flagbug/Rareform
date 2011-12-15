@@ -171,17 +171,14 @@ namespace FlagLib.Collections
                 return this.InternRemove(item);
             }
 
-            else
+            DispatcherOperation op = this.dispatcher.BeginInvoke(new Func<T, bool>(this.InternRemove), item);
+
+            if (op == null || op.Result == null)
             {
-                DispatcherOperation op = this.dispatcher.BeginInvoke(new Func<T, bool>(this.InternRemove), item);
-
-                if (op == null || op.Result == null)
-                {
-                    return false;
-                }
-
-                return (bool)op.Result;
+                return false;
             }
+
+            return (bool)op.Result;
         }
 
         /// <summary>
