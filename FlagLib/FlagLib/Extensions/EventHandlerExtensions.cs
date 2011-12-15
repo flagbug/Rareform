@@ -35,7 +35,7 @@ namespace FlagLib.Extensions
         /// <param name="handler">The event handler.</param>
         /// <param name="sender">The event sender.</param>
         /// <param name="eventArgs">The event args.</param>
-        public static void SafeRaise<T>(this EventHandler<T> handler, object sender, T eventArgs) where T : EventArgs
+        public static void RaiseSafe<T>(this EventHandler<T> handler, object sender, T eventArgs) where T : EventArgs
         {
             if (handler != null)
             {
@@ -49,7 +49,7 @@ namespace FlagLib.Extensions
         /// <param name="handler">The event handler.</param>
         /// <param name="sender">The event sender.</param>
         /// <param name="eventArgs">The event args.</param>
-        public static void SafeRaise(this EventHandler handler, object sender, EventArgs eventArgs)
+        public static void RaiseSafe(this EventHandler handler, object sender, EventArgs eventArgs)
         {
             if (handler != null)
             {
@@ -64,7 +64,7 @@ namespace FlagLib.Extensions
         /// <param name="handler">The event handler.</param>
         /// <param name="sender">The sender.</param>
         /// <param name="eventArgs">The event args.</param>
-        [Obsolete("This method has been renamed, use FlagLib.Extensions.EventHandlerExtension.SafeRaise<T> instead.")]
+        [Obsolete("This method has been renamed, use FlagLib.Extensions.EventHandlerExtension.RaiseSafe<T> instead.")]
         public static void Raise<T>(this EventHandler<T> handler, object sender, T eventArgs) where T : EventArgs
         {
             if (handler != null)
@@ -79,7 +79,7 @@ namespace FlagLib.Extensions
         /// <param name="handler">The event handler.</param>
         /// <param name="sender">The sender.</param>
         /// <param name="eventArgs">The event args.</param>
-        [Obsolete("This method has been renamed, use FlagLib.Extensions.EventHandlerExtension.SafeRaise instead.")]
+        [Obsolete("This method has been renamed, use FlagLib.Extensions.EventHandlerExtension.RaiseSafe instead.")]
         public static void Raise(this EventHandler handler, object sender, EventArgs eventArgs)
         {
             if (handler != null)

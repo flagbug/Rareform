@@ -37,19 +37,19 @@ namespace FlagLib.Tests
         private event EventHandler<DataTransferEventArgs> TestEventGeneric;
 
         [TestMethod]
-        public void SafeRaiseTest()
+        public void RaiseSafeTest()
         {
             bool handled = false;
 
             this.TestEvent += (sender, e) => handled = true;
 
-            this.TestEvent.SafeRaise(this, EventArgs.Empty);
+            this.TestEvent.RaiseSafe(this, EventArgs.Empty);
 
             Assert.IsTrue(handled);
         }
 
         [TestMethod]
-        public void SafeRaiseTestGeneric()
+        public void RaiseSafeTestGeneric()
         {
             bool handled = false;
 
@@ -60,7 +60,7 @@ namespace FlagLib.Tests
                 handled = true;
             };
 
-            this.TestEventGeneric.SafeRaise(this, new DataTransferEventArgs(1, 100));
+            this.TestEventGeneric.RaiseSafe(this, new DataTransferEventArgs(1, 100));
 
             Assert.IsTrue(handled);
         }

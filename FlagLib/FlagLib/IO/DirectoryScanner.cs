@@ -121,7 +121,7 @@ namespace FlagLib.IO
         /// <param name="e">The <see cref="FlagLib.IO.FileEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileFound(FileEventArgs e)
         {
-            this.FileFound.SafeRaise(this, e);
+            this.FileFound.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace FlagLib.IO
         /// <param name="e">The <see cref="FlagLib.IO.DirectoryEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryFound(DirectoryEventArgs e)
         {
-            this.DirectoryFound.SafeRaise(this, e);
+            this.DirectoryFound.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace FlagLib.IO
         /// <param name="e">The <see cref="FlagLib.IO.DirectoryScanErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryScanError(DirectoryScanErrorEventArgs e)
         {
-            this.DirectoryScanError.SafeRaise(this, e);
+            this.DirectoryScanError.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace FlagLib.IO
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnFinished(EventArgs e)
         {
-            this.Finished.SafeRaise(this, e);
+            this.Finished.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace FlagLib.IO
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryProceeded(EventArgs e)
         {
-            this.DirectoryProceeded.SafeRaise(this, e);
+            this.DirectoryProceeded.RaiseSafe(this, e);
         }
 
         /// <summary>

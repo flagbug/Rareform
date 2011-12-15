@@ -329,7 +329,7 @@ namespace FlagLib.Collections
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemAdded(EventCollectionEventArgs<T> e)
         {
-            this.ItemAdded.SafeRaise(this, e);
+            this.ItemAdded.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace FlagLib.Collections
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemAdding(EventCollectionEventArgs<T> e)
         {
-            this.ItemAdding.SafeRaise(this, e);
+            this.ItemAdding.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace FlagLib.Collections
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemRemoved(EventCollectionEventArgs<T> e)
         {
-            this.ItemRemoved.SafeRaise(this, e);
+            this.ItemRemoved.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -356,7 +356,7 @@ namespace FlagLib.Collections
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemRemoving(EventCollectionEventArgs<T> e)
         {
-            this.ItemRemoving.SafeRaise(this, e);
+            this.ItemRemoving.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -365,7 +365,7 @@ namespace FlagLib.Collections
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnCleared(EventArgs e)
         {
-            this.Cleared.SafeRaise(this, e);
+            this.Cleared.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace FlagLib.Collections
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnClearing(EventArgs e)
         {
-            this.Clearing.SafeRaise(this, e);
+            this.Clearing.RaiseSafe(this, e);
         }
     }
 }
