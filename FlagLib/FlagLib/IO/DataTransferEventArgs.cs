@@ -42,6 +42,9 @@ namespace FlagLib.IO
         /// <summary>
         /// Gets the average speed in bytes per second.
         /// </summary>
+        /// <value>
+        /// The average speed in bytes per second.
+        /// </value>
         public long AverageSpeed { get; set; }
 
         /// <summary>
@@ -79,18 +82,18 @@ namespace FlagLib.IO
     public class DataTransferEventArgs<TSource, TDestination> : DataTransferEventArgs
     {
         /// <summary>
-        /// Gets or sets the source.
+        /// Gets or sets the source of the data transfer.
         /// </summary>
         /// <value>
-        /// The source.
+        /// The source of the data transfer.
         /// </value>
         public TSource Source { get; set; }
 
         /// <summary>
-        /// Gets or sets the destination.
+        /// Gets or sets the destination of the data transfer.
         /// </summary>
         /// <value>
-        /// The destination.
+        /// The destination of the data transfer.
         /// </value>
         public TDestination Destination { get; set; }
 
