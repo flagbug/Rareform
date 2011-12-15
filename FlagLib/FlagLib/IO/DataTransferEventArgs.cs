@@ -20,6 +20,7 @@
  */
 
 using System;
+using FlagLib.Extensions;
 
 namespace FlagLib.IO
 {
@@ -62,6 +63,9 @@ namespace FlagLib.IO
         /// <param name="transferredBytes">The transferred bytes.</param>
         public DataTransferEventArgs(long totalBytes, long transferredBytes)
         {
+            totalBytes.ThrowIfLessThan(1, () => totalBytes);
+            transferredBytes.ThrowIfLessThan(1, () => transferredBytes);
+
             this.TotalBytes = totalBytes;
             this.TransferredBytes = transferredBytes;
         }
