@@ -324,75 +324,57 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ItemAdded"/> event.
+        /// Raises the <see cref="ItemAdded"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemAdded(EventCollectionEventArgs<T> e)
         {
-            if (this.ItemAdded != null)
-            {
-                this.ItemAdded.Invoke(this, e);
-            }
+            this.ItemAdded.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ItemAdding"/> event.
+        /// Raises the <see cref="ItemAdding"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemAdding(EventCollectionEventArgs<T> e)
         {
-            if (this.ItemAdding != null)
-            {
-                this.ItemAdding.Invoke(this, e);
-            }
+            this.ItemAdding.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ItemRemoved"/> event.
+        /// Raises the <see cref="ItemRemoved"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemRemoved(EventCollectionEventArgs<T> e)
         {
-            if (this.ItemRemoved != null)
-            {
-                this.ItemRemoved.Invoke(this, e);
-            }
+            this.ItemRemoved.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ItemRemoving"/> event.
+        /// Raises the <see cref="ItemRemoving"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.Collections.EventCollectionEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnItemRemoving(EventCollectionEventArgs<T> e)
         {
-            if (this.ItemRemoving != null)
-            {
-                this.ItemRemoving.Invoke(this, e);
-            }
+            this.ItemRemoving.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ListCleared"/> event.
+        /// Raises the <see cref="Cleared"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnCleared(EventArgs e)
         {
-            if (this.Cleared != null)
-            {
-                this.Cleared.Invoke(this, e);
-            }
+            this.Cleared.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:BeforeListCleared"/> event.
+        /// Raises the <see cref="Clearing"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnClearing(EventArgs e)
         {
-            if (this.Clearing != null)
-            {
-                this.Clearing.Invoke(this, e);
-            }
+            this.Clearing.SafeRaise(this, e);
         }
     }
 }
