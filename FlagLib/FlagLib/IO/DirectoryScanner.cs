@@ -116,63 +116,48 @@ namespace FlagLib.IO
         }
 
         /// <summary>
-        /// Raises the <see cref="E:FileFound"/> event.
+        /// Raises the <see cref="FileFound"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.FileEventArgs"/> instance containing the event data.</param>
         protected virtual void OnFileFound(FileEventArgs e)
         {
-            if (this.FileFound != null)
-            {
-                this.FileFound(this, e);
-            }
+            this.FileFound.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryFound"/> event.
+        /// Raises the <see cref="DirectoryFound"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.DirectoryEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryFound(DirectoryEventArgs e)
         {
-            if (this.DirectoryFound != null)
-            {
-                this.DirectoryFound(this, e);
-            }
+            this.DirectoryFound.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryScanError"/> event.
+        /// Raises the <see cref="DirectoryScanError"/> event.
         /// </summary>
         /// <param name="e">The <see cref="FlagLib.IO.DirectoryScanErrorEventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryScanError(DirectoryScanErrorEventArgs e)
         {
-            if (this.DirectoryScanError != null)
-            {
-                this.DirectoryScanError(this, e);
-            }
+            this.DirectoryScanError.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:Finished"/> event.
+        /// Raises the <see cref="Finished"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnFinished(EventArgs e)
         {
-            if (this.Finished != null)
-            {
-                this.Finished(this, e);
-            }
+            this.Finished.SafeRaise(this, e);
         }
 
         /// <summary>
-        /// Raises the <see cref="E:DirectoryProceeded"/> event.
+        /// Raises the <see cref="DirectoryProceeded"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         protected virtual void OnDirectoryProceeded(EventArgs e)
         {
-            if (this.DirectoryProceeded != null)
-            {
-                this.DirectoryProceeded(this, e);
-            }
+            this.DirectoryProceeded.SafeRaise(this, e);
         }
 
         /// <summary>
