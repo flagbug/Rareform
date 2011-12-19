@@ -30,6 +30,9 @@ namespace FlagLib.WPF
     /// </summary>
     public static class PasswordBoxBinder
     {
+        /// <summary>
+        /// The password property.
+        /// </summary>
         public static readonly DependencyProperty PasswordProperty =
             DependencyProperty.RegisterAttached
                 (
@@ -39,6 +42,9 @@ namespace FlagLib.WPF
                     new FrameworkPropertyMetadata(string.Empty, OnPasswordChanged)
                 );
 
+        /// <summary>
+        /// The attached property.
+        /// </summary>
         public static readonly DependencyProperty AttachProperty =
             DependencyProperty.RegisterAttached
                 (
@@ -56,21 +62,41 @@ namespace FlagLib.WPF
                     typeof(PasswordBoxBinder)
                 );
 
+        /// <summary>
+        /// Sets the attached value of the depency object.
+        /// </summary>
+        /// <param name="depencyObject">The depency object.</param>
+        /// <param name="value">The value.</param>
         public static void SetAttach(DependencyObject depencyObject, bool value)
         {
             depencyObject.SetValue(AttachProperty, value);
         }
 
+        /// <summary>
+        /// Gets the attached value of the depency object.
+        /// </summary>
+        /// <param name="depencyObject">The depency object.</param>
+        /// <returns>The attached value of the depency object.</returns>
         public static bool GetAttach(DependencyObject depencyObject)
         {
             return (bool)depencyObject.GetValue(AttachProperty);
         }
 
+        /// <summary>
+        /// Gets the password.
+        /// </summary>
+        /// <param name="depencyObject">The depency object.</param>
+        /// <returns>The password.</returns>
         public static string GetPassword(DependencyObject depencyObject)
         {
             return (string)depencyObject.GetValue(PasswordProperty);
         }
 
+        /// <summary>
+        /// Sets the password.
+        /// </summary>
+        /// <param name="depencyObject">The depency object.</param>
+        /// <param name="value">The value.</param>
         public static void SetPassword(DependencyObject depencyObject, string value)
         {
             depencyObject.SetValue(PasswordProperty, value);
@@ -127,6 +153,11 @@ namespace FlagLib.WPF
             }
         }
 
+        /// <summary>
+        /// Handles the <see cref="PasswordBox.PasswordChanged"/> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private static void PasswordChanged(object sender, RoutedEventArgs e)
         {
             var passwordBox = (PasswordBox)sender;
