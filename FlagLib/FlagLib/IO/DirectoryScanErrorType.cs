@@ -1,6 +1,6 @@
 ﻿/*
  * This source is released under the MIT-license.
- * 
+ *
  * Copyright (c) 2011 Dennis Daume
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -29,8 +29,17 @@ namespace FlagLib.IO
     [Serializable]
     public enum DirectoryScanErrorType
     {
+        /// <summary>
+        /// Indicates a security exception during the directory scan.
+        /// </summary>
         SecurityError,
+        /// <summary>
+        /// Indicates an access exception during the directory scan.
+        /// </summary>
         AccessError,
+        /// <summary>
+        /// Indicates that a directory could not be found during the scan.
+        /// </summary>
         DirectoryNotFoundError
     }
 }
