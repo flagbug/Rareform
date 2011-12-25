@@ -42,7 +42,7 @@ namespace FlagLib.IO
         public int BufferSize { get; private set; }
 
         /// <summary>
-        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged"/> shall be raised.
+        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.
         /// </summary>
         public int UpdateInterval { get; private set; }
 
@@ -72,7 +72,7 @@ namespace FlagLib.IO
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChanged"/> shall be raised.</param>
+        /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.</param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
@@ -88,7 +88,7 @@ namespace FlagLib.IO
         /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="dynamicUpdateInterval">if set to true, the operation uses an dynamic update interval, based on the stream length.;
-        /// otherwise, it uses a predefined update interval</param>
+        /// otherwise, it uses a predefined update interval.</param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, bool dynamicUpdateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
