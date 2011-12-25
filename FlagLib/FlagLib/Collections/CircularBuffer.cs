@@ -24,7 +24,7 @@ namespace FlagLib.Collections
         /// <summary>
         /// Initializes a new instance of the <see cref="CircularBuffer&lt;T&gt;"/> class.
         /// </summary>
-        /// <param name="capacity">The capacity of the circular buffer.</param>
+        /// <param name="capacity">The initial capacity of the <see cref="CircularBuffer{T}"/>.</param>
         public CircularBuffer(int capacity)
         {
             capacity.ThrowIfLessThan(1, () => capacity);
@@ -55,11 +55,11 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Adds an item to the <see cref="CircularBuffer{T}"/>.
         /// </summary>
-        /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to add to the <see cref="CircularBuffer{T}"/>.</param>
         /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// The <see cref="CircularBuffer{T}"/> is read-only.
         ///   </exception>
         public void Add(T item)
         {
@@ -87,10 +87,10 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Removes all items from the <see cref="CircularBuffer{T}"/>.
         /// </summary>
         /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// The <see cref="CircularBuffer{T}"/> is read-only.
         ///   </exception>
         public void Clear()
         {
@@ -98,11 +98,11 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+        /// Determines whether the <see cref="CircularBuffer{T}"/> contains a specific value.
         /// </summary>
-        /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to locate in the <see cref="CircularBuffer{T}"/>.</param>
         /// <returns>
-        /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+        /// true if <paramref name="item"/> is found in the <see cref="CircularBuffer{T}"/>; otherwise, false.
         /// </returns>
         public bool Contains(T item)
         {
@@ -110,24 +110,24 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Copies the <see cref="CircularBuffer&lt;T&gt;"/> to the specified array, starting at the specified index.
+        /// Copies the <see cref="CircularBuffer{T}"/> to the specified array, starting at the specified index.
         /// </summary>
         /// <param name="array">The destination array.</param>
-        /// <param name="arrayIndex">Index of the <see cref="CircularBuffer&lt;T&gt;"/> where the copy begins.</param>
+        /// <param name="arrayIndex">Index of the <see cref="CircularBuffer{T}"/> where the copy begins.</param>
         public void CopyTo(T[] array, int arrayIndex)
         {
             this.buffer.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Removes the first occurrence of a specific object from the <see cref="CircularBuffer{T}"/>.
         /// </summary>
-        /// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to remove from the <see cref="CircularBuffer{T}"/>.</param>
         /// <returns>
-        /// true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// true if <paramref name="item"/> was successfully removed from the <see cref="CircularBuffer{T}"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
         /// </returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// The <see cref="CircularBuffer{T}"/> is read-only.
         ///   </exception>
         public bool Remove(T item)
         {
@@ -135,10 +135,10 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Gets the number of elements contained in the <see cref="CircularBuffer{T}"/>.
         /// </summary>
         /// <returns>
-        /// The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// The number of elements contained in the <see cref="CircularBuffer{T}"/>.
         ///   </returns>
         public int Count
         {
@@ -146,9 +146,10 @@ namespace FlagLib.Collections
         }
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// Gets a value indicating whether the <see cref="CircularBuffer{T}"/> is read-only.
         /// </summary>
-        /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+        /// <returns>
+        /// Returns always false.
         ///   </returns>
         bool ICollection<T>.IsReadOnly
         {
