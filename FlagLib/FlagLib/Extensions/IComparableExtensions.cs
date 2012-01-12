@@ -21,7 +21,7 @@ namespace FlagLib.Extensions
 
             if (value.CompareTo(limit) == 1)
             {
-                throw new ArgumentOutOfRangeException(parameterName, "Value must be less than" + limit);
+                throw new ArgumentOutOfRangeException(parameterName, "Value must be less than " + limit);
             }
         }
 
@@ -42,7 +42,7 @@ namespace FlagLib.Extensions
 
             if (value.CompareTo(limit) == 1)
             {
-                throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), "Value must be less than" + limit);
+                throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), "Value must be less than " + limit);
             }
         }
 
@@ -58,7 +58,7 @@ namespace FlagLib.Extensions
 
             if (value.CompareTo(limit) == -1)
             {
-                throw new ArgumentOutOfRangeException(parameterName, "Value must be greater than" + limit);
+                throw new ArgumentOutOfRangeException(parameterName, "Value must be greater than " + limit);
             }
         }
 
@@ -79,7 +79,7 @@ namespace FlagLib.Extensions
 
             if (value.CompareTo(limit) == -1)
             {
-                throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), "Value must be greater than" + limit);
+                throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), "Value must be greater than " + limit);
             }
         }
     }
