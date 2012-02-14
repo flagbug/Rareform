@@ -8,7 +8,7 @@ namespace FlagLib.Extensions
     public static class LongExtensions
     {
         /// <summary>
-        /// Formats the value to a string, which has the appropriate size-suffix.
+        /// Formats the value to a string, that has the appropriate size-suffix.
         /// </summary>
         /// <param name="size">The value.</param>
         /// <returns>
