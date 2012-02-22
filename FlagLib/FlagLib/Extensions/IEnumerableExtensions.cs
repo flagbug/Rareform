@@ -27,7 +27,7 @@ namespace FlagLib.Extensions
             if (items == null)
                 throw new ArgumentNullException("items");
 
-            return items.Any(item => source.Contains(item));
+            return items.Any(source.Contains);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace FlagLib.Extensions
             if (items == null)
                 throw new ArgumentNullException("items");
 
-            return items.Any(item => source.Contains(item));
+            return items.Any(source.Contains);
         }
 
         /// <summary>
