@@ -21,8 +21,11 @@ namespace FlagLib.Extensions
         /// <exception cref="System.ArgumentNullException">source or items is null.</exception>
         public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, params TSource[] items)
         {
-            source.ThrowIfNull(() => source);
-            items.ThrowIfNull(() => items);
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (items == null)
+                throw new ArgumentNullException("items");
 
             return items.Any(item => source.Contains(item));
         }
@@ -39,8 +42,11 @@ namespace FlagLib.Extensions
         /// <exception cref="System.ArgumentNullException">source or items is null.</exception>
         public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> items)
         {
-            source.ThrowIfNull(() => source);
-            items.ThrowIfNull(() => items);
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (items == null)
+                throw new ArgumentNullException("items");
 
             return items.Any(item => source.Contains(item));
         }
@@ -53,8 +59,11 @@ namespace FlagLib.Extensions
         /// <param name="action">The action to execute.</param>
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
         {
-            source.ThrowIfNull(() => source);
-            action.ThrowIfNull(() => action);
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (action == null)
+                throw new ArgumentNullException("action");
 
             foreach (TSource item in source)
             {
@@ -72,6 +81,12 @@ namespace FlagLib.Extensions
         /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no passes again.</returns>
         public static IEnumerable<TSource> TakeWhileInclusive<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            if (predicate == null)
+                throw new ArgumentNullException("predicate");
+
             foreach (TSource item in source)
             {
                 if (predicate(item))
