@@ -61,5 +61,30 @@ namespace FlagLib.Extensions
                 action(item);
             }
         }
+
+        /// <summary>
+        /// Returns elements from a sequence as long as a specified condition is true inclusive the element for that the condition was false,
+        /// and then skips the remaining elements.
+        /// </summary>
+        /// <typeparam name="TSource">The type of <c>source</c>.</typeparam>
+        /// <param name="source">A sequence to return elements from.</param>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        /// <returns>A sequence that contains the elements from the input sequence that occur before the element at which the test no passes again.</returns>
+        public static IEnumerable<TSource> TakeWhileInclusive<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            foreach (TSource item in source)
+            {
+                if (predicate(item))
+                {
+                    yield return item;
+                }
+
+                else
+                {
+                    yield return item;
+                    yield break;
+                }
+            }
+        }
     }
 }
