@@ -1,6 +1,7 @@
 
-/FlagLib/_ReSharper.FlagLib
-/FlagLib/FlagLib/bin
-/FlagLib/FlagLib/obj
-/FlagLib/FlagLib.Tests/bin
-/FlagLib/FlagLib.Tests/obj
+/Rareform/_ReSharper.Rareform
+/Rareform/Rareform/bin
+/Rareform/Rareform/obj
+/Rareform/Rareform.Tests/bin
+/Rareform/Rareform.Tests/obj
+/Rareform/TestResults
