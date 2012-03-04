@@ -71,6 +71,16 @@ namespace Rareform.IO
         /// </summary>
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
+        /// <remarks>This constructor uses a 32 kilobyte buffer and a dynamic update interval.</remarks>
+        public StreamCopyOperation(Stream sourceStream, Stream targetStream)
+            : this(sourceStream, targetStream, 32 * 1024, true)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StreamCopyOperation"/> class.
+        /// </summary>
+        /// <param name="sourceStream">The source stream.</param>
+        /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.</param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
