@@ -87,7 +87,7 @@ namespace Rareform.IO
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <param name="dynamicUpdateInterval">if set to true, the operation uses an dynamic update interval, based on the stream length.;
+        /// <param name="dynamicUpdateInterval">if set to true, the operation uses a dynamic update interval, based on the stream length.;
         /// otherwise, it uses a predefined update interval.</param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, bool dynamicUpdateInterval)
             : this(sourceStream, targetStream, bufferSize)
