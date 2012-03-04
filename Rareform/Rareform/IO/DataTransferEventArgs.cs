@@ -19,6 +19,14 @@ namespace Rareform.IO
         public long TransferredBytes { get; private set; }
 
         /// <summary>
+        /// Gets the progress percentage.
+        /// </summary>
+        public double ProgressPercentage
+        {
+            get { return (this.TransferredBytes * 1.0 / this.TotalBytes) * 100; }
+        }
+
+        /// <summary>
         /// Gets the average speed in bytes per second.
         /// </summary>
         /// <value>
