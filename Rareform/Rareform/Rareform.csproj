@@ -53,6 +53,7 @@
     <Compile Include="IO\DirectoryScanner.cs" />
     <Compile Include="IO\FileEventArgs.cs" />
     <Compile Include="IO\DirectoryScanErrorEventArgs.cs" />
+    <Compile Include="IO\RemovableDriveWatcher.cs" />
     <Compile Include="IO\StreamCopyOperation.cs" />
     <Compile Include="Patterns\MVVM\RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +67,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
