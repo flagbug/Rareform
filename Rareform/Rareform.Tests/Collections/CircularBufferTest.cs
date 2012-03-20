@@ -15,10 +15,10 @@ namespace Rareform.Tests.Collections
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Constructor_ZeroAsCapacity_ThrowsArgumentNullException()
+        public void Constructor_ZeroAsCapacity_ThrowsArgumentOutOfRangeException()
         {
             const int capacity = 0;
-            var target = new CircularBuffer<int>(capacity);
+            new CircularBuffer<int>(capacity);
         }
 
         [TestMethod]
