@@ -30,7 +30,7 @@ namespace Rareform.Tests.Collections
         }
 
         [TestMethod]
-        public void Add_ThreeAsCapacityAndAddFourItems_CountIsThreeAndFirstItemIsRemoved()
+        public void Add_ThreeAsCapacityAndAddEightItems_CountIsThreeAndFirstItemsAreRemoved()
         {
             var target = new CircularBuffer<int>(3) { 1, 2, 3, 4, 5, 6, 7, 8 };
 
