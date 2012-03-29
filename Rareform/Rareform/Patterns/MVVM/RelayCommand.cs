@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Rareform.Extensions;
 
 namespace Rareform.Patterns.MVVM
 {
@@ -11,8 +10,8 @@ namespace Rareform.Patterns.MVVM
     /// </summary>
     public class RelayCommand : ICommand
     {
-        readonly Action<object> execute;
-        readonly Predicate<object> canExecute;
+        private readonly Action<object> execute;
+        private readonly Predicate<object> canExecute;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
@@ -20,8 +19,7 @@ namespace Rareform.Patterns.MVVM
         /// <param name="execute">The action to execute.</param>
         public RelayCommand(Action<object> execute)
             : this(execute, null)
-        {
-        }
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
@@ -30,7 +28,8 @@ namespace Rareform.Patterns.MVVM
         /// <param name="canExecute">The predicated, which indicates if the command can execute.</param>
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            execute.ThrowIfNull(() => execute);
+            if (execute == null)
+                throw new ArgumentNullException("execute");
 
             this.execute = execute;
             this.canExecute = canExecute;
@@ -45,7 +44,7 @@ namespace Rareform.Patterns.MVVM
         /// </returns>
         public bool CanExecute(object parameter)
         {
-            return canExecute == null || canExecute(parameter);
+            return this.canExecute == null || this.canExecute(parameter);
         }
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace Rareform.Patterns.MVVM
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute(object parameter)
         {
-            execute(parameter);
+            this.execute(parameter);
         }
     }
 }
