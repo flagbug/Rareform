@@ -152,7 +152,7 @@ namespace Rareform.Collections
 
             DispatcherOperation op = this.dispatcher.BeginInvoke(new Func<T, bool>(this.InternRemove), item);
 
-            if (op == null || op.Result == null)
+            if (op.Result == null)
             {
                 return false;
             }

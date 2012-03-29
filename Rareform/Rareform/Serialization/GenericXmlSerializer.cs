@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
-using Rareform.Extensions;
 
 namespace Rareform.Serialization
 {
@@ -19,10 +19,13 @@ namespace Rareform.Serialization
         /// <param name="path">The path of the file.</param>
         public static void SerializeCollection<T>(ICollection<T> collection, string path) where T : class
         {
-            collection.ThrowIfNull(() => collection);
-            path.ThrowIfNull(() => path);
+            if (collection == null)
+                throw new ArgumentNullException("collection");
 
-            GenericXmlSerializer.InternalSerialize(collection, path);
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            InternalSerialize(collection, path);
         }
 
         /// <summary>
@@ -33,10 +36,13 @@ namespace Rareform.Serialization
         /// <param name="path">The path of the file.</param>
         public static void SerializeItem<T>(T item, string path) where T : class
         {
-            item.ThrowIfNull(() => item);
-            path.ThrowIfNull(() => path);
+            if (item == null)
+                throw new ArgumentNullException("item");
 
-            GenericXmlSerializer.InternalSerialize(item, path);
+            if (path == null)
+                throw new ArgumentNullException("path");
+
+            InternalSerialize(item, path);
         }
 
         /// <summary>
@@ -49,9 +55,10 @@ namespace Rareform.Serialization
         /// </returns>
         public static ICollection<T> DeserializeCollection<T>(string path) where T : class, new()
         {
-            path.ThrowIfNull(() => path);
+            if (path == null)
+                throw new ArgumentNullException("path");
 
-            return GenericXmlSerializer.InternDeserialize<Collection<T>>(path);
+            return InternDeserialize<Collection<T>>(path);
         }
 
         /// <summary>
@@ -64,9 +71,10 @@ namespace Rareform.Serialization
         /// </returns>
         public static T DeserializeItem<T>(string path) where T : class, new()
         {
-            path.ThrowIfNull(() => path);
+            if (path == null)
+                throw new ArgumentNullException("path");
 
-            return GenericXmlSerializer.InternDeserialize<T>(path);
+            return InternDeserialize<T>(path);
         }
 
         /// <summary>
@@ -77,8 +85,11 @@ namespace Rareform.Serialization
         /// <param name="path">The path of the file.</param>
         private static void InternalSerialize<T>(T @object, string path) where T : class
         {
-            @object.ThrowIfNull(() => @object);
-            path.ThrowIfNull(() => path);
+            if (@object == null)
+                throw new ArgumentNullException("object");
+
+            if (path == null)
+                throw new ArgumentNullException("path");
 
             var serializer = new XmlSerializer(@object.GetType());
 
@@ -96,9 +107,10 @@ namespace Rareform.Serialization
         /// <returns></returns>
         private static T InternDeserialize<T>(string path) where T : class, new()
         {
-            path.ThrowIfNull(() => path);
+            if (path == null)
+                throw new ArgumentNullException("path");
 
-            T @object = new T();
+            var @object = new T();
 
             var serializer = new XmlSerializer(@object.GetType());
 

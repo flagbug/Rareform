@@ -113,8 +113,12 @@ namespace Rareform.IO
         /// <param name="bufferSize">The size of the buffer.</param>
         private StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize)
         {
-            sourceStream.ThrowIfNull(() => sourceStream);
-            targetStream.ThrowIfNull(() => targetStream);
+            if (sourceStream == null)
+                throw new ArgumentNullException("sourceStream");
+
+            if (targetStream == null)
+                throw new ArgumentNullException("targetStream");
+
             bufferSize.ThrowIfLessThan(1, "bufferSize");
 
             this.SourceStream = sourceStream;

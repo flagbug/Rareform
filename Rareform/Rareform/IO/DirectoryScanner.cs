@@ -70,7 +70,8 @@ namespace Rareform.IO
         /// <param name="path">The path of the directory to scan.</param>
         public DirectoryScanner(string path)
         {
-            path.ThrowIfNull(() => path);
+            if (path == null)
+                throw new ArgumentNullException("path");
 
             this.DirectoryPath = path;
             this.filesFound = new List<FileInfo>();
@@ -145,7 +146,8 @@ namespace Rareform.IO
         /// <param name="rootPath">The root path.</param>
         private void ScanDirectories(string rootPath)
         {
-            rootPath.ThrowIfNull(() => rootPath);
+            if (rootPath == null)
+                throw new ArgumentNullException("rootPath");
 
             if (this.IsStopped) { return; }
 

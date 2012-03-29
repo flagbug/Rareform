@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Rareform.Extensions;
 
 namespace Rareform.Reflection
 {
@@ -27,7 +26,8 @@ namespace Rareform.Reflection
         ///   </example>
         public static string GetMemberName<T>(Expression<Func<T>> expression)
         {
-            expression.ThrowIfNull(() => expression);
+            if (expression == null)
+                throw new ArgumentNullException("expression");
 
             var memberExpression = expression.Body as MemberExpression;
 

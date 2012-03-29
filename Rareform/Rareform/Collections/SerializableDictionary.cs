@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using Rareform.Extensions;
 
 namespace Rareform.Collections
 {
@@ -33,7 +32,8 @@ namespace Rareform.Collections
         /// <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the object is deserialized.</param>
         public void ReadXml(XmlReader reader)
         {
-            reader.ThrowIfNull(() => reader);
+            if (reader == null)
+                throw new ArgumentNullException("reader");
 
             var keySerializer = new XmlSerializer(typeof(TKey));
             var valueSerializer = new XmlSerializer(typeof(TValue));
@@ -48,11 +48,11 @@ namespace Rareform.Collections
                 reader.ReadStartElement("Item");
 
                 reader.ReadStartElement("Key");
-                TKey key = (TKey)keySerializer.Deserialize(reader);
+                var key = (TKey)keySerializer.Deserialize(reader);
                 reader.ReadEndElement();
 
                 reader.ReadStartElement("Value");
-                TValue value = (TValue)valueSerializer.Deserialize(reader);
+                var value = (TValue)valueSerializer.Deserialize(reader);
                 reader.ReadEndElement();
 
                 this.Add(key, value);
@@ -69,7 +69,8 @@ namespace Rareform.Collections
         /// <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
         public void WriteXml(XmlWriter writer)
         {
-            writer.ThrowIfNull(() => writer);
+            if (writer == null)
+                throw new ArgumentNullException("writer");
 
             var keySerializer = new XmlSerializer(typeof(TKey));
             var valueSerializer = new XmlSerializer(typeof(TValue));

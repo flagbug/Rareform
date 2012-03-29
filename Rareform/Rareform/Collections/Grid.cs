@@ -39,8 +39,8 @@ namespace Rareform.Collections
         /// <param name="rows">The number of rows.</param>
         public Grid(int columns, int rows)
         {
-            rows.ThrowIfLessThan(1, "rows");
             columns.ThrowIfLessThan(1, "columns");
+            rows.ThrowIfLessThan(1, "rows");
 
             this.Rows = rows;
             this.Columns = columns;
@@ -57,22 +57,22 @@ namespace Rareform.Collections
         {
             get
             {
-                row.ThrowIfLessThan(0, "row");
-                row.ThrowIfGreaterThan(this.Rows - 1, "row");
-
                 column.ThrowIfLessThan(0, "column");
                 column.ThrowIfGreaterThan(this.Columns - 1, "column");
+
+                row.ThrowIfLessThan(0, "row");
+                row.ThrowIfGreaterThan(this.Rows - 1, "row");
 
                 return this[row * this.Columns + column];
             }
 
             set
             {
-                row.ThrowIfLessThan(0, "row");
-                row.ThrowIfGreaterThan(this.Rows - 1, "row");
-
                 column.ThrowIfLessThan(0, "column");
                 column.ThrowIfGreaterThan(this.Columns - 1, "column");
+
+                row.ThrowIfLessThan(0, "row");
+                row.ThrowIfGreaterThan(this.Rows - 1, "row");
 
                 this[row * this.Columns + column] = value;
             }
@@ -83,15 +83,8 @@ namespace Rareform.Collections
         /// </summary>
         public T this[int index]
         {
-            get
-            {
-                return this.internFields[index];
-            }
-
-            set
-            {
-                this.internFields[index] = value;
-            }
+            get { return this.internFields[index]; }
+            set { this.internFields[index] = value; }
         }
 
         /// <summary>
@@ -103,7 +96,8 @@ namespace Rareform.Collections
         /// </param>
         public void Traverse(Action<int, int> action)
         {
-            action.ThrowIfNull(() => action);
+            if (action == null)
+                throw new ArgumentNullException("action");
 
             for (int row = 0; row < this.Rows; row++)
             {

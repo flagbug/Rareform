@@ -110,7 +110,8 @@ namespace Rareform.Collections
         /// <param name="collection">The collection which gets copied into the <see cref="EventCollection&lt;T&gt;"/>.</param>
         public EventCollection(IEnumerable<T> collection)
         {
-            collection.ThrowIfNull(() => collection);
+            if (collection == null)
+                throw new ArgumentNullException("collection");
 
             this.internList = new List<T>(collection);
         }
@@ -121,8 +122,7 @@ namespace Rareform.Collections
         /// <param name="capacity">The initial capacity of the <see cref="EventCollection&lt;T&gt;"/>.</param>
         public EventCollection(int capacity)
             : this(new List<T>(capacity))
-        {
-        }
+        { }
 
         /// <summary>
         /// Adds an item to the <see cref="EventCollection&lt;T&gt;"/>.
@@ -145,7 +145,8 @@ namespace Rareform.Collections
         /// <exception cref="System.ArgumentNullException"/>
         public virtual void AddRange(IEnumerable<T> collection)
         {
-            collection.ThrowIfNull(() => collection);
+            if (collection == null)
+                throw new ArgumentNullException("collection");
 
             foreach (T item in collection)
             {
