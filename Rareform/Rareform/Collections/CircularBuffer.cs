@@ -27,7 +27,7 @@ namespace Rareform.Collections
         /// <param name="capacity">The initial capacity of the <see cref="CircularBuffer{T}"/>.</param>
         public CircularBuffer(int capacity)
         {
-            capacity.ThrowIfLessThan(1, () => capacity);
+            capacity.ThrowIfLessThan(1, "capacity");
 
             this.buffer = new List<T>(capacity);
         }

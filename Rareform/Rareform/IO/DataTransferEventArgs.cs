@@ -53,8 +53,8 @@ namespace Rareform.IO
         /// <param name="transferredBytes">The transferred bytes.</param>
         public DataTransferEventArgs(long totalBytes, long transferredBytes)
         {
-            totalBytes.ThrowIfLessThan(1, () => totalBytes);
-            transferredBytes.ThrowIfLessThan(1, () => transferredBytes);
+            totalBytes.ThrowIfLessThan(1, "totalBytes");
+            transferredBytes.ThrowIfLessThan(1, "transferredBytes");
 
             this.TotalBytes = totalBytes;
             this.TransferredBytes = transferredBytes;

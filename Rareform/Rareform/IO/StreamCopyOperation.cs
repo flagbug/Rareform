@@ -27,10 +27,7 @@ namespace Rareform.IO
         /// </summary>
         public long AverageSpeed
         {
-            get
-            {
-                return (long)(this.copiedBytes / this.elapsedTime.TotalSeconds);
-            }
+            get { return (long)(this.copiedBytes / this.elapsedTime.TotalSeconds); }
         }
 
         /// <summary>

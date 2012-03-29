@@ -101,8 +101,7 @@ namespace Rareform.Collections
         /// </summary>
         public EventCollection()
             : this(new T[0])
-        {
-        }
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventCollection&lt;T&gt;"/> class.
