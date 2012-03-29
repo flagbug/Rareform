@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using Rareform.Extensions;
 
 namespace Rareform.Patterns.MVVM
 {
@@ -24,15 +23,16 @@ namespace Rareform.Patterns.MVVM
         /// <param name="propertySelector">The property selector.</param>
         protected void OnPropertyChanged<TValue>(Expression<Func<T, TValue>> propertySelector)
         {
-            propertySelector.ThrowIfNull(() => propertySelector);
+            if (propertySelector == null)
+                throw new ArgumentNullException("propertySelector");
 
-            if (PropertyChanged != null)
+            if (this.PropertyChanged != null)
             {
                 var memberExpression = propertySelector.Body as MemberExpression;
 
                 if (memberExpression != null && this.PropertyChanged != null)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs(memberExpression.Member.Name));
+                    this.PropertyChanged(this, new PropertyChangedEventArgs(memberExpression.Member.Name));
                 }
             }
         }
