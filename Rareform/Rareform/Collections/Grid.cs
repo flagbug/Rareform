@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Rareform.Extensions;
 
 namespace Rareform.Collections
 {
@@ -39,8 +38,11 @@ namespace Rareform.Collections
         /// <param name="rows">The number of rows.</param>
         public Grid(int columns, int rows)
         {
-            columns.ThrowIfLessThan(1, "columns");
-            rows.ThrowIfLessThan(1, "rows");
+            if (columns < 1)
+                throw new ArgumentOutOfRangeException("columns", "columns must be greater than 1.");
+
+            if (rows < 1)
+                throw new ArgumentOutOfRangeException("rows", "rows must be greater than 1.");
 
             this.Rows = rows;
             this.Columns = columns;
@@ -57,22 +59,34 @@ namespace Rareform.Collections
         {
             get
             {
-                column.ThrowIfLessThan(0, "column");
-                column.ThrowIfGreaterThan(this.Columns - 1, "column");
+                if (column < 0)
+                    throw new IndexOutOfRangeException("column must be greater than 0.");
 
-                row.ThrowIfLessThan(0, "row");
-                row.ThrowIfGreaterThan(this.Rows - 1, "row");
+                if (column > this.Columns - 1)
+                    throw new IndexOutOfRangeException("column must be less than " + (this.Columns - 1));
+
+                if (row < 0)
+                    throw new IndexOutOfRangeException("row must be greater than 0.");
+
+                if (row > this.Rows - 1)
+                    throw new IndexOutOfRangeException("row must be less than " + (this.Rows - 1));
 
                 return this[row * this.Columns + column];
             }
 
             set
             {
-                column.ThrowIfLessThan(0, "column");
-                column.ThrowIfGreaterThan(this.Columns - 1, "column");
+                if (column < 0)
+                    throw new IndexOutOfRangeException("column must be greater than 0.");
 
-                row.ThrowIfLessThan(0, "row");
-                row.ThrowIfGreaterThan(this.Rows - 1, "row");
+                if (column > this.Columns - 1)
+                    throw new IndexOutOfRangeException("column must be less than " + (this.Columns - 1));
+
+                if (row < 0)
+                    throw new IndexOutOfRangeException("row must be greater than 0.");
+
+                if (row > this.Rows - 1)
+                    throw new IndexOutOfRangeException("row must be less than " + (this.Rows - 1));
 
                 this[row * this.Columns + column] = value;
             }
