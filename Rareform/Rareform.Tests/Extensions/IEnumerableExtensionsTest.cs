@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rareform.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
 {
@@ -14,12 +14,12 @@ namespace Rareform.Tests.Extensions
     public class IEnumerableExtensionsTest
     {
         [TestMethod]
-        public void ContainsAny_IEnumerableAsParameter_ReturnsTrue()
+        public void ContainsAny_IEnumerableAsParameter_ReturnsFalse()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
-            IEnumerable<int> items = new List<int> { 1, 2 };
+            IEnumerable<int> items = new List<int> { 6, 7 };
 
-            bool expected = true;
+            bool expected = false;
             bool actual;
 
             actual = value.ContainsAny(items);
@@ -28,12 +28,12 @@ namespace Rareform.Tests.Extensions
         }
 
         [TestMethod]
-        public void ContainsAny_IEnumerableAsParameter_ReturnsFalse()
+        public void ContainsAny_IEnumerableAsParameter_ReturnsTrue()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
-            IEnumerable<int> items = new List<int> { 6, 7 };
+            IEnumerable<int> items = new List<int> { 1, 2 };
 
-            bool expected = false;
+            bool expected = true;
             bool actual;
 
             actual = value.ContainsAny(items);
@@ -52,19 +52,6 @@ namespace Rareform.Tests.Extensions
         }
 
         [TestMethod]
-        public void ContainsAny_ParamsAsParameter_ReturnsTrue()
-        {
-            IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
-
-            bool expected = true;
-            bool actual;
-
-            actual = value.ContainsAny(1, 2);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
         public void ContainsAny_ParamsAsParameter_ReturnsFalse()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
@@ -73,6 +60,19 @@ namespace Rareform.Tests.Extensions
             bool actual;
 
             actual = value.ContainsAny(6, 7);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ContainsAny_ParamsAsParameter_ReturnsTrue()
+        {
+            IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
+
+            bool expected = true;
+            bool actual;
+
+            actual = value.ContainsAny(1, 2);
 
             Assert.AreEqual(expected, actual);
         }

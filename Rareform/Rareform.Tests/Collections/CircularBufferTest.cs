@@ -14,22 +14,6 @@ namespace Rareform.Tests.Collections
     public class CircularBufferTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Constructor_ZeroAsCapacity_ThrowsArgumentOutOfRangeException()
-        {
-            const int capacity = 0;
-            new CircularBuffer<int>(capacity);
-        }
-
-        [TestMethod]
-        public void Add_ThreeAsCapacityAndAddOneItem_CountIsOne()
-        {
-            var target = new CircularBuffer<int>(3) { 1 };
-
-            Assert.IsTrue(target.Count == 1);
-        }
-
-        [TestMethod]
         public void Add_ThreeAsCapacityAndAddEightItems_CountIsThreeAndFirstItemsAreRemoved()
         {
             var target = new CircularBuffer<int>(3) { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -45,6 +29,14 @@ namespace Rareform.Tests.Collections
         }
 
         [TestMethod]
+        public void Add_ThreeAsCapacityAndAddOneItem_CountIsOne()
+        {
+            var target = new CircularBuffer<int>(3) { 1 };
+
+            Assert.IsTrue(target.Count == 1);
+        }
+
+        [TestMethod]
         public void ClearTest()
         {
             var target = new CircularBuffer<int>(3) { 1, 2, 3 };
@@ -53,6 +45,14 @@ namespace Rareform.Tests.Collections
 
             Assert.IsTrue(target.Capacity == 3);
             Assert.IsTrue(target.Count == 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Constructor_ZeroAsCapacity_ThrowsArgumentOutOfRangeException()
+        {
+            const int capacity = 0;
+            new CircularBuffer<int>(capacity);
         }
 
         [TestMethod]

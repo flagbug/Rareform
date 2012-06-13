@@ -9,21 +9,20 @@ namespace Rareform.IO
     public class DataTransferEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the total number of bytes.
+        /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
         /// </summary>
-        public long TotalBytes { get; private set; }
-
-        /// <summary>
-        /// Gets the number of copied bytes.
-        /// </summary>
-        public long TransferredBytes { get; private set; }
-
-        /// <summary>
-        /// Gets the progress percentage.
-        /// </summary>
-        public double ProgressPercentage
+        /// <param name="totalBytes">The total number of bytes.</param>
+        /// <param name="transferredBytes">The transferred bytes.</param>
+        public DataTransferEventArgs(long totalBytes, long transferredBytes)
         {
-            get { return (this.TransferredBytes * 1.0 / this.TotalBytes) * 100; }
+            if (totalBytes < 1)
+                Throw.ArgumentOutOfRangeException(() => totalBytes, 1);
+
+            if (transferredBytes < 1)
+                Throw.ArgumentOutOfRangeException(() => transferredBytes, 1);
+
+            this.TotalBytes = totalBytes;
+            this.TransferredBytes = transferredBytes;
         }
 
         /// <summary>
@@ -47,21 +46,22 @@ namespace Rareform.IO
         public bool Cancel { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
+        /// Gets the progress percentage.
         /// </summary>
-        /// <param name="totalBytes">The total number of bytes.</param>
-        /// <param name="transferredBytes">The transferred bytes.</param>
-        public DataTransferEventArgs(long totalBytes, long transferredBytes)
+        public double ProgressPercentage
         {
-            if (totalBytes < 1)
-                Throw.ArgumentOutOfRangeException(() => totalBytes, 1);
-
-            if (transferredBytes < 1)
-                Throw.ArgumentOutOfRangeException(() => transferredBytes, 1);
-
-            this.TotalBytes = totalBytes;
-            this.TransferredBytes = transferredBytes;
+            get { return (this.TransferredBytes * 1.0 / this.TotalBytes) * 100; }
         }
+
+        /// <summary>
+        /// Gets the total number of bytes.
+        /// </summary>
+        public long TotalBytes { get; private set; }
+
+        /// <summary>
+        /// Gets the number of copied bytes.
+        /// </summary>
+        public long TransferredBytes { get; private set; }
     }
 
     /// <summary>
@@ -72,12 +72,13 @@ namespace Rareform.IO
     public class DataTransferEventArgs<TSource, TDestination> : DataTransferEventArgs
     {
         /// <summary>
-        /// Gets or sets the source of the data transfer.
+        /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
         /// </summary>
-        /// <value>
-        /// The source of the data transfer.
-        /// </value>
-        public TSource Source { get; set; }
+        /// <param name="totalBytes">The total number of bytes.</param>
+        /// <param name="transferredBytes">The transferred bytes.</param>
+        public DataTransferEventArgs(long totalBytes, long transferredBytes)
+            : base(totalBytes, transferredBytes)
+        { }
 
         /// <summary>
         /// Gets or sets the destination of the data transfer.
@@ -88,12 +89,11 @@ namespace Rareform.IO
         public TDestination Destination { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataTransferEventArgs"/> class.
+        /// Gets or sets the source of the data transfer.
         /// </summary>
-        /// <param name="totalBytes">The total number of bytes.</param>
-        /// <param name="transferredBytes">The transferred bytes.</param>
-        public DataTransferEventArgs(long totalBytes, long transferredBytes)
-            : base(totalBytes, transferredBytes)
-        { }
+        /// <value>
+        /// The source of the data transfer.
+        /// </value>
+        public TSource Source { get; set; }
     }
 }

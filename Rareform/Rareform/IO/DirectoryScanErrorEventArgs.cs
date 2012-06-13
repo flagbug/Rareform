@@ -8,12 +8,15 @@ namespace Rareform.IO
     public class DirectoryScanErrorEventArgs : EventArgs
     {
         /// <summary>
-        /// Gets the type of the error.
+        /// Initializes a new instance of the <see cref="DirectoryScanErrorEventArgs"/> class.
         /// </summary>
-        /// <value>
-        /// The type of the error.
-        /// </value>
-        public DirectoryScanErrorType ErrorType { get; private set; }
+        /// <param name="directoryPath">The directory path.</param>
+        /// <param name="errorType">Type of the error.</param>
+        public DirectoryScanErrorEventArgs(string directoryPath, DirectoryScanErrorType errorType)
+        {
+            this.DirectoryPath = directoryPath;
+            this.ErrorType = errorType;
+        }
 
         /// <summary>
         /// Gets the directory path.
@@ -24,14 +27,11 @@ namespace Rareform.IO
         public string DirectoryPath { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DirectoryScanErrorEventArgs"/> class.
+        /// Gets the type of the error.
         /// </summary>
-        /// <param name="directoryPath">The directory path.</param>
-        /// <param name="errorType">Type of the error.</param>
-        public DirectoryScanErrorEventArgs(string directoryPath, DirectoryScanErrorType errorType)
-        {
-            this.DirectoryPath = directoryPath;
-            this.ErrorType = errorType;
-        }
+        /// <value>
+        /// The type of the error.
+        /// </value>
+        public DirectoryScanErrorType ErrorType { get; private set; }
     }
 }

@@ -10,9 +10,14 @@ namespace Rareform.IO
     public class RemovableDriveWatcher : IDisposable
     {
         private static RemovableDriveWatcher instance;
-
-        private ManagementEventWatcher removeWatcher;
         private ManagementEventWatcher insertWatcher;
+        private ManagementEventWatcher removeWatcher;
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="RemovableDriveWatcher"/> class from being created.
+        /// </summary>
+        private RemovableDriveWatcher()
+        { }
 
         /// <summary>
         /// Occurs when a removable drive has is inserted.
@@ -23,12 +28,6 @@ namespace Rareform.IO
         /// Occurs when a removable drive is removed.
         /// </summary>
         public event EventHandler DriveRemoved;
-
-        /// <summary>
-        /// Prevents a default instance of the <see cref="RemovableDriveWatcher"/> class from being created.
-        /// </summary>
-        private RemovableDriveWatcher()
-        { }
 
         /// <summary>
         /// Creates a new <see cref="RemovableDriveWatcher"/>.

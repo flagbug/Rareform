@@ -15,54 +15,8 @@ namespace Rareform.IO
     /// </remarks>
     public class StreamCopyOperation
     {
-        private TimeSpan elapsedTime;
         private long copiedBytes;
-
-        /// <summary>
-        /// Occurs when copy progress has changed.
-        /// </summary>
-        public event EventHandler<DataTransferEventArgs<Stream, Stream>> CopyProgressChanged;
-
-        /// <summary>
-        /// Gets the average speed in bytes per second.
-        /// </summary>
-        public long AverageSpeed
-        {
-            get { return (long)(this.copiedBytes / this.elapsedTime.TotalSeconds); }
-        }
-
-        /// <summary>
-        /// Gets the size of the buffer in bytes.
-        /// </summary>
-        /// <value>
-        /// The size of the buffer in bytes.
-        /// </value>
-        public int BufferSize { get; private set; }
-
-        /// <summary>
-        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.
-        /// </summary>
-        public int UpdateInterval { get; private set; }
-
-        /// <summary>
-        /// Gets the start time.
-        /// </summary>
-        public DateTime StartTime { get; private set; }
-
-        /// <summary>
-        /// Gets the end time.
-        /// </summary>
-        public DateTime EndTime { get; private set; }
-
-        /// <summary>
-        /// Gets the source stream.
-        /// </summary>
-        public Stream SourceStream { get; private set; }
-
-        /// <summary>
-        /// Gets the target stream.
-        /// </summary>
-        public Stream TargetStream { get; private set; }
+        private TimeSpan elapsedTime;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StreamCopyOperation"/> class.
@@ -125,6 +79,52 @@ namespace Rareform.IO
             this.TargetStream = targetStream;
             this.BufferSize = bufferSize;
         }
+
+        /// <summary>
+        /// Occurs when copy progress has changed.
+        /// </summary>
+        public event EventHandler<DataTransferEventArgs<Stream, Stream>> CopyProgressChanged;
+
+        /// <summary>
+        /// Gets the average speed in bytes per second.
+        /// </summary>
+        public long AverageSpeed
+        {
+            get { return (long)(this.copiedBytes / this.elapsedTime.TotalSeconds); }
+        }
+
+        /// <summary>
+        /// Gets the size of the buffer in bytes.
+        /// </summary>
+        /// <value>
+        /// The size of the buffer in bytes.
+        /// </value>
+        public int BufferSize { get; private set; }
+
+        /// <summary>
+        /// Gets the end time.
+        /// </summary>
+        public DateTime EndTime { get; private set; }
+
+        /// <summary>
+        /// Gets the source stream.
+        /// </summary>
+        public Stream SourceStream { get; private set; }
+
+        /// <summary>
+        /// Gets the start time.
+        /// </summary>
+        public DateTime StartTime { get; private set; }
+
+        /// <summary>
+        /// Gets the target stream.
+        /// </summary>
+        public Stream TargetStream { get; private set; }
+
+        /// <summary>
+        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.
+        /// </summary>
+        public int UpdateInterval { get; private set; }
 
         /// <summary>
         /// Executes the stream copy operation.

@@ -1,5 +1,5 @@
-﻿using Rareform.Extensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
 {
@@ -10,6 +10,18 @@ namespace Rareform.Tests.Extensions
     [TestClass]
     public class LongExtensionsTest
     {
+        [TestMethod]
+        public void ToSizeString_ParameterGigaIsByte_ReturnsGigaByteString()
+        {
+            long size = 1024 * 1024 * 1024;
+            string expected = "1,00 GB";
+            string actual;
+
+            actual = size.ToSizeString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestMethod]
         public void ToSizeString_ParameterIsByte_ReturnsByteString()
         {
@@ -39,18 +51,6 @@ namespace Rareform.Tests.Extensions
         {
             long size = 1024 * 1024;
             string expected = "1,00 MB";
-            string actual;
-
-            actual = size.ToSizeString();
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void ToSizeString_ParameterGigaIsByte_ReturnsGigaByteString()
-        {
-            long size = 1024 * 1024 * 1024;
-            string expected = "1,00 GB";
             string actual;
 
             actual = size.ToSizeString();

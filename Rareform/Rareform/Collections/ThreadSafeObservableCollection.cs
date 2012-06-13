@@ -18,11 +18,6 @@ namespace Rareform.Collections
         private readonly ReaderWriterLock syncLock;
 
         /// <summary>
-        /// Occurs when the collection changes.
-        /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> class.
         /// </summary>
         public ThreadSafeObservableCollection()
@@ -30,6 +25,79 @@ namespace Rareform.Collections
             this.dispatcher = Dispatcher.CurrentDispatcher;
             this.collection = new List<T>();
             this.syncLock = new ReaderWriterLock();
+        }
+
+        /// <summary>
+        /// Occurs when the collection changes.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        /// <summary>
+        /// Gets the number of elements contained in the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
+        /// </summary>
+        /// <returns>
+        /// The number of elements contained in the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
+        ///   </returns>
+        public int Count
+        {
+            get
+            {
+                this.syncLock.AcquireReaderLock(Timeout.Infinite);
+
+                int count = this.collection.Count;
+
+                this.syncLock.ReleaseReaderLock();
+
+                return count;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> is read-only.
+        /// </summary>
+        /// <returns>true if the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> is read-only; otherwise, false.
+        ///   </returns>
+        public bool IsReadOnly
+        {
+            get { return this.collection.IsReadOnly; }
+        }
+
+        /// <summary>
+        /// Gets or sets the element at the specified index.
+        /// </summary>
+        /// <returns>
+        /// The element at the specified index.
+        ///   </returns>
+        ///
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
+        ///   </exception>
+        ///
+        /// <exception cref="T:System.NotSupportedException">
+        /// The property is set and the <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+        ///   </exception>
+        public T this[int index]
+        {
+            get
+            {
+                syncLock.AcquireReaderLock(Timeout.Infinite);
+                T result = collection[index];
+                syncLock.ReleaseReaderLock();
+                return result;
+            }
+
+            set
+            {
+                syncLock.AcquireWriterLock(Timeout.Infinite);
+
+                if (collection.Count == 0 || collection.Count <= index)
+                {
+                    syncLock.ReleaseWriterLock();
+                    return;
+                }
+
+                collection[index] = value;
+                syncLock.ReleaseWriterLock();
+            }
         }
 
         /// <summary>
@@ -104,80 +172,12 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
-        /// </summary>
-        /// <returns>
-        /// The number of elements contained in the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
-        ///   </returns>
-        public int Count
-        {
-            get
-            {
-                this.syncLock.AcquireReaderLock(Timeout.Infinite);
-
-                int count = this.collection.Count;
-
-                this.syncLock.ReleaseReaderLock();
-
-                return count;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> is read-only.
-        /// </summary>
-        /// <returns>true if the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> is read-only; otherwise, false.
-        ///   </returns>
-        public bool IsReadOnly
-        {
-            get { return this.collection.IsReadOnly; }
-        }
-
-        /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
-        /// </summary>
-        /// <param name="item">The object to remove from the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.</param>
-        /// <returns>
-        /// true if <paramref name="item"/> was successfully removed from the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
-        /// </returns>
-        /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> is read-only.
-        ///   </exception>
-        public bool Remove(T item)
-        {
-            if (Thread.CurrentThread == this.dispatcher.Thread)
-            {
-                return this.InternRemove(item);
-            }
-
-            DispatcherOperation op = this.dispatcher.BeginInvoke(new Func<T, bool>(this.InternRemove), item);
-
-            if (op.Result == null)
-            {
-                return false;
-            }
-
-            return (bool)op.Result;
-        }
-
-        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
         /// </returns>
         public IEnumerator<T> GetEnumerator()
-        {
-            return collection.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through a collection.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
         {
             return collection.GetEnumerator();
         }
@@ -222,6 +222,33 @@ namespace Rareform.Collections
         }
 
         /// <summary>
+        /// Removes the first occurrence of a specific object from the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
+        /// </summary>
+        /// <param name="item">The object to remove from the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.</param>
+        /// <returns>
+        /// true if <paramref name="item"/> was successfully removed from the <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="ThreadSafeObservableCollection&lt;T&gt;"/>.
+        /// </returns>
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="ThreadSafeObservableCollection&lt;T&gt;"/> is read-only.
+        ///   </exception>
+        public bool Remove(T item)
+        {
+            if (Thread.CurrentThread == this.dispatcher.Thread)
+            {
+                return this.InternRemove(item);
+            }
+
+            DispatcherOperation op = this.dispatcher.BeginInvoke(new Func<T, bool>(this.InternRemove), item);
+
+            if (op.Result == null)
+            {
+                return false;
+            }
+
+            return (bool)op.Result;
+        }
+
+        /// <summary>
         /// Removes the <see cref="T:System.Collections.Generic.IList`1"/> item at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index of the item to remove.</param>
@@ -245,41 +272,14 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Gets or sets the element at the specified index.
+        /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
-        /// The element at the specified index.
-        ///   </returns>
-        ///
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
-        ///   </exception>
-        ///
-        /// <exception cref="T:System.NotSupportedException">
-        /// The property is set and the <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
-        ///   </exception>
-        public T this[int index]
+        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            get
-            {
-                syncLock.AcquireReaderLock(Timeout.Infinite);
-                T result = collection[index];
-                syncLock.ReleaseReaderLock();
-                return result;
-            }
-
-            set
-            {
-                syncLock.AcquireWriterLock(Timeout.Infinite);
-
-                if (collection.Count == 0 || collection.Count <= index)
-                {
-                    syncLock.ReleaseWriterLock();
-                    return;
-                }
-
-                collection[index] = value;
-                syncLock.ReleaseWriterLock();
-            }
+            return collection.GetEnumerator();
         }
 
         /// <summary>
@@ -318,6 +318,25 @@ namespace Rareform.Collections
         }
 
         /// <summary>
+        /// Executes the intern Insert method.
+        /// </summary>
+        /// <param name="index">The index to insert the item.</param>
+        /// <param name="item">The item to insert.</param>
+        private void InternInsert(int index, T item)
+        {
+            this.syncLock.AcquireWriterLock(Timeout.Infinite);
+            this.collection.Insert(index, item);
+
+            if (this.CollectionChanged != null)
+            {
+                this.CollectionChanged(this,
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+            }
+
+            this.syncLock.ReleaseWriterLock();
+        }
+
+        /// <summary>
         /// Executes the intern Remove method
         /// </summary>
         /// <param name="item">The item to remove.</param>
@@ -347,25 +366,6 @@ namespace Rareform.Collections
             this.syncLock.ReleaseWriterLock();
 
             return result;
-        }
-
-        /// <summary>
-        /// Executes the intern Insert method.
-        /// </summary>
-        /// <param name="index">The index to insert the item.</param>
-        /// <param name="item">The item to insert.</param>
-        private void InternInsert(int index, T item)
-        {
-            this.syncLock.AcquireWriterLock(Timeout.Infinite);
-            this.collection.Insert(index, item);
-
-            if (this.CollectionChanged != null)
-            {
-                this.CollectionChanged(this,
-                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
-            }
-
-            this.syncLock.ReleaseWriterLock();
         }
 
         /// <summary>

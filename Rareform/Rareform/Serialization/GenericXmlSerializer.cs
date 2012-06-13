@@ -12,6 +12,38 @@ namespace Rareform.Serialization
     public static class GenericXmlSerializer
     {
         /// <summary>
+        /// Deserializes the collection from the specified path.
+        /// </summary>
+        /// <typeparam name="T">The type of the serialized items</typeparam>
+        /// <param name="path">The path of the file with the deserialized data.</param>
+        /// <returns>
+        /// The deserialized collection.
+        /// </returns>
+        public static ICollection<T> DeserializeCollection<T>(string path) where T : class, new()
+        {
+            if (path == null)
+                Throw.ArgumentNullException(() => path);
+
+            return InternDeserialize<Collection<T>>(path);
+        }
+
+        /// <summary>
+        /// Deserializes the item at the specified path.
+        /// </summary>
+        /// <typeparam name="T">The type of the serialized item</typeparam>
+        /// <param name="path">The path of the file with the serialized data.</param>
+        /// <returns>
+        /// The deserialized item.
+        /// </returns>
+        public static T DeserializeItem<T>(string path) where T : class, new()
+        {
+            if (path == null)
+                Throw.ArgumentNullException(() => path);
+
+            return InternDeserialize<T>(path);
+        }
+
+        /// <summary>
         /// Serializes the specified collection at the specified path.
         /// </summary>
         /// <typeparam name="T">Type of the items to serialize.</typeparam>
@@ -43,38 +75,6 @@ namespace Rareform.Serialization
                 Throw.ArgumentNullException(() => path);
 
             InternalSerialize(item, path);
-        }
-
-        /// <summary>
-        /// Deserializes the collection from the specified path.
-        /// </summary>
-        /// <typeparam name="T">The type of the serialized items</typeparam>
-        /// <param name="path">The path of the file with the deserialized data.</param>
-        /// <returns>
-        /// The deserialized collection.
-        /// </returns>
-        public static ICollection<T> DeserializeCollection<T>(string path) where T : class, new()
-        {
-            if (path == null)
-                Throw.ArgumentNullException(() => path);
-
-            return InternDeserialize<Collection<T>>(path);
-        }
-
-        /// <summary>
-        /// Deserializes the item at the specified path.
-        /// </summary>
-        /// <typeparam name="T">The type of the serialized item</typeparam>
-        /// <param name="path">The path of the file with the serialized data.</param>
-        /// <returns>
-        /// The deserialized item.
-        /// </returns>
-        public static T DeserializeItem<T>(string path) where T : class, new()
-        {
-            if (path == null)
-                Throw.ArgumentNullException(() => path);
-
-            return InternDeserialize<T>(path);
         }
 
         /// <summary>

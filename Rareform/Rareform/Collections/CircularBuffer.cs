@@ -14,14 +14,6 @@ namespace Rareform.Collections
         private int position;
 
         /// <summary>
-        /// Gets the capacity of the buffer.
-        /// </summary>
-        public int Capacity
-        {
-            get { return this.buffer.Capacity; }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CircularBuffer&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="capacity">The initial capacity of the <see cref="CircularBuffer{T}"/>.</param>
@@ -34,25 +26,33 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the collection.
+        /// Gets the capacity of the buffer.
         /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-        /// </returns>
-        public IEnumerator<T> GetEnumerator()
+        public int Capacity
         {
-            return buffer.GetEnumerator();
+            get { return this.buffer.Capacity; }
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through a collection.
+        /// Gets the number of elements contained in the <see cref="CircularBuffer{T}"/>.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
+        /// The number of elements contained in the <see cref="CircularBuffer{T}"/>.
+        ///   </returns>
+        public int Count
         {
-            return this.GetEnumerator();
+            get { return this.buffer.Count; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="CircularBuffer{T}"/> is read-only.
+        /// </summary>
+        /// <returns>
+        /// Returns always false.
+        ///   </returns>
+        bool ICollection<T>.IsReadOnly
+        {
+            get { return false; }
         }
 
         /// <summary>
@@ -121,6 +121,17 @@ namespace Rareform.Collections
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// </returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return buffer.GetEnumerator();
+        }
+
+        /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="CircularBuffer{T}"/>.
         /// </summary>
         /// <param name="item">The object to remove from the <see cref="CircularBuffer{T}"/>.</param>
@@ -136,25 +147,14 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="CircularBuffer{T}"/>.
+        /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
-        /// The number of elements contained in the <see cref="CircularBuffer{T}"/>.
-        ///   </returns>
-        public int Count
+        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            get { return this.buffer.Count; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="CircularBuffer{T}"/> is read-only.
-        /// </summary>
-        /// <returns>
-        /// Returns always false.
-        ///   </returns>
-        bool ICollection<T>.IsReadOnly
-        {
-            get { return false; }
+            return this.GetEnumerator();
         }
     }
 }

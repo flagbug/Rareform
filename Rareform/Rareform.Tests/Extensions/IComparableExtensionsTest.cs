@@ -1,6 +1,6 @@
 ﻿using System;
-using Rareform.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rareform.Extensions;
 using Rareform.Reflection;
 
 namespace Rareform.Tests.Extensions
@@ -8,18 +8,6 @@ namespace Rareform.Tests.Extensions
     [TestClass]
     public class IComparableExtensionsTest
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
-        {
-            int value = 10;
-            int limit = 9;
-
-            string parameterName = "value";
-
-            value.ThrowIfGreaterThan(limit, parameterName);
-        }
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
@@ -42,17 +30,6 @@ namespace Rareform.Tests.Extensions
         }
 
         [TestMethod]
-        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
-        {
-            int value = 9;
-            int limit = 10;
-
-            string parameterName = "value";
-
-            value.ThrowIfGreaterThan(limit, parameterName);
-        }
-
-        [TestMethod]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
         {
             int value = 9;
@@ -63,14 +40,25 @@ namespace Rareform.Tests.Extensions
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
+        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
+        {
+            int value = 10;
+            int limit = 9;
+
+            string parameterName = "value";
+
+            value.ThrowIfGreaterThan(limit, parameterName);
+        }
+
+        [TestMethod]
+        public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
             int value = 9;
             int limit = 10;
 
             string parameterName = "value";
 
-            value.ThrowIfLessThan(limit, parameterName);
+            value.ThrowIfGreaterThan(limit, parameterName);
         }
 
         [TestMethod]
@@ -95,6 +83,27 @@ namespace Rareform.Tests.Extensions
         }
 
         [TestMethod]
+        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
+        {
+            int value = 10;
+            int limit = 9;
+
+            value.ThrowIfLessThan(limit, () => value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
+        {
+            int value = 9;
+            int limit = 10;
+
+            string parameterName = "value";
+
+            value.ThrowIfLessThan(limit, parameterName);
+        }
+
+        [TestMethod]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
             int value = 10;
@@ -103,15 +112,6 @@ namespace Rareform.Tests.Extensions
             string parameterName = "value";
 
             value.ThrowIfLessThan(limit, parameterName);
-        }
-
-        [TestMethod]
-        public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
-        {
-            int value = 10;
-            int limit = 9;
-
-            value.ThrowIfLessThan(limit, () => value);
         }
     }
 }

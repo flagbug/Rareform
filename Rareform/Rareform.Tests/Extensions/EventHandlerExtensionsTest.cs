@@ -1,6 +1,6 @@
 ﻿using System;
-using Rareform.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rareform.Extensions;
 using Rareform.IO;
 
 namespace Rareform.Tests.Extensions
@@ -13,6 +13,7 @@ namespace Rareform.Tests.Extensions
     public class EventHandlerExtensionsTest
     {
         private event EventHandler TestEvent;
+
         private event EventHandler<DataTransferEventArgs> TestEventGeneric;
 
         [TestMethod]

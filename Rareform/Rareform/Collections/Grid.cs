@@ -15,24 +15,6 @@ namespace Rareform.Collections
         private readonly List<T> internFields;
 
         /// <summary>
-        /// Gets the number of rows.
-        /// </summary>
-        public int Rows { get; private set; }
-
-        /// <summary>
-        /// Gets the number of columns.
-        /// </summary>
-        public int Columns { get; private set; }
-
-        /// <summary>
-        /// Gets the number of cells.
-        /// </summary>
-        public int CellCount
-        {
-            get { return this.Rows * this.Columns; }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Grid&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="columns">The number of columns.</param>
@@ -52,6 +34,24 @@ namespace Rareform.Collections
 
             this.internFields.AddRange(Enumerable.Repeat(default(T), this.CellCount));
         }
+
+        /// <summary>
+        /// Gets the number of cells.
+        /// </summary>
+        public int CellCount
+        {
+            get { return this.Rows * this.Columns; }
+        }
+
+        /// <summary>
+        /// Gets the number of columns.
+        /// </summary>
+        public int Columns { get; private set; }
+
+        /// <summary>
+        /// Gets the number of rows.
+        /// </summary>
+        public int Rows { get; private set; }
 
         /// <summary>
         /// Gets or sets the element at the specified column and row.
@@ -103,6 +103,17 @@ namespace Rareform.Collections
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// </returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this.internFields.GetEnumerator();
+        }
+
+        /// <summary>
         /// Traverses each row of the grid item per item from the origin and executes the specified action.
         /// </summary>
         /// <param name="action">
@@ -121,17 +132,6 @@ namespace Rareform.Collections
                     action(column, row);
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-        /// </returns>
-        public IEnumerator<T> GetEnumerator()
-        {
-            return this.internFields.GetEnumerator();
         }
 
         /// <summary>

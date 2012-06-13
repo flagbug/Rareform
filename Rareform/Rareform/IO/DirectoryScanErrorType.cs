@@ -33,10 +33,12 @@ namespace Rareform.IO
         /// Indicates a security exception during the directory scan.
         /// </summary>
         SecurityError,
+
         /// <summary>
         /// Indicates an access exception during the directory scan.
         /// </summary>
         AccessError,
+
         /// <summary>
         /// Indicates that a directory could not be found during the scan.
         /// </summary>

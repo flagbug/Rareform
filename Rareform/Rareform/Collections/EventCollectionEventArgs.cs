@@ -9,12 +9,15 @@ namespace Rareform.Collections
     public class EventCollectionEventArgs<T> : EventArgs
     {
         /// <summary>
-        /// Gets the item that was affected.
+        /// Initializes a new instance of the <see cref="EventCollectionEventArgs&lt;T&gt;"/> class.
         /// </summary>
-        /// <value>
-        /// The item that was affected.
-        /// </value>
-        public T Item { get; private set; }
+        /// <param name="item">The item that was affected.</param>
+        /// <param name="index">The index of the item that was affected.</param>
+        public EventCollectionEventArgs(T item, int index)
+        {
+            this.Item = item;
+            this.Index = index;
+        }
 
         /// <summary>
         /// Gets the index of the item which was affected.
@@ -25,14 +28,11 @@ namespace Rareform.Collections
         public int Index { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventCollectionEventArgs&lt;T&gt;"/> class.
+        /// Gets the item that was affected.
         /// </summary>
-        /// <param name="item">The item that was affected.</param>
-        /// <param name="index">The index of the item that was affected.</param>
-        public EventCollectionEventArgs(T item, int index)
-        {
-            this.Item = item;
-            this.Index = index;
-        }
+        /// <value>
+        /// The item that was affected.
+        /// </value>
+        public T Item { get; private set; }
     }
 }

@@ -14,63 +14,6 @@ namespace Rareform.Tests.Collections
     public class GridTest
     {
         [TestMethod]
-        public void GridConstructor_NoParameters_Success()
-        {
-            int rows = 5;
-            int columns = 10;
-
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GridConstructor_ZeroRowsAsParameter_ThrowsArgumentOutOfRangeException()
-        {
-            int rows = 0;
-            int columns = 10;
-
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GridConstructor_ZeroColumnsAsParameter_ThrowsArgumentOutOfRangeException()
-        {
-            int rows = 5;
-            int columns = 0;
-
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
-        }
-
-        [TestMethod]
-        public void GridConstructor_StandardParameters_ValueTypesAreZero()
-        {
-            int rows = 5;
-            int columns = 10;
-
-            Grid<int> target = new Grid<int>(columns, rows);
-
-            foreach (int value in target)
-            {
-                Assert.AreEqual(0, value);
-            }
-        }
-
-        [TestMethod]
-        public void GridConstructor_StandardParameters_ReferenceTypesAreNull()
-        {
-            int rows = 5;
-            int columns = 10;
-
-            Grid<string> target = new Grid<string>(columns, rows);
-
-            foreach (string value in target)
-            {
-                Assert.AreEqual(null, value);
-            }
-        }
-
-        [TestMethod]
         public void CellCount_ConstructorWithStandardParameters_Succeed()
         {
             int rows = 5;
@@ -94,6 +37,82 @@ namespace Rareform.Tests.Collections
             int actual = target.Columns;
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DualIndexer_ConstructorWithStandardParameters_Succeed()
+        {
+            int rows = 5;
+            int columns = 10;
+
+            Grid<int> target = new Grid<int>(columns, rows);
+
+            int cell = 9;
+
+            int expected = 25;
+            int actual;
+
+            target[cell] = expected;
+            actual = target[cell];
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GridConstructor_NoParameters_Success()
+        {
+            int rows = 5;
+            int columns = 10;
+
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+        }
+
+        [TestMethod]
+        public void GridConstructor_StandardParameters_ReferenceTypesAreNull()
+        {
+            int rows = 5;
+            int columns = 10;
+
+            Grid<string> target = new Grid<string>(columns, rows);
+
+            foreach (string value in target)
+            {
+                Assert.AreEqual(null, value);
+            }
+        }
+
+        [TestMethod]
+        public void GridConstructor_StandardParameters_ValueTypesAreZero()
+        {
+            int rows = 5;
+            int columns = 10;
+
+            Grid<int> target = new Grid<int>(columns, rows);
+
+            foreach (int value in target)
+            {
+                Assert.AreEqual(0, value);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GridConstructor_ZeroColumnsAsParameter_ThrowsArgumentOutOfRangeException()
+        {
+            int rows = 5;
+            int columns = 0;
+
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GridConstructor_ZeroRowsAsParameter_ThrowsArgumentOutOfRangeException()
+        {
+            int rows = 0;
+            int columns = 10;
+
+            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
@@ -125,25 +144,6 @@ namespace Rareform.Tests.Collections
 
             target[column, row] = expected;
             actual = target[10];
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void DualIndexer_ConstructorWithStandardParameters_Succeed()
-        {
-            int rows = 5;
-            int columns = 10;
-
-            Grid<int> target = new Grid<int>(columns, rows);
-
-            int cell = 9;
-
-            int expected = 25;
-            int actual;
-
-            target[cell] = expected;
-            actual = target[cell];
 
             Assert.AreEqual(expected, actual);
         }

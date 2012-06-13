@@ -17,14 +17,20 @@ namespace Rareform.Tests.Reflection
         private int TestMember { get; set; }
 
         [TestMethod]
-        public void GetMemberNameLocalScopeTest()
+        public void GetMemberNameArgumentTest()
         {
-            int testMember = 0;
+            this.InternGetMemberNameArgumentTest(0);
+        }
+
+        [TestMethod]
+        public void GetMemberNameExpressionTest()
+        {
+            object testMember = new object();
 
             string expected = "testMember";
             string actual;
 
-            actual = Reflector.GetMemberName(() => testMember);
+            actual = this.InternGetMemberNameExpressionTest(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -41,6 +47,33 @@ namespace Rareform.Tests.Reflection
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetMemberNameInvalidArgumentTest()
+        {
+            Reflector.GetMemberName(() => this);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetMemberNameInvalidArgumentTest2()
+        {
+            Reflector.GetMemberName(() => new int());
+        }
+
+        [TestMethod]
+        public void GetMemberNameLocalScopeTest()
+        {
+            int testMember = 0;
+
+            string expected = "testMember";
+            string actual;
+
+            actual = Reflector.GetMemberName(() => testMember);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void GetMemberNamePropertyTest()
         {
             string expected = "TestMember";
@@ -49,12 +82,6 @@ namespace Rareform.Tests.Reflection
             actual = Reflector.GetMemberName(() => this.TestMember);
 
             Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void GetMemberNameArgumentTest()
-        {
-            this.InternGetMemberNameArgumentTest(0);
         }
 
         private void InternGetMemberNameArgumentTest(int testArgument)
@@ -67,36 +94,9 @@ namespace Rareform.Tests.Reflection
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void GetMemberNameExpressionTest()
-        {
-            object testMember = new object();
-
-            string expected = "testMember";
-            string actual;
-
-            actual = this.InternGetMemberNameExpressionTest(() => testMember);
-
-            Assert.AreEqual(expected, actual);
-        }
-
         private string InternGetMemberNameExpressionTest<T>(Expression<Func<T>> expression)
         {
             return Reflector.GetMemberName(expression);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetMemberNameInvalidArgumentTest()
-        {
-            Reflector.GetMemberName(() => this);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetMemberNameInvalidArgumentTest2()
-        {
-            Reflector.GetMemberName(() => new int());
         }
     }
 }

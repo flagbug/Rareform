@@ -1,6 +1,6 @@
 ﻿using System;
-using Rareform.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
 {
@@ -12,10 +12,17 @@ namespace Rareform.Tests.Extensions
     public class ClassExtensionsTest
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ThrowIfNull_NullObjectWithStringParameter_ThrowsArgumentNullExeption()
+        public void ThrowIfNull_NotNullObjectWithExpressionParameter_Success()
         {
-            object testObject = null;
+            object testObject = new object();
+
+            testObject.ThrowIfNull(() => testObject);
+        }
+
+        [TestMethod]
+        public void ThrowIfNull_NotNullObjectWithStringParameter_Success()
+        {
+            object testObject = new object();
 
             testObject.ThrowIfNull("testObject");
         }
@@ -30,19 +37,12 @@ namespace Rareform.Tests.Extensions
         }
 
         [TestMethod]
-        public void ThrowIfNull_NotNullObjectWithStringParameter_Success()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ThrowIfNull_NullObjectWithStringParameter_ThrowsArgumentNullExeption()
         {
-            object testObject = new object();
+            object testObject = null;
 
             testObject.ThrowIfNull("testObject");
-        }
-
-        [TestMethod]
-        public void ThrowIfNull_NotNullObjectWithExpressionParameter_Success()
-        {
-            object testObject = new object();
-
-            testObject.ThrowIfNull(() => testObject);
         }
     }
 }

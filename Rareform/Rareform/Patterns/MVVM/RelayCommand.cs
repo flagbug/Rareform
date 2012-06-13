@@ -11,8 +11,8 @@ namespace Rareform.Patterns.MVVM
     /// </summary>
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> execute;
         private readonly Predicate<object> canExecute;
+        private readonly Action<object> execute;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayCommand"/> class.
@@ -37,6 +37,15 @@ namespace Rareform.Patterns.MVVM
         }
 
         /// <summary>
+        /// Occurs when changes occur that affect whether or not the command should execute.
+        /// </summary>
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        /// <summary>
         /// Defines the method that determines whether the command can execute in its current state.
         /// </summary>
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
@@ -46,15 +55,6 @@ namespace Rareform.Patterns.MVVM
         public bool CanExecute(object parameter)
         {
             return this.canExecute == null || this.canExecute(parameter);
-        }
-
-        /// <summary>
-        /// Occurs when changes occur that affect whether or not the command should execute.
-        /// </summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
         }
 
         /// <summary>

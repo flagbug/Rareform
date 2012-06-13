@@ -10,18 +10,6 @@ namespace Rareform.WPF
     public static class PasswordBoxBinder
     {
         /// <summary>
-        /// The password property.
-        /// </summary>
-        public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.RegisterAttached
-                (
-                    "Password",
-                    typeof(string),
-                    typeof(PasswordBoxBinder),
-                    new FrameworkPropertyMetadata(string.Empty, OnPasswordChanged)
-                );
-
-        /// <summary>
         /// The attached property.
         /// </summary>
         public static readonly DependencyProperty AttachProperty =
@@ -33,6 +21,18 @@ namespace Rareform.WPF
                     new PropertyMetadata(false, Attach)
                 );
 
+        /// <summary>
+        /// The password property.
+        /// </summary>
+        public static readonly DependencyProperty PasswordProperty =
+            DependencyProperty.RegisterAttached
+                (
+                    "Password",
+                    typeof(string),
+                    typeof(PasswordBoxBinder),
+                    new FrameworkPropertyMetadata(string.Empty, OnPasswordChanged)
+                );
+
         private static readonly DependencyProperty IsUpdatingProperty =
             DependencyProperty.RegisterAttached
                 (
@@ -40,16 +40,6 @@ namespace Rareform.WPF
                     typeof(bool),
                     typeof(PasswordBoxBinder)
                 );
-
-        /// <summary>
-        /// Sets the attached value of the depency object.
-        /// </summary>
-        /// <param name="depencyObject">The depency object.</param>
-        /// <param name="value">The value.</param>
-        public static void SetAttach(DependencyObject depencyObject, bool value)
-        {
-            depencyObject.SetValue(AttachProperty, value);
-        }
 
         /// <summary>
         /// Gets the attached value of the depency object.
@@ -72,6 +62,16 @@ namespace Rareform.WPF
         }
 
         /// <summary>
+        /// Sets the attached value of the depency object.
+        /// </summary>
+        /// <param name="depencyObject">The depency object.</param>
+        /// <param name="value">The value.</param>
+        public static void SetAttach(DependencyObject depencyObject, bool value)
+        {
+            depencyObject.SetValue(AttachProperty, value);
+        }
+
+        /// <summary>
         /// Sets the password.
         /// </summary>
         /// <param name="depencyObject">The depency object.</param>
@@ -79,34 +79,6 @@ namespace Rareform.WPF
         public static void SetPassword(DependencyObject depencyObject, string value)
         {
             depencyObject.SetValue(PasswordProperty, value);
-        }
-
-        private static bool GetIsUpdating(DependencyObject depencyObject)
-        {
-            return (bool)depencyObject.GetValue(IsUpdatingProperty);
-        }
-
-        private static void SetIsUpdating(DependencyObject dp, bool value)
-        {
-            dp.SetValue(IsUpdatingProperty, value);
-        }
-
-        /// <summary>
-        /// Called when the password has changed.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
-        private static void OnPasswordChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var passwordBox = (PasswordBox)sender;
-            passwordBox.PasswordChanged -= PasswordChanged;
-
-            if (!GetIsUpdating(passwordBox))
-            {
-                passwordBox.Password = (string)e.NewValue;
-            }
-
-            passwordBox.PasswordChanged += PasswordChanged;
         }
 
         /// <summary>
@@ -132,6 +104,29 @@ namespace Rareform.WPF
             }
         }
 
+        private static bool GetIsUpdating(DependencyObject depencyObject)
+        {
+            return (bool)depencyObject.GetValue(IsUpdatingProperty);
+        }
+
+        /// <summary>
+        /// Called when the password has changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        private static void OnPasswordChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var passwordBox = (PasswordBox)sender;
+            passwordBox.PasswordChanged -= PasswordChanged;
+
+            if (!GetIsUpdating(passwordBox))
+            {
+                passwordBox.Password = (string)e.NewValue;
+            }
+
+            passwordBox.PasswordChanged += PasswordChanged;
+        }
+
         /// <summary>
         /// Handles the <see cref="PasswordBox.PasswordChanged"/> event.
         /// </summary>
@@ -144,6 +139,11 @@ namespace Rareform.WPF
             SetIsUpdating(passwordBox, true);
             SetPassword(passwordBox, passwordBox.Password);
             SetIsUpdating(passwordBox, false);
+        }
+
+        private static void SetIsUpdating(DependencyObject dp, bool value)
+        {
+            dp.SetValue(IsUpdatingProperty, value);
         }
     }
 }

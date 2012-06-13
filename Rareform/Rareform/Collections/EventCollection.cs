@@ -16,88 +16,6 @@ namespace Rareform.Collections
         private readonly List<T> internList;
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.
-        /// </summary>
-        /// <returns>
-        /// The number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.
-        ///   </returns>
-        public virtual int Count
-        {
-            get { return this.internList.Count; }
-        }
-
-        /// <summary>
-        /// Gets or sets the element at the specified index.
-        /// </summary>
-        /// <returns>
-        /// The element at the specified index.
-        ///   </returns>
-        ///
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
-        ///  </exception>
-        ///
-        /// <exception cref="T:System.NotSupportedException">
-        /// The property is set and the  <see cref="EventCollection&lt;T&gt;"/> is read-only.
-        ///   </exception>
-        public virtual T this[int index]
-        {
-            get { return this.internList[index]; }
-            set { this.internList[index] = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the capacity.
-        /// </summary>
-        /// <value>
-        /// The capacity.
-        /// </value>
-        public virtual int Capacity
-        {
-            get { return this.internList.Capacity; }
-            set { this.internList.Capacity = value; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="EventCollection&lt;T&gt;"/> is read-only.
-        /// </summary>
-        /// <returns>true if the  <see cref="EventCollection&lt;T&gt;"/> is read-only; otherwise, false.
-        ///   </returns>
-        public virtual bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        /// <summary>
-        /// Occurs when an item has been added.
-        /// </summary>
-        public event EventHandler<EventCollectionEventArgs<T>> ItemAdded;
-
-        /// <summary>
-        /// Occurs before an item has been added.
-        /// </summary>
-        public event EventHandler<EventCollectionEventArgs<T>> ItemAdding;
-
-        /// <summary>
-        /// Occurs when an item has been removed.
-        /// </summary>
-        public event EventHandler<EventCollectionEventArgs<T>> ItemRemoved;
-
-        /// <summary>
-        /// Occurs before an item has been removed.
-        /// </summary>
-        public event EventHandler<EventCollectionEventArgs<T>> ItemRemoving;
-
-        /// <summary>
-        /// Occurs when the <see cref="EventCollection&lt;T&gt;"/> has been cleared.
-        /// </summary>
-        public event EventHandler Cleared;
-
-        /// <summary>
-        /// Occurs before the <see cref="EventCollection&lt;T&gt;"/> has been cleared.
-        /// </summary>
-        public event EventHandler Clearing;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EventCollection&lt;T&gt;"/> class.
         /// </summary>
         public EventCollection()
@@ -123,6 +41,88 @@ namespace Rareform.Collections
         public EventCollection(int capacity)
             : this(new List<T>(capacity))
         { }
+
+        /// <summary>
+        /// Occurs when the <see cref="EventCollection&lt;T&gt;"/> has been cleared.
+        /// </summary>
+        public event EventHandler Cleared;
+
+        /// <summary>
+        /// Occurs before the <see cref="EventCollection&lt;T&gt;"/> has been cleared.
+        /// </summary>
+        public event EventHandler Clearing;
+
+        /// <summary>
+        /// Occurs when an item has been added.
+        /// </summary>
+        public event EventHandler<EventCollectionEventArgs<T>> ItemAdded;
+
+        /// <summary>
+        /// Occurs before an item has been added.
+        /// </summary>
+        public event EventHandler<EventCollectionEventArgs<T>> ItemAdding;
+
+        /// <summary>
+        /// Occurs when an item has been removed.
+        /// </summary>
+        public event EventHandler<EventCollectionEventArgs<T>> ItemRemoved;
+
+        /// <summary>
+        /// Occurs before an item has been removed.
+        /// </summary>
+        public event EventHandler<EventCollectionEventArgs<T>> ItemRemoving;
+
+        /// <summary>
+        /// Gets or sets the capacity.
+        /// </summary>
+        /// <value>
+        /// The capacity.
+        /// </value>
+        public virtual int Capacity
+        {
+            get { return this.internList.Capacity; }
+            set { this.internList.Capacity = value; }
+        }
+
+        /// <summary>
+        /// Gets the number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.
+        /// </summary>
+        /// <returns>
+        /// The number of elements contained in the <see cref="EventCollection&lt;T&gt;"/>.
+        ///   </returns>
+        public virtual int Count
+        {
+            get { return this.internList.Count; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="EventCollection&lt;T&gt;"/> is read-only.
+        /// </summary>
+        /// <returns>true if the  <see cref="EventCollection&lt;T&gt;"/> is read-only; otherwise, false.
+        ///   </returns>
+        public virtual bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        /// <summary>
+        /// Gets or sets the element at the specified index.
+        /// </summary>
+        /// <returns>
+        /// The element at the specified index.
+        ///   </returns>
+        ///
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
+        ///  </exception>
+        ///
+        /// <exception cref="T:System.NotSupportedException">
+        /// The property is set and the  <see cref="EventCollection&lt;T&gt;"/> is read-only.
+        ///   </exception>
+        public virtual T this[int index]
+        {
+            get { return this.internList[index]; }
+            set { this.internList[index] = value; }
+        }
 
         /// <summary>
         /// Adds an item to the <see cref="EventCollection&lt;T&gt;"/>.
@@ -182,6 +182,16 @@ namespace Rareform.Collections
         }
 
         /// <summary>
+        /// Copies the <see cref="EventCollection&lt;T&gt;"/> to the specified array, starting at the specified index.
+        /// </summary>
+        /// <param name="array">The destination array.</param>
+        /// <param name="arrayIndex">Index of the <see cref="EventCollection&lt;T&gt;"/> where the copy begins.</param>
+        public virtual void CopyTo(T[] array, int arrayIndex)
+        {
+            this.internList.CopyTo(array, arrayIndex);
+        }
+
+        /// <summary>
         /// Determines the index of a specific item in the <see cref="EventCollection&lt;T&gt;"/>.
         /// </summary>
         /// <param name="item">The object to locate in the <see cref="EventCollection&lt;T&gt;"/>.</param>
@@ -191,6 +201,26 @@ namespace Rareform.Collections
         public virtual int IndexOf(T item)
         {
             return this.internList.IndexOf(item);
+        }
+
+        /// <summary>
+        /// Inserts an item to the <see cref="EventCollection&lt;T&gt;"/> at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+        /// <param name="item">The object to insert into the <see cref="EventCollection&lt;T&gt;"/>.</param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
+        ///   </exception>
+        ///
+        /// <exception cref="T:System.NotSupportedException">
+        /// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+        ///   </exception>
+        public virtual void Insert(int index, T item)
+        {
+            this.OnItemAdding(new EventCollectionEventArgs<T>(item, index));
+
+            this.internList.Insert(index, item);
+
+            this.OnItemAdded(new EventCollectionEventArgs<T>(item, index));
         }
 
         /// <summary>
@@ -220,69 +250,6 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Copies the <see cref="EventCollection&lt;T&gt;"/> to the specified array, starting at the specified index.
-        /// </summary>
-        /// <param name="array">The destination array.</param>
-        /// <param name="arrayIndex">Index of the <see cref="EventCollection&lt;T&gt;"/> where the copy begins.</param>
-        public virtual void CopyTo(T[] array, int arrayIndex)
-        {
-            this.internList.CopyTo(array, arrayIndex);
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through a collection.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
-        /// </returns>
-        protected IEnumerator<T> GetEnumerator()
-        {
-            return this.internList.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Inserts an item to the <see cref="EventCollection&lt;T&gt;"/> at the specified index.
-        /// </summary>
-        /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
-        /// <param name="item">The object to insert into the <see cref="EventCollection&lt;T&gt;"/>.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="EventCollection&lt;T&gt;"/>.
-        ///   </exception>
-        ///
-        /// <exception cref="T:System.NotSupportedException">
-        /// The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
-        ///   </exception>
-        public virtual void Insert(int index, T item)
-        {
-            this.OnItemAdding(new EventCollectionEventArgs<T>(item, index));
-
-            this.internList.Insert(index, item);
-
-            this.OnItemAdded(new EventCollectionEventArgs<T>(item, index));
-        }
-
-        /// <summary>
         /// Removes the <see cref="EventCollection&lt;T&gt;"/> item at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index of the item to remove.</param>
@@ -301,6 +268,35 @@ namespace Rareform.Collections
             this.internList.RemoveAt(index);
 
             this.OnItemRemoved(new EventCollectionEventArgs<T>(item, index));
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// </returns>
+        protected IEnumerator<T> GetEnumerator()
+        {
+            return this.internList.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Cleared"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnCleared(EventArgs e)
+        {
+            this.Cleared.RaiseSafe(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Clearing"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnClearing(EventArgs e)
+        {
+            this.Clearing.RaiseSafe(this, e);
         }
 
         /// <summary>
@@ -340,21 +336,25 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Raises the <see cref="Cleared"/> event.
+        /// Returns an enumerator that iterates through a collection.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnCleared(EventArgs e)
+        /// <returns>
+        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            this.Cleared.RaiseSafe(this, e);
+            return this.GetEnumerator();
         }
 
         /// <summary>
-        /// Raises the <see cref="Clearing"/> event.
+        /// Returns an enumerator that iterates through the collection.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        protected virtual void OnClearing(EventArgs e)
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            this.Clearing.RaiseSafe(this, e);
+            return this.GetEnumerator();
         }
     }
 }
