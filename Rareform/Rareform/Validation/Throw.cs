@@ -36,10 +36,10 @@ namespace Rareform.Validation
             throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName), actualValue, message);
         }
 
-        public static void ArgumentOutOfRangeException<T>(Expression<Func<T>> parameterName, T actualValue, T limit)
+        public static void ArgumentOutOfRangeException<T>(Expression<Func<T>> parameterName, T limit)
         {
             throw new ArgumentOutOfRangeException(Reflector.GetMemberName(parameterName),
-                String.Format("Limit was {0}, actual value was {1}.", limit, actualValue));
+                String.Format("Limit was {0}, actual value was {1}.", limit, parameterName.Compile()()));
         }
 
         public static void ArgumentOutOfRangeException<T>(Expression<Func<T>> parameterName, string message)
