@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Rareform.Extensions;
+using Rareform.Validation;
 
 namespace Rareform.Collections
 {
@@ -27,7 +27,8 @@ namespace Rareform.Collections
         /// <param name="capacity">The initial capacity of the <see cref="CircularBuffer{T}"/>.</param>
         public CircularBuffer(int capacity)
         {
-            capacity.ThrowIfLessThan(1, "capacity");
+            if (capacity < 1)
+                Throw.ArgumentOutOfRangeException(() => capacity, 1);
 
             this.buffer = new List<T>(capacity);
         }

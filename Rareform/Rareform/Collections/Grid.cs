@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Rareform.Validation;
 
 namespace Rareform.Collections
 {
@@ -39,10 +40,10 @@ namespace Rareform.Collections
         public Grid(int columns, int rows)
         {
             if (columns < 1)
-                throw new ArgumentOutOfRangeException("columns", "columns must be greater than 1.");
+                Throw.ArgumentOutOfRangeException(() => columns, 1);
 
             if (rows < 1)
-                throw new ArgumentOutOfRangeException("rows", "rows must be greater than 1.");
+                Throw.ArgumentOutOfRangeException(() => rows, 1);
 
             this.Rows = rows;
             this.Columns = columns;
@@ -111,7 +112,7 @@ namespace Rareform.Collections
         public void Traverse(Action<int, int> action)
         {
             if (action == null)
-                throw new ArgumentNullException("action");
+                Throw.ArgumentNullException(() => action);
 
             for (int row = 0; row < this.Rows; row++)
             {

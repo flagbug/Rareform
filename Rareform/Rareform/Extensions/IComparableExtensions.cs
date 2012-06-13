@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Rareform.Reflection;
+using Rareform.Validation;
 
 namespace Rareform.Extensions
 {
@@ -17,7 +18,8 @@ namespace Rareform.Extensions
         /// <param name="parameterName">The name of the parameter.</param>
         public static void ThrowIfGreaterThan<T>(this IComparable<T> value, T limit, string parameterName)
         {
-            parameterName.ThrowIfNull(() => parameterName);
+            if (parameterName == null)
+                Throw.ArgumentNullException(() => parameterName);
 
             if (value.CompareTo(limit) == 1)
             {
@@ -39,7 +41,7 @@ namespace Rareform.Extensions
         public static void ThrowIfGreaterThan<T, TFunc>(this IComparable<T> value, T limit, Expression<Func<TFunc>> parameterName)
         {
             if (parameterName == null)
-                throw new ArgumentNullException("parameterName");
+                Throw.ArgumentNullException(() => parameterName);
 
             if (value.CompareTo(limit) == 1)
             {
@@ -56,7 +58,7 @@ namespace Rareform.Extensions
         public static void ThrowIfLessThan<T>(this IComparable<T> value, T limit, string parameterName)
         {
             if (parameterName == null)
-                throw new ArgumentNullException("parameterName");
+                Throw.ArgumentNullException(() => parameterName);
 
             if (value.CompareTo(limit) == -1)
             {
@@ -78,7 +80,7 @@ namespace Rareform.Extensions
         public static void ThrowIfLessThan<T, TFunc>(this IComparable<T> value, T limit, Expression<Func<TFunc>> parameterName)
         {
             if (parameterName == null)
-                throw new ArgumentNullException("parameterName");
+                Throw.ArgumentNullException(() => parameterName);
 
             if (value.CompareTo(limit) == -1)
             {

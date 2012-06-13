@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Rareform.Validation;
 
 namespace Rareform.Patterns.MVVM
 {
@@ -29,7 +30,7 @@ namespace Rareform.Patterns.MVVM
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
-                throw new ArgumentNullException("execute");
+                Throw.ArgumentNullException(() => execute);
 
             this.execute = execute;
             this.canExecute = canExecute;

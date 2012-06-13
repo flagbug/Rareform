@@ -26,6 +26,7 @@ namespace Rareform.Reflection
         ///   </example>
         public static string GetMemberName<T>(Expression<Func<T>> expression)
         {
+            // Don't replace the argument checks with any handy exception method, it would cause an infinite loop
             if (expression == null)
                 throw new ArgumentNullException("expression");
 

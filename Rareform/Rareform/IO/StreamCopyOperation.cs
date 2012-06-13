@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using Rareform.Extensions;
+using Rareform.Validation;
 
 namespace Rareform.IO
 {
@@ -83,7 +84,8 @@ namespace Rareform.IO
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
-            updateInterval.ThrowIfLessThan(1, "updateInterval");
+            if (updateInterval < 1)
+                Throw.ArgumentOutOfRangeException(() => updateInterval, 1);
 
             this.UpdateInterval = updateInterval;
         }
@@ -111,12 +113,13 @@ namespace Rareform.IO
         private StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize)
         {
             if (sourceStream == null)
-                throw new ArgumentNullException("sourceStream");
+                Throw.ArgumentNullException(() => sourceStream);
 
             if (targetStream == null)
-                throw new ArgumentNullException("targetStream");
+                Throw.ArgumentNullException(() => targetStream);
 
-            bufferSize.ThrowIfLessThan(1, "bufferSize");
+            if (bufferSize < 1)
+                Throw.ArgumentOutOfRangeException(() => bufferSize, 1);
 
             this.SourceStream = sourceStream;
             this.TargetStream = targetStream;

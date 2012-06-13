@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Rareform.Validation;
 
 namespace Rareform.Collections
 {
@@ -33,7 +34,7 @@ namespace Rareform.Collections
         public void ReadXml(XmlReader reader)
         {
             if (reader == null)
-                throw new ArgumentNullException("reader");
+                Throw.ArgumentNullException(() => reader);
 
             var keySerializer = new XmlSerializer(typeof(TKey));
             var valueSerializer = new XmlSerializer(typeof(TValue));
@@ -70,7 +71,7 @@ namespace Rareform.Collections
         public void WriteXml(XmlWriter writer)
         {
             if (writer == null)
-                throw new ArgumentNullException("writer");
+                Throw.ArgumentNullException(() => writer);
 
             var keySerializer = new XmlSerializer(typeof(TKey));
             var valueSerializer = new XmlSerializer(typeof(TValue));

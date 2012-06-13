@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Rareform.Validation;
 
 namespace Rareform.Extensions
 {
@@ -22,10 +23,10 @@ namespace Rareform.Extensions
         public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, params TSource[] items)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                Throw.ArgumentNullException(() => source);
 
             if (items == null)
-                throw new ArgumentNullException("items");
+                Throw.ArgumentNullException(() => items);
 
             return items.Any(source.Contains);
         }
@@ -43,10 +44,10 @@ namespace Rareform.Extensions
         public static bool ContainsAny<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> items)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                Throw.ArgumentNullException(() => source);
 
             if (items == null)
-                throw new ArgumentNullException("items");
+                Throw.ArgumentNullException(() => items);
 
             return items.Any(source.Contains);
         }
@@ -60,10 +61,10 @@ namespace Rareform.Extensions
         public static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                Throw.ArgumentNullException(() => source);
 
             if (action == null)
-                throw new ArgumentNullException("action");
+                Throw.ArgumentNullException(() => action);
 
             foreach (TSource item in source)
             {
@@ -82,10 +83,10 @@ namespace Rareform.Extensions
         public static IEnumerable<TSource> TakeWhileInclusive<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
             if (source == null)
-                throw new ArgumentNullException("source");
+                Throw.ArgumentNullException(() => source);
 
             if (predicate == null)
-                throw new ArgumentNullException("predicate");
+                Throw.ArgumentNullException(() => predicate);
 
             foreach (TSource item in source)
             {

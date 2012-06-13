@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using Rareform.Validation;
 
 namespace Rareform.Patterns.MVVM
 {
@@ -24,7 +25,7 @@ namespace Rareform.Patterns.MVVM
         protected void OnPropertyChanged<TValue>(Expression<Func<T, TValue>> propertySelector)
         {
             if (propertySelector == null)
-                throw new ArgumentNullException("propertySelector");
+                Throw.ArgumentNullException(() => propertySelector);
 
             if (this.PropertyChanged != null)
             {

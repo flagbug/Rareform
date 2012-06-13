@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Rareform.Extensions;
+using Rareform.Validation;
 
 namespace Rareform.Collections
 {
@@ -110,7 +111,7 @@ namespace Rareform.Collections
         public EventCollection(IEnumerable<T> collection)
         {
             if (collection == null)
-                throw new ArgumentNullException("collection");
+                Throw.ArgumentNullException(() => collection);
 
             this.internList = new List<T>(collection);
         }
@@ -145,7 +146,7 @@ namespace Rareform.Collections
         public virtual void AddRange(IEnumerable<T> collection)
         {
             if (collection == null)
-                throw new ArgumentNullException("collection");
+                Throw.ArgumentNullException(() => collection);
 
             foreach (T item in collection)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Rareform.Validation;
 
 namespace Rareform.Extensions
 {
@@ -25,6 +26,9 @@ namespace Rareform.Extensions
         /// </example>
         public static string ToSizeString(this long size)
         {
+            if (size < 0)
+                Throw.ArgumentOutOfRangeException(() => size, 0);
+
             string[] suffix = { "B", "KB", "MB", "GB", "TB" };
             int i;
             double dblSByte = size;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Rareform.Extensions;
+using Rareform.Validation;
 
 namespace Rareform.IO
 {
@@ -53,8 +53,11 @@ namespace Rareform.IO
         /// <param name="transferredBytes">The transferred bytes.</param>
         public DataTransferEventArgs(long totalBytes, long transferredBytes)
         {
-            totalBytes.ThrowIfLessThan(1, "totalBytes");
-            transferredBytes.ThrowIfLessThan(1, "transferredBytes");
+            if (totalBytes < 1)
+                Throw.ArgumentOutOfRangeException(() => totalBytes, 1);
+
+            if (transferredBytes < 1)
+                Throw.ArgumentOutOfRangeException(() => transferredBytes, 1);
 
             this.TotalBytes = totalBytes;
             this.TransferredBytes = transferredBytes;

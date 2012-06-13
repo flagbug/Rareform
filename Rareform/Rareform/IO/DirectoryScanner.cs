@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using Rareform.Extensions;
+using Rareform.Validation;
 
 namespace Rareform.IO
 {
@@ -71,7 +72,7 @@ namespace Rareform.IO
         public DirectoryScanner(string path)
         {
             if (path == null)
-                throw new ArgumentNullException("path");
+                Throw.ArgumentNullException(() => path);
 
             this.DirectoryPath = path;
             this.filesFound = new List<FileInfo>();
@@ -147,7 +148,7 @@ namespace Rareform.IO
         private void ScanDirectories(string rootPath)
         {
             if (rootPath == null)
-                throw new ArgumentNullException("rootPath");
+                Throw.ArgumentNullException(() => rootPath);
 
             if (this.IsStopped) { return; }
 
