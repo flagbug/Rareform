@@ -42,6 +42,7 @@
     <Compile Include="Collections\Grid.cs" />
     <Compile Include="Collections\SerializableDictionary.cs" />
     <Compile Include="Collections\ThreadSafeObservableCollection.cs" />
+    <Compile Include="Validation\Throw.cs" />
     <Compile Include="Extensions\ClassExtensions.cs" />
     <Compile Include="Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Extensions\IComparableExtensions.cs" />
