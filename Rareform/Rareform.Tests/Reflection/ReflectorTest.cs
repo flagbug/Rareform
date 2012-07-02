@@ -12,25 +12,24 @@ namespace Rareform.Tests.Reflection
     [TestClass]
     public class ReflectorTest
     {
-        private int testMember = 0;
+        private int testMember;
 
-        private int TestMember { get; set; }
+        private int TestProperty { get; set; }
 
         [TestMethod]
         public void GetMemberNameArgumentTest()
         {
-            this.InternGetMemberNameArgumentTest(0);
+            InternGetMemberNameArgumentTest(0);
         }
 
         [TestMethod]
         public void GetMemberNameExpressionTest()
         {
-            object testMember = new object();
+            var testMember = new object();
 
-            string expected = "testMember";
-            string actual;
+            const string expected = "testMember";
 
-            actual = this.InternGetMemberNameExpressionTest(() => testMember);
+            string actual = InternGetMemberNameExpressionTest(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -38,10 +37,9 @@ namespace Rareform.Tests.Reflection
         [TestMethod]
         public void GetMemberNameFieldTest()
         {
-            string expected = "testMember";
-            string actual;
+            const string expected = "testMember";
 
-            actual = Reflector.GetMemberName(() => this.testMember);
+            string actual = Reflector.GetMemberName(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -63,12 +61,11 @@ namespace Rareform.Tests.Reflection
         [TestMethod]
         public void GetMemberNameLocalScopeTest()
         {
-            int testMember = 0;
+            int testMember = 0; // Do not make const! Reflection doesn't work properly with constant types.
 
-            string expected = "testMember";
-            string actual;
+            const string expected = "testMember";
 
-            actual = Reflector.GetMemberName(() => testMember);
+            string actual = Reflector.GetMemberName(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -76,25 +73,23 @@ namespace Rareform.Tests.Reflection
         [TestMethod]
         public void GetMemberNamePropertyTest()
         {
-            string expected = "TestMember";
-            string actual;
+            const string expected = "TestProperty";
 
-            actual = Reflector.GetMemberName(() => this.TestMember);
+            string actual = Reflector.GetMemberName(() => this.TestProperty);
 
             Assert.AreEqual(expected, actual);
         }
 
-        private void InternGetMemberNameArgumentTest(int testArgument)
+        private static void InternGetMemberNameArgumentTest(int testArgument)
         {
-            string expected = "testArgument";
-            string actual;
+            const string expected = "testArgument";
 
-            actual = Reflector.GetMemberName(() => testArgument);
+            string actual = Reflector.GetMemberName(() => testArgument);
 
             Assert.AreEqual(expected, actual);
         }
 
-        private string InternGetMemberNameExpressionTest<T>(Expression<Func<T>> expression)
+        private static string InternGetMemberNameExpressionTest<T>(Expression<Func<T>> expression)
         {
             return Reflector.GetMemberName(expression);
         }

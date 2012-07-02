@@ -17,7 +17,7 @@ namespace Rareform.Tests.Extensions
         private event EventHandler<DataTransferEventArgs> TestEventGeneric;
 
         [TestMethod]
-        public void RaiseSafeTest()
+        public void RaiseSafe_EventHasSubscriber_EventIsRaised()
         {
             bool handled = false;
 
@@ -29,7 +29,7 @@ namespace Rareform.Tests.Extensions
         }
 
         [TestMethod]
-        public void RaiseSafeTestGeneric()
+        public void RaiseSafeGeneric_EventHasSubscriver_EventIsRaised()
         {
             bool handled = false;
 

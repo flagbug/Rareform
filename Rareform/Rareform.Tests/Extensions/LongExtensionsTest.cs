@@ -13,11 +13,10 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ToSizeString_ParameterGigaIsByte_ReturnsGigaByteString()
         {
-            long size = 1024 * 1024 * 1024;
-            string expected = "1,00 GB";
-            string actual;
+            const long size = 1024 * 1024 * 1024;
+            const string expected = "1,00 GB";
 
-            actual = size.ToSizeString();
+            string actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -25,11 +24,10 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ToSizeString_ParameterIsByte_ReturnsByteString()
         {
-            long size = 512;
-            string expected = "512 B";
-            string actual;
+            const long size = 512;
+            const string expected = "512 B";
 
-            actual = size.ToSizeString();
+            string actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -37,11 +35,10 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ToSizeString_ParameterIsKiloByte_ReturnsKiloByteString()
         {
-            long size = 1024;
-            string expected = "1,00 KB";
-            string actual;
+            const long size = 1024;
+            const string expected = "1,00 KB";
 
-            actual = size.ToSizeString();
+            string actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -49,11 +46,10 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ToSizeString_ParameterIsMegaByte_ReturnsMegaByteString()
         {
-            long size = 1024 * 1024;
-            string expected = "1,00 MB";
-            string actual;
+            const long size = 1024 * 1024;
+            const string expected = "1,00 MB";
 
-            actual = size.ToSizeString();
+            string actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -61,12 +57,11 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ToSizeString_ParameterIsTeraByte_ReturnsTeraByteString()
         {
-            long size = 1024L * 1024L * 1024L * 1024L;
+            const long size = 1024L * 1024L * 1024L * 1024L;
 
-            string expected = "1,00 TB";
-            string actual;
+            const string expected = "1,00 TB";
 
-            actual = size.ToSizeString();
+            string actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }

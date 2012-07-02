@@ -19,10 +19,9 @@ namespace Rareform.Tests.Extensions
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
             IEnumerable<int> items = new List<int> { 6, 7 };
 
-            bool expected = false;
-            bool actual;
+            const bool expected = false;
 
-            actual = value.ContainsAny(items);
+            bool actual = value.ContainsAny(items);
 
             Assert.AreEqual(expected, actual);
         }
@@ -33,10 +32,9 @@ namespace Rareform.Tests.Extensions
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
             IEnumerable<int> items = new List<int> { 1, 2 };
 
-            bool expected = true;
-            bool actual;
+            const bool expected = true;
 
-            actual = value.ContainsAny(items);
+            bool actual = value.ContainsAny(items);
 
             Assert.AreEqual(expected, actual);
         }
@@ -46,9 +44,8 @@ namespace Rareform.Tests.Extensions
         public void ContainsAny_NullAsParameter_ThrowsArgumentNullExeption()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
-            IEnumerable<int> items = null;
 
-            value.ContainsAny(items);
+            value.ContainsAny(null);
         }
 
         [TestMethod]
@@ -56,10 +53,9 @@ namespace Rareform.Tests.Extensions
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
-            bool expected = false;
-            bool actual;
+            const bool expected = false;
 
-            actual = value.ContainsAny(6, 7);
+            bool actual = value.ContainsAny(6, 7);
 
             Assert.AreEqual(expected, actual);
         }
@@ -69,10 +65,9 @@ namespace Rareform.Tests.Extensions
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
-            bool expected = true;
-            bool actual;
+            const bool expected = true;
 
-            actual = value.ContainsAny(1, 2);
+            bool actual = value.ContainsAny(1, 2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -93,10 +88,7 @@ namespace Rareform.Tests.Extensions
 
             var actual = new List<int>();
 
-            expected.ForEach((param) =>
-                {
-                    actual.Add(param);
-                });
+            expected.ForEach(actual.Add);
 
             Assert.IsTrue(expected.SequenceEqual(actual));
         }

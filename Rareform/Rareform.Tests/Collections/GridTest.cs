@@ -16,11 +16,11 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void CellCount_ConstructorWithStandardParameters_Succeed()
         {
-            int rows = 5;
-            int columns = 10;
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+            const int rows = 5;
+            const int columns = 10;
+            var target = new Grid<GenericParameterHelper>(columns, rows);
 
-            int expected = 50;
+            const int expected = 50;
             int actual = target.CellCount;
 
             Assert.AreEqual(expected, actual);
@@ -29,11 +29,11 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void ColumnCount_ConstructorWithStandardParameters_Succeed()
         {
-            int rows = 5;
-            int columns = 10;
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+            const int rows = 5;
+            const int columns = 10;
+            var target = new Grid<GenericParameterHelper>(columns, rows);
 
-            int expected = 10;
+            const int expected = 10;
             int actual = target.Columns;
 
             Assert.AreEqual(expected, actual);
@@ -42,18 +42,17 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void DualIndexer_ConstructorWithStandardParameters_Succeed()
         {
-            int rows = 5;
-            int columns = 10;
+            const int rows = 5;
+            const int columns = 10;
 
-            Grid<int> target = new Grid<int>(columns, rows);
+            var target = new Grid<int>(columns, rows);
 
-            int cell = 9;
+            const int cell = 9;
 
-            int expected = 25;
-            int actual;
+            const int expected = 25;
 
             target[cell] = expected;
-            actual = target[cell];
+            int actual = target[cell];
 
             Assert.AreEqual(expected, actual);
         }
@@ -61,19 +60,19 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void GridConstructor_NoParameters_Success()
         {
-            int rows = 5;
-            int columns = 10;
+            const int rows = 5;
+            const int columns = 10;
 
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+            new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
         public void GridConstructor_StandardParameters_ReferenceTypesAreNull()
         {
-            int rows = 5;
-            int columns = 10;
+            const int rows = 5;
+            const int columns = 10;
 
-            Grid<string> target = new Grid<string>(columns, rows);
+            var target = new Grid<string>(columns, rows);
 
             foreach (string value in target)
             {
@@ -84,10 +83,10 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void GridConstructor_StandardParameters_ValueTypesAreZero()
         {
-            int rows = 5;
-            int columns = 10;
+            const int rows = 5;
+            const int columns = 10;
 
-            Grid<int> target = new Grid<int>(columns, rows);
+            var target = new Grid<int>(columns, rows);
 
             foreach (int value in target)
             {
@@ -99,30 +98,30 @@ namespace Rareform.Tests.Collections
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GridConstructor_ZeroColumnsAsParameter_ThrowsArgumentOutOfRangeException()
         {
-            int rows = 5;
-            int columns = 0;
+            const int rows = 5;
+            const int columns = 0;
 
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+            new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GridConstructor_ZeroRowsAsParameter_ThrowsArgumentOutOfRangeException()
         {
-            int rows = 0;
-            int columns = 10;
+            const int rows = 0;
+            const int columns = 10;
 
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+            new Grid<GenericParameterHelper>(columns, rows);
         }
 
         [TestMethod]
         public void RowCount_ConstructorWithStandardParameters_Succeed()
         {
-            int rows = 5;
-            int columns = 10;
-            Grid<GenericParameterHelper> target = new Grid<GenericParameterHelper>(columns, rows);
+            const int rows = 5;
+            const int columns = 10;
+            var target = new Grid<GenericParameterHelper>(columns, rows);
 
-            int expected = 5;
+            const int expected = 5;
             int actual = target.Rows;
 
             Assert.AreEqual(expected, actual);
@@ -131,19 +130,18 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void SingleIndexer_ConstructorWithStandardParameters_Succeed()
         {
-            int rows = 5;
-            int columns = 4;
+            const int rows = 5;
+            const int columns = 4;
 
-            Grid<int> target = new Grid<int>(columns, rows);
+            var target = new Grid<int>(columns, rows);
 
-            int row = 2;
-            int column = 2;
+            const int row = 2;
+            const int column = 2;
 
-            int expected = 25;
-            int actual;
+            const int expected = 25;
 
             target[column, row] = expected;
-            actual = target[10];
+            int actual = target[10];
 
             Assert.AreEqual(expected, actual);
         }
@@ -151,10 +149,10 @@ namespace Rareform.Tests.Collections
         [TestMethod]
         public void Traverse_ConstructorWithStandardParameters_OrderIsEqual()
         {
-            List<int> expected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-            List<int> actual = new List<int>();
+            var expected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+            var actual = new List<int>();
 
-            Grid<int> target = new Grid<int>(3, 4);
+            var target = new Grid<int>(3, 4);
             target[0, 0] = 0;
             target[1, 0] = 1;
             target[2, 0] = 2;

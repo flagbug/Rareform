@@ -12,8 +12,8 @@ namespace Rareform.Tests.Extensions
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
-            int value = 10;
-            int limit = 9;
+            int value = 10; // Do not make const! Reflection doesn't work properly with constant types.
+            const int limit = 9;
 
             try
             {
@@ -32,8 +32,8 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
         {
-            int value = 9;
-            int limit = 10;
+            const int value = 9;
+            const int limit = 10;
 
             value.ThrowIfGreaterThan(limit, () => value);
         }
@@ -42,10 +42,10 @@ namespace Rareform.Tests.Extensions
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
         {
-            int value = 10;
-            int limit = 9;
+            const int value = 10;
+            const int limit = 9;
 
-            string parameterName = "value";
+            const string parameterName = "value";
 
             value.ThrowIfGreaterThan(limit, parameterName);
         }
@@ -53,10 +53,10 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
-            int value = 9;
-            int limit = 10;
+            const int value = 9;
+            const int limit = 10;
 
-            string parameterName = "value";
+            const string parameterName = "value";
 
             value.ThrowIfGreaterThan(limit, parameterName);
         }
@@ -65,8 +65,8 @@ namespace Rareform.Tests.Extensions
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
-            int value = 9;
-            int limit = 10;
+            int value = 9; // Do not make const! Reflection doesn't work properly with constant types.
+            const int limit = 10;
 
             try
             {
@@ -85,8 +85,8 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsNothing()
         {
-            int value = 10;
-            int limit = 9;
+            const int value = 10;
+            const int limit = 9;
 
             value.ThrowIfLessThan(limit, () => value);
         }
@@ -95,10 +95,10 @@ namespace Rareform.Tests.Extensions
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsArgumentOutOfRangeException()
         {
-            int value = 9;
-            int limit = 10;
+            const int value = 9;
+            const int limit = 10;
 
-            string parameterName = "value";
+            const string parameterName = "value";
 
             value.ThrowIfLessThan(limit, parameterName);
         }
@@ -106,10 +106,10 @@ namespace Rareform.Tests.Extensions
         [TestMethod]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsString_ThrowsNothing()
         {
-            int value = 10;
-            int limit = 9;
+            const int value = 10;
+            const int limit = 9;
 
-            string parameterName = "value";
+            const string parameterName = "value";
 
             value.ThrowIfLessThan(limit, parameterName);
         }

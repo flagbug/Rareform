@@ -12,17 +12,17 @@ namespace Rareform.Tests.Extensions
     public class ClassExtensionsTest
     {
         [TestMethod]
-        public void ThrowIfNull_NotNullObjectWithExpressionParameter_Success()
+        public void ThrowIfNull_NotNullObjectWithExpressionParameter_NoException()
         {
-            object testObject = new object();
+            var testObject = new object();
 
             testObject.ThrowIfNull(() => testObject);
         }
 
         [TestMethod]
-        public void ThrowIfNull_NotNullObjectWithStringParameter_Success()
+        public void ThrowIfNull_NotNullObjectWithStringParameter_NoException()
         {
-            object testObject = new object();
+            var testObject = new object();
 
             testObject.ThrowIfNull("testObject");
         }

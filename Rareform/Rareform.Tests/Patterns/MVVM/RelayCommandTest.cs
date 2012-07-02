@@ -14,21 +14,16 @@ namespace Rareform.Tests.Patterns.MVVM
         [TestMethod]
         public void CanExecute_PredicateReturnsTrue_ReturnsTrue()
         {
-            bool expected = true;
-            bool actual;
+            const bool expected = true;
 
             Action<object> execute = (arg) =>
-                {
-                };
+                { };
 
-            Predicate<object> canExecute = (arg) =>
-                {
-                    return true;
-                };
+            Predicate<object> canExecute = (arg) => true;
 
-            RelayCommand target = new RelayCommand(execute, canExecute);
+            var target = new RelayCommand(execute, canExecute);
 
-            actual = target.CanExecute(null);
+            bool actual = target.CanExecute(null);
 
             Assert.AreEqual(expected, actual);
         }
@@ -36,7 +31,7 @@ namespace Rareform.Tests.Patterns.MVVM
         [TestMethod]
         public void Execute_CanExecuteIsTrue_Succeeds()
         {
-            bool expected = true;
+            const bool expected = true;
             bool actual;
 
             Action<object> execute = (arg) =>
@@ -44,12 +39,9 @@ namespace Rareform.Tests.Patterns.MVVM
                 actual = true;
             };
 
-            Predicate<object> canExecute = (arg) =>
-            {
-                return true;
-            };
+            Predicate<object> canExecute = (arg) => true;
 
-            RelayCommand target = new RelayCommand(execute, canExecute);
+            var target = new RelayCommand(execute, canExecute);
 
             actual = target.CanExecute(null);
 
