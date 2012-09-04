@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.Extensions;
 using Rareform.IO;
+using System;
 
 namespace Rareform.Tests.Extensions
 {
@@ -9,14 +9,14 @@ namespace Rareform.Tests.Extensions
     ///This is a test class for EventHandlerExtensionsTest and is intended
     ///to contain all EventHandlerExtensionsTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class EventHandlerExtensionsTest
     {
         private event EventHandler TestEvent;
 
         private event EventHandler<DataTransferEventArgs> TestEventGeneric;
 
-        [TestMethod]
+        [Test]
         public void RaiseSafe_EventHasSubscriber_EventIsRaised()
         {
             bool handled = false;
@@ -28,7 +28,7 @@ namespace Rareform.Tests.Extensions
             Assert.IsTrue(handled);
         }
 
-        [TestMethod]
+        [Test]
         public void RaiseSafeGeneric_EventHasSubscriver_EventIsRaised()
         {
             bool handled = false;

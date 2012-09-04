@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.Extensions;
+using System;
 
 namespace Rareform.Tests.Extensions
 {
@@ -8,10 +8,10 @@ namespace Rareform.Tests.Extensions
     ///This is a test class for ClassExtensionsTest and is intended
     ///to contain all ClassExtensionsTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class ClassExtensionsTest
     {
-        [TestMethod]
+        [Test]
         public void ThrowIfNull_NotNullObjectWithExpressionParameter_NoException()
         {
             var testObject = new object();
@@ -19,7 +19,7 @@ namespace Rareform.Tests.Extensions
             testObject.ThrowIfNull(() => testObject);
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfNull_NotNullObjectWithStringParameter_NoException()
         {
             var testObject = new object();
@@ -27,22 +27,20 @@ namespace Rareform.Tests.Extensions
             testObject.ThrowIfNull("testObject");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void ThrowIfNull_NullObjectWithExpressionParameter_ThrowsArgumentNullExeption()
         {
             object testObject = null;
 
-            testObject.ThrowIfNull(() => testObject);
+            Assert.Throws<ArgumentNullException>(() => testObject.ThrowIfNull(() => testObject));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void ThrowIfNull_NullObjectWithStringParameter_ThrowsArgumentNullExeption()
         {
             object testObject = null;
 
-            testObject.ThrowIfNull("testObject");
+            Assert.Throws<ArgumentNullException>(() => testObject.ThrowIfNull("testObject"));
         }
     }
 }

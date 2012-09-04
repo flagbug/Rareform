@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq.Expressions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.Reflection;
+using System;
+using System.Linq.Expressions;
 
 namespace Rareform.Tests.Reflection
 {
@@ -9,20 +9,20 @@ namespace Rareform.Tests.Reflection
     ///This is a test class for ReflectionUtilitiesTest and is intended
     ///to contain all ReflectionUtilitiesTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class ReflectorTest
     {
         private int testMember;
 
         private int TestProperty { get; set; }
 
-        [TestMethod]
+        [Test]
         public void GetMemberNameArgumentTest()
         {
             InternGetMemberNameArgumentTest(0);
         }
 
-        [TestMethod]
+        [Test]
         public void GetMemberNameExpressionTest()
         {
             var testMember = new object();
@@ -34,7 +34,7 @@ namespace Rareform.Tests.Reflection
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void GetMemberNameFieldTest()
         {
             const string expected = "testMember";
@@ -44,21 +44,19 @@ namespace Rareform.Tests.Reflection
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void GetMemberNameInvalidArgumentTest()
         {
-            Reflector.GetMemberName(() => this);
+            Assert.Throws<ArgumentException>(() => Reflector.GetMemberName(() => this));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void GetMemberNameInvalidArgumentTest2()
         {
-            Reflector.GetMemberName(() => new int());
+            Assert.Throws<ArgumentException>(() => Reflector.GetMemberName(() => new int()));
         }
 
-        [TestMethod]
+        [Test]
         public void GetMemberNameLocalScopeTest()
         {
             int testMember = 0; // Do not make const! Reflection doesn't work properly with constant types.
@@ -70,7 +68,7 @@ namespace Rareform.Tests.Reflection
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void GetMemberNamePropertyTest()
         {
             const string expected = "TestProperty";

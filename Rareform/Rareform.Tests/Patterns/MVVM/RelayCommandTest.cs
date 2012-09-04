@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.Patterns.MVVM;
+using System;
 
 namespace Rareform.Tests.Patterns.MVVM
 {
@@ -8,10 +8,10 @@ namespace Rareform.Tests.Patterns.MVVM
     ///This is a test class for RelayCommandTest and is intended
     ///to contain all RelayCommandTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class RelayCommandTest
     {
-        [TestMethod]
+        [Test]
         public void CanExecute_PredicateReturnsTrue_ReturnsTrue()
         {
             const bool expected = true;
@@ -28,7 +28,7 @@ namespace Rareform.Tests.Patterns.MVVM
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void Execute_CanExecuteIsTrue_Succeeds()
         {
             const bool expected = true;

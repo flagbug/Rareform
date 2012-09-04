@@ -1,8 +1,9 @@
-﻿using System;
+﻿using NUnit.Framework;
+using Rareform.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rareform.Collections;
+using Assert = NUnit.Framework.Assert;
 
 namespace Rareform.Tests.Collections
 {
@@ -10,15 +11,15 @@ namespace Rareform.Tests.Collections
     ///This is a test class for GridTest and is intended
     ///to contain all GridTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class GridTest
     {
-        [TestMethod]
+        [Test]
         public void CellCount_ConstructorWithStandardParameters_Succeed()
         {
             const int rows = 5;
             const int columns = 10;
-            var target = new Grid<GenericParameterHelper>(columns, rows);
+            var target = new Grid<int>(columns, rows);
 
             const int expected = 50;
             int actual = target.CellCount;
@@ -26,12 +27,12 @@ namespace Rareform.Tests.Collections
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ColumnCount_ConstructorWithStandardParameters_Succeed()
         {
             const int rows = 5;
             const int columns = 10;
-            var target = new Grid<GenericParameterHelper>(columns, rows);
+            var target = new Grid<int>(columns, rows);
 
             const int expected = 10;
             int actual = target.Columns;
@@ -39,7 +40,7 @@ namespace Rareform.Tests.Collections
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void DualIndexer_ConstructorWithStandardParameters_Succeed()
         {
             const int rows = 5;
@@ -57,16 +58,16 @@ namespace Rareform.Tests.Collections
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void GridConstructor_NoParameters_Success()
         {
             const int rows = 5;
             const int columns = 10;
 
-            new Grid<GenericParameterHelper>(columns, rows);
+            new Grid<int>(columns, rows);
         }
 
-        [TestMethod]
+        [Test]
         public void GridConstructor_StandardParameters_ReferenceTypesAreNull()
         {
             const int rows = 5;
@@ -80,7 +81,7 @@ namespace Rareform.Tests.Collections
             }
         }
 
-        [TestMethod]
+        [Test]
         public void GridConstructor_StandardParameters_ValueTypesAreZero()
         {
             const int rows = 5;
@@ -94,32 +95,30 @@ namespace Rareform.Tests.Collections
             }
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Test]
         public void GridConstructor_ZeroColumnsAsParameter_ThrowsArgumentOutOfRangeException()
         {
             const int rows = 5;
             const int columns = 0;
 
-            new Grid<GenericParameterHelper>(columns, rows);
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Grid<int>(columns, rows));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Test]
         public void GridConstructor_ZeroRowsAsParameter_ThrowsArgumentOutOfRangeException()
         {
             const int rows = 0;
             const int columns = 10;
 
-            new Grid<GenericParameterHelper>(columns, rows);
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Grid<int>(columns, rows));
         }
 
-        [TestMethod]
+        [Test]
         public void RowCount_ConstructorWithStandardParameters_Succeed()
         {
             const int rows = 5;
             const int columns = 10;
-            var target = new Grid<GenericParameterHelper>(columns, rows);
+            var target = new Grid<int>(columns, rows);
 
             const int expected = 5;
             int actual = target.Rows;
@@ -127,7 +126,7 @@ namespace Rareform.Tests.Collections
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void SingleIndexer_ConstructorWithStandardParameters_Succeed()
         {
             const int rows = 5;
@@ -146,7 +145,7 @@ namespace Rareform.Tests.Collections
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void Traverse_ConstructorWithStandardParameters_OrderIsEqual()
         {
             var expected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };

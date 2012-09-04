@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NUnit.Framework;
+using Rareform.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rareform.Collections;
 
 namespace Rareform.Tests.Collections
 {
@@ -10,10 +10,10 @@ namespace Rareform.Tests.Collections
     ///This is a test class for CircularBufferTest and is intended
     ///to contain all CircularBufferTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class CircularBufferTest
     {
-        [TestMethod]
+        [Test]
         public void Add_ThreeAsCapacityAndAddEightItems_CountIsThreeAndFirstItemsAreRemoved()
         {
             var target = new CircularBuffer<int>(3) { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -28,7 +28,7 @@ namespace Rareform.Tests.Collections
             Assert.IsTrue(targetList[2] == 6);
         }
 
-        [TestMethod]
+        [Test]
         public void Add_ThreeAsCapacityAndAddOneItem_CountIsOne()
         {
             var target = new CircularBuffer<int>(3) { 1 };
@@ -36,7 +36,7 @@ namespace Rareform.Tests.Collections
             Assert.IsTrue(target.Count == 1);
         }
 
-        [TestMethod]
+        [Test]
         public void ClearTest()
         {
             var target = new CircularBuffer<int>(3) { 1, 2, 3 };
@@ -47,7 +47,7 @@ namespace Rareform.Tests.Collections
             Assert.IsTrue(target.Count == 0);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Constructor_ZeroAsCapacity_ThrowsArgumentOutOfRangeException()
         {
@@ -55,7 +55,7 @@ namespace Rareform.Tests.Collections
             new CircularBuffer<int>(capacity);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_RemoveSecondItem_OrderIsRight()
         {
             var target = new CircularBuffer<int>(4) { 1, 2, 3, 4 };
@@ -68,7 +68,7 @@ namespace Rareform.Tests.Collections
             Assert.IsTrue(target.Capacity == 4);
         }
 
-        [TestMethod]
+        [Test]
         public void Remove_RemoveSecondItemAndAddTwoItems_OrderIsRight()
         {
             //Create a circular buffer where the first item is overridden

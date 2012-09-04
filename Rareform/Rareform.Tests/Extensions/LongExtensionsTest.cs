@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
@@ -7,10 +7,10 @@ namespace Rareform.Tests.Extensions
     ///This is a test class for LongExtensionsTest and is intended
     ///to contain all LongExtensionsTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class LongExtensionsTest
     {
-        [TestMethod]
+        [Test]
         public void ToSizeString_ParameterGigaIsByte_ReturnsGigaByteString()
         {
             const long size = 1024 * 1024 * 1024;
@@ -21,7 +21,7 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToSizeString_ParameterIsByte_ReturnsByteString()
         {
             const long size = 512;
@@ -32,7 +32,7 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToSizeString_ParameterIsKiloByte_ReturnsKiloByteString()
         {
             const long size = 1024;
@@ -43,7 +43,7 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToSizeString_ParameterIsMegaByte_ReturnsMegaByteString()
         {
             const long size = 1024 * 1024;
@@ -54,7 +54,7 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ToSizeString_ParameterIsTeraByte_ReturnsTeraByteString()
         {
             const long size = 1024L * 1024L * 1024L * 1024L;

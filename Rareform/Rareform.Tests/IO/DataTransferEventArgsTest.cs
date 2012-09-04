@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.IO;
 
 namespace Rareform.Tests.IO
 {
-    [TestClass]
+    [TestFixture]
     public class DataTransferEventArgsTest
     {
-        [TestMethod]
+        [Test]
         public void ProgressPercentageTest()
         {
             var args = new DataTransferEventArgs(100, 100);
@@ -14,7 +14,7 @@ namespace Rareform.Tests.IO
             Assert.AreEqual(100, args.ProgressPercentage);
         }
 
-        [TestMethod]
+        [Test]
         public void ProgressPercentageTest1()
         {
             var args = new DataTransferEventArgs(100, 50);

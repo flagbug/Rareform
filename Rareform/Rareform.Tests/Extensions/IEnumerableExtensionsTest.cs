@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Rareform.Extensions;
 using System;
 using System.Collections.Generic;
@@ -10,10 +10,10 @@ namespace Rareform.Tests.Extensions
     ///This is a test class for EnumerableExtensionsTest and is intended
     ///to contain all EnumerableExtensionsTest Unit Tests
     ///</summary>
-    [TestClass]
+    [TestFixture]
     public class IEnumerableExtensionsTest
     {
-        [TestMethod]
+        [Test]
         public void ContainsAny_IEnumerableAsParameter_ReturnsFalse()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
@@ -26,7 +26,7 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ContainsAny_IEnumerableAsParameter_ReturnsTrue()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
@@ -39,16 +39,15 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void ContainsAny_NullAsParameter_ThrowsArgumentNullExeption()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
-            value.ContainsAny(null);
+            Assert.Throws<ArgumentNullException>(() => value.ContainsAny(null));
         }
 
-        [TestMethod]
+        [Test]
         public void ContainsAny_ParamsAsParameter_ReturnsFalse()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
@@ -60,7 +59,7 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
+        [Test]
         public void ContainsAny_ParamsAsParameter_ReturnsTrue()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
@@ -72,16 +71,15 @@ namespace Rareform.Tests.Extensions
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void ContainsAny_ParamsAsParameter_ThrowsArgumentNullExeption()
         {
             IEnumerable<int> value = new List<int> { 1, 2, 3, 4, 5 };
 
-            value.ContainsAny(null);
+            Assert.Throws<ArgumentNullException>(() => value.ContainsAny(null));
         }
 
-        [TestMethod]
+        [Test]
         public void ForEach_ActionAsParameter_HasEqualSequence()
         {
             IEnumerable<int> expected = new List<int> { 1, 2, 3, 4, 5 };
@@ -93,7 +91,7 @@ namespace Rareform.Tests.Extensions
             Assert.IsTrue(expected.SequenceEqual(actual));
         }
 
-        [TestMethod]
+        [Test]
         public void Unique_CreationFunctionWithIndex_CreatesUniqueObject()
         {
             IEnumerable<int> current = new[] { 1, 2, 3 };
