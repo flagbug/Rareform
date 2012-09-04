@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Rareform.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
 {
@@ -91,6 +91,19 @@ namespace Rareform.Tests.Extensions
             expected.ForEach(actual.Add);
 
             Assert.IsTrue(expected.SequenceEqual(actual));
+        }
+
+        [TestMethod]
+        public void Unique_CreationFunctionWithIndex_CreatesUniqueObject()
+        {
+            IEnumerable<int> current = new[] { 1, 2, 3 };
+
+            Func<int, int> creationFunc = i => i;
+
+            int created = current.CreateUnique(creationFunc);
+
+            Assert.AreEqual(4, created);
+            Assert.IsFalse(current.Contains(created));
         }
     }
 }

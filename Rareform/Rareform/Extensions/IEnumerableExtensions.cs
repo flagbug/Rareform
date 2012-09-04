@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Rareform.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rareform.Validation;
 
 namespace Rareform.Extensions
 {
@@ -50,6 +50,46 @@ namespace Rareform.Extensions
                 Throw.ArgumentNullException(() => items);
 
             return items.Any(source.Contains);
+        }
+
+        /// <summary>
+        /// Creates a, to the source sequence unique, element, derived from the <paramref name="creationFunc"/> function.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="creationFunc">
+        /// The function, that creates a new instance of the element to check.
+        /// The parameter is the current attempt. The first attempt returns 1.
+        /// </param>
+        /// <returns>An element that is unique to the source sequence.</returns>
+        public static TSource CreateUnique<TSource>(this IEnumerable<TSource> source, Func<int, TSource> creationFunc)
+            where TSource : IEquatable<TSource>
+        {
+            TSource t;
+            int attempt = 0;
+
+            do
+            {
+                attempt++;
+
+                t = creationFunc(attempt);
+            }
+            while (source.Contains(t));
+
+            return t;
+        }
+
+        /// <summary>
+        /// Creates a, to the source sequence unique, element, derived from the <paramref name="creationFunc"/> function.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+        /// <param name="source">The source sequence.</param>
+        /// <param name="creationFunc">The function, that creates a new instance of the element to check.</param>
+        /// <returns>An element that is unique to the source sequence.</returns>
+        public static TSource CreateUnique<TSource>(this IEnumerable<TSource> source, Func<TSource> creationFunc)
+            where TSource : IEquatable<TSource>
+        {
+            return source.CreateUnique(i => creationFunc());
         }
 
         /// <summary>

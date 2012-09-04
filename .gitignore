@@ -1,7 +1,15 @@
 
-/Rareform/_ReSharper.Rareform
-/Rareform/Rareform/bin
-/Rareform/Rareform/obj
-/Rareform/Rareform.Tests/bin
-/Rareform/Rareform.Tests/obj
-/Rareform/TestResults
+_ReSharper*
+[Bb]in/
+[Oo]bj/
+TestResults
+publish
+_NCrunch*
+
+*.suo
+*.user
+*.psess
+*.vsp
+*.ncrunchproject
+*.ncrunchsolution
+*.pdb
