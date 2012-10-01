@@ -65,6 +65,12 @@ namespace Rareform.Extensions
         public static TSource CreateUnique<TSource>(this IEnumerable<TSource> source, Func<int, TSource> creationFunc)
             where TSource : IEquatable<TSource>
         {
+            if (source == null)
+                Throw.ArgumentNullException(() => source);
+
+            if (creationFunc == null)
+                Throw.ArgumentNullException(() => creationFunc);
+
             TSource t;
             int attempt = 0;
 
