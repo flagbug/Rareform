@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Rareform.Reflection;
+using System;
 using System.Linq.Expressions;
-using Rareform.Reflection;
 
 namespace Rareform.Extensions
 {
@@ -26,7 +26,7 @@ namespace Rareform.Extensions
         /// <summary>
         /// Throws an <see cref="System.ArgumentNullException"/> if the object is null.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The type of the object of <paramref name="object"/> and <paramref name="parameterName"/>.</typeparam>
         /// <param name="object">The object to check.</param>
         /// <param name="parameterName">The expression, which resolves to the parameter name.</param>
         /// <remarks>
