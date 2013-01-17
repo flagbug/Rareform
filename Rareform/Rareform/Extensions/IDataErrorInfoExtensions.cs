@@ -7,7 +7,7 @@ namespace Rareform.Extensions
     {
         public static bool HasErrors(this IDataErrorInfo info)
         {
-            bool hasErrors = info.GetType().GetProperties().Any(p => info[p.Name] != null);
+            return info.GetType().GetProperties().Any(p => info[p.Name] != null);
         }
     }
 }
