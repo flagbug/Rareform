@@ -40,6 +40,9 @@
     <Compile Include="Collections\EventCollection.cs" />
     <Compile Include="Collections\EventCollectionEventArgs.cs" />
     <Compile Include="Collections\Grid.cs" />
+    <Compile Include="Collections\IReadOnlyObservableWrapper.cs" />
+    <Compile Include="Collections\ObservableHashSet.cs" />
+    <Compile Include="Collections\ReadOnlyObservableWrapper.cs" />
     <Compile Include="Collections\SerializableDictionary.cs" />
     <Compile Include="Collections\ThreadSafeObservableCollection.cs" />
     <Compile Include="Extensions\IDataErrorInfoExtensions.cs" />
