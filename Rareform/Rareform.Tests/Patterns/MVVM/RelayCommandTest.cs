@@ -4,10 +4,6 @@ using System;
 
 namespace Rareform.Tests.Patterns.MVVM
 {
-    /// <summary>
-    ///This is a test class for RelayCommandTest and is intended
-    ///to contain all RelayCommandTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class RelayCommandTest
     {

@@ -5,10 +5,6 @@ using System;
 
 namespace Rareform.Tests.Extensions
 {
-    /// <summary>
-    ///This is a test class for EventHandlerExtensionsTest and is intended
-    ///to contain all EventHandlerExtensionsTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class EventHandlerExtensionsTest
     {

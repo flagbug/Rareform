@@ -4,10 +4,6 @@ using System;
 
 namespace Rareform.Tests.Extensions
 {
-    /// <summary>
-    ///This is a test class for ClassExtensionsTest and is intended
-    ///to contain all ClassExtensionsTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class ClassExtensionsTest
     {

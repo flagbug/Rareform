@@ -6,10 +6,6 @@ using System.Linq;
 
 namespace Rareform.Tests.Extensions
 {
-    /// <summary>
-    ///This is a test class for EnumerableExtensionsTest and is intended
-    ///to contain all EnumerableExtensionsTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class IEnumerableExtensionsTest
     {

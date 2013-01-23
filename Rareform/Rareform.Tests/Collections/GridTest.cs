@@ -7,10 +7,6 @@ using Assert = NUnit.Framework.Assert;
 
 namespace Rareform.Tests.Collections
 {
-    /// <summary>
-    ///This is a test class for GridTest and is intended
-    ///to contain all GridTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class GridTest
     {

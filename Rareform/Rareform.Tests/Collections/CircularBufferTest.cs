@@ -6,10 +6,6 @@ using System.Linq;
 
 namespace Rareform.Tests.Collections
 {
-    /// <summary>
-    ///This is a test class for CircularBufferTest and is intended
-    ///to contain all CircularBufferTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class CircularBufferTest
     {

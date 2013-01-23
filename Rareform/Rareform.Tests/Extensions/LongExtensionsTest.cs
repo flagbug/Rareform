@@ -3,10 +3,6 @@ using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
 {
-    /// <summary>
-    ///This is a test class for LongExtensionsTest and is intended
-    ///to contain all LongExtensionsTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class LongExtensionsTest
     {

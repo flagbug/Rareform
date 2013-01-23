@@ -5,10 +5,6 @@ using System.Linq.Expressions;
 
 namespace Rareform.Tests.Reflection
 {
-    /// <summary>
-    ///This is a test class for ReflectionUtilitiesTest and is intended
-    ///to contain all ReflectionUtilitiesTest Unit Tests
-    ///</summary>
     [TestFixture]
     public class ReflectorTest
     {
