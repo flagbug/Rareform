@@ -67,19 +67,6 @@ namespace Rareform.Collections
             this.backingSet.CopyTo(array, arrayIndex);
         }
 
-        public void ExceptWith(IEnumerable<T> other)
-        {
-            var list = new List<T>(other);
-
-            this.backingSet.ExceptWith(list);
-
-            foreach (T item in list)
-            {
-                while (this.backingCollection.Remove(item))
-                { }
-            }
-        }
-
         public IEnumerator<T> GetEnumerator()
         {
             return this.backingSet.GetEnumerator();
@@ -113,6 +100,19 @@ namespace Rareform.Collections
         #region Future .NET 4.0 Support
 
         /*
+        public void ExceptWith(IEnumerable<T> other)
+        {
+            var list = new List<T>(other);
+
+            this.backingSet.ExceptWith(list);
+
+            foreach (T item in list)
+            {
+                while (this.backingCollection.Remove(item))
+                { }
+            }
+        }
+
         public void IntersectWith(IEnumerable<T> other)
         {
             var list = new List<T>(other);
