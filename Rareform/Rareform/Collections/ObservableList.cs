@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Rareform.Collections
 {
-    public class ObservableList<T> : IList<T>, INotifyCollectionChanged
+    public class ObservableList<T> : IList<T>, INotifyCollectionChanged, INotifyPropertyChanged
     {
         private readonly List<T> list;
         private readonly double resetThreshold;
@@ -18,6 +19,8 @@ namespace Rareform.Collections
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public int Capacity
         {
@@ -52,6 +55,8 @@ namespace Rareform.Collections
             this.list.Add(item);
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, this.list.Count - 1));
+            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
         }
 
         public void AddRange(IEnumerable<T> collection)
@@ -62,6 +67,8 @@ namespace Rareform.Collections
             this.list.AddRange(itemsToAdd);
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)itemsToAdd, currentCount));
+            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
         }
 
         public void Clear()
@@ -69,6 +76,8 @@ namespace Rareform.Collections
             this.list.Clear();
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
         }
 
         public bool Contains(T item)
@@ -101,6 +110,8 @@ namespace Rareform.Collections
             this.list.Insert(index, item);
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
         }
 
         public void InsertRange(int index, IEnumerable<T> collection)
@@ -110,6 +121,8 @@ namespace Rareform.Collections
             this.list.InsertRange(index, collectionToInsert);
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)collectionToInsert, index));
+            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
         }
 
         public bool Remove(T item)
@@ -119,6 +132,8 @@ namespace Rareform.Collections
             if (removed)
             {
                 this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+                this.OnPropertyChanged("Count");
+                this.OnPropertyChanged("Item[]");
             }
 
             return removed;
@@ -141,17 +156,23 @@ namespace Rareform.Collections
                 }
             }
 
-            if (this.ShouldReset(removedList.Count, previousCount))
+            if (removedList.Count != 0)
             {
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            }
-
-            else
-            {
-                foreach (KeyValuePair<int, T> pair in removedList)
+                if (this.ShouldReset(removedList.Count, previousCount))
                 {
-                    this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, pair.Value, pair.Key));
+                    this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 }
+
+                else
+                {
+                    foreach (KeyValuePair<int, T> pair in removedList)
+                    {
+                        this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, pair.Value, pair.Key));
+                    }
+                }
+
+                this.OnPropertyChanged("Count");
+                this.OnPropertyChanged("Item[]");
             }
 
             return removedList.Count;
@@ -164,6 +185,8 @@ namespace Rareform.Collections
             this.list.RemoveAt(index);
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, objectToRemove, index));
+            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
         }
 
         public void Reverse()
@@ -171,6 +194,7 @@ namespace Rareform.Collections
             this.list.Reverse();
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            this.OnPropertyChanged("Item[]");
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -181,9 +205,17 @@ namespace Rareform.Collections
             }
         }
 
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         private bool ShouldReset(int changeLength, int currentLength)
         {
-            return (double)changeLength / currentLength > this.resetThreshold
+            return (double)changeLength / currentLength > this.resetThreshold;
         }
     }
 }
