@@ -9,7 +9,7 @@ namespace Rareform.Collections
     public class ObservableList<T> : IList<T>, INotifyCollectionChanged
     {
         private readonly List<T> list;
-        private double resetThreshold;
+        private readonly double resetThreshold;
 
         public ObservableList()
         {
@@ -164,6 +164,13 @@ namespace Rareform.Collections
             this.list.RemoveAt(index);
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, objectToRemove, index));
+        }
+
+        public void Reverse()
+        {
+            this.list.Reverse();
+
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
