@@ -26,16 +26,40 @@ namespace Rareform.Tests.Collections
         [Test]
         public void AddRange_FiresCollectionChanged()
         {
-            var list = new ObservableList<int> { 1, 2 };
+            var list = new ObservableList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int eventFireCount = 0;
 
             list.CollectionChanged += (sender, args) =>
             {
+                eventFireCount++;
+
                 Assert.AreEqual(NotifyCollectionChangedAction.Add, args.Action);
-                Assert.AreEqual(2, args.NewStartingIndex);
-                Assert.IsTrue(new[] { 3, 4 }.SequenceEqual(args.NewItems.Cast<int>()));
+
+                switch (eventFireCount)
+                {
+                    case 1:
+                        Assert.AreEqual(9, args.NewStartingIndex);
+                        Assert.IsTrue(new[] { 10 }.SequenceEqual(args.NewItems.Cast<int>()));
+                        break;
+
+                    case 2:
+                        Assert.AreEqual(10, args.NewStartingIndex);
+                        Assert.IsTrue(new[] { 11 }.SequenceEqual(args.NewItems.Cast<int>()));
+                        break;
+                }
             };
 
-            list.AddRange(new[] { 3, 4 });
+            list.AddRange(new[] { 10, 11 });
+        }
+
+        [Test]
+        public void AddRange_ItemCountOverThresHold_FiresCollectionChanged()
+        {
+            var list = new ObservableList<int> { 1, 2, 3, 4, 5 };
+
+            list.CollectionChanged += (sender, args) => Assert.AreEqual(NotifyCollectionChangedAction.Reset, args.Action);
+
+            list.AddRange(new[] { 6, 7, 8, 9, 10 });
         }
 
         [Test]

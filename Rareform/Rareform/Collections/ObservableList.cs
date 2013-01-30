@@ -61,14 +61,28 @@ namespace Rareform.Collections
 
         public void AddRange(IEnumerable<T> collection)
         {
-            int currentCount = this.Count;
             IList<T> itemsToAdd = collection.ToList();
 
-            this.list.AddRange(itemsToAdd);
+            if (itemsToAdd.Count != 0)
+            {
+                int currentCount = this.Count;
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)itemsToAdd, currentCount));
-            this.OnPropertyChanged("Count");
-            this.OnPropertyChanged("Item[]");
+                if (this.ShouldReset(itemsToAdd.Count, currentCount))
+                {
+                    this.list.AddRange(itemsToAdd);
+                    this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    this.OnPropertyChanged("Count");
+                    this.OnPropertyChanged("Item[]");
+                }
+
+                else
+                {
+                    foreach (T item in itemsToAdd)
+                    {
+                        this.Add(item);
+                    }
+                }
+            }
         }
 
         public void Clear()
