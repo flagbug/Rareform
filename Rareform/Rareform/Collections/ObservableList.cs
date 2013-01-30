@@ -216,7 +216,14 @@ namespace Rareform.Collections
             this.list.Sort();
 
             this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            this.OnPropertyChanged("Count");
+            this.OnPropertyChanged("Item[]");
+        }
+
+        public void Sort(Func<T, T, int> comparison)
+        {
+            this.list.Sort((x, y) => comparison(x, y));
+
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             this.OnPropertyChanged("Item[]");
         }
 
