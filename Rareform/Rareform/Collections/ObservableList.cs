@@ -141,7 +141,7 @@ namespace Rareform.Collections
                 }
             }
 
-            if ((double)removedList.Count / previousCount > resetThreshold)
+            if (this.ShouldReset(removedList.Count, previousCount))
             {
                 this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
@@ -172,6 +172,11 @@ namespace Rareform.Collections
             {
                 this.CollectionChanged(this, e);
             }
+        }
+
+        private bool ShouldReset(int changeLength, int currentLength)
+        {
+            return (double)changeLength / currentLength > this.resetThreshold
         }
     }
 }
