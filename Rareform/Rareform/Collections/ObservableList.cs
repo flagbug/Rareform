@@ -211,6 +211,23 @@ namespace Rareform.Collections
             this.OnPropertyChanged("Item[]");
         }
 
+        public void Shuffle()
+        {
+            this.Shuffle(x => Guid.NewGuid());
+        }
+
+        public void Shuffle<TKey>(Func<T, TKey> keySelector)
+        {
+            var newList = new List<T>(this.Capacity);
+            newList.AddRange(this.OrderBy(keySelector));
+
+            this.list.Clear();
+            this.list.AddRange(newList);
+
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            this.OnPropertyChanged("Item[]");
+        }
+
         public void Sort()
         {
             this.list.Sort();
