@@ -88,6 +88,16 @@ namespace Rareform.Tests.Extensions
         }
 
         [Test]
+        public void SkipWhileInclusive_ReturnsFirstFalseItem()
+        {
+            IEnumerable<int> current = new[] { 1, 2, 3, 4 };
+
+            IEnumerable<int> skipped = current.SkipWhileInclusive(i => i != 3);
+
+            Assert.IsTrue(new[] { 3, 4 }.SequenceEqual(skipped));
+        }
+
+        [Test]
         public void Unique_CreationFunctionWithIndex_CreatesUniqueObject()
         {
             IEnumerable<int> current = new[] { 1, 2, 3 };

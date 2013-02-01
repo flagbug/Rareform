@@ -119,6 +119,40 @@ namespace Rareform.Extensions
         }
 
         /// <summary>
+        /// Bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements
+        /// inclusive the first element that passes the condition.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
+        /// <param name="source">An <see cref="IEnumerable{T}"/> to return elements from.</param>
+        /// <param name="predicate">A function to test each element for a condition.</param>
+        /// <returns>A sequence that contains the elements from the input sequence after the element that passes the test specified by
+        /// <paramref name="predicate"/> inclusive the first element that passes the test.</returns>
+        public static IEnumerable<TSource> SkipWhileInclusive<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            if (source == null)
+                Throw.ArgumentNullException(() => source);
+
+            if (predicate == null)
+                Throw.ArgumentNullException(() => predicate);
+
+            bool yieldRest = false;
+
+            foreach (TSource item in source)
+            {
+                if (yieldRest)
+                {
+                    yield return item;
+                }
+
+                else if (!predicate(item))
+                {
+                    yield return item;
+                    yieldRest = true;
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns elements from a sequence as long as a specified condition is true inclusive the element for that the condition was false,
         /// and then skips the remaining elements.
         /// </summary>
