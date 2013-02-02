@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Rareform.Extensions;
+using System.Globalization;
 
 namespace Rareform.Tests.Extensions
 {
@@ -10,7 +11,7 @@ namespace Rareform.Tests.Extensions
         public void ToSizeString_ParameterGigaIsByte_ReturnsGigaByteString()
         {
             const long size = 1024 * 1024 * 1024;
-            const string expected = "1,00 GB";
+            string expected = this.GetOne("GB");
 
             string actual = size.ToSizeString();
 
@@ -32,7 +33,7 @@ namespace Rareform.Tests.Extensions
         public void ToSizeString_ParameterIsKiloByte_ReturnsKiloByteString()
         {
             const long size = 1024;
-            const string expected = "1,00 KB";
+            string expected = this.GetOne("KB");
 
             string actual = size.ToSizeString();
 
@@ -43,7 +44,7 @@ namespace Rareform.Tests.Extensions
         public void ToSizeString_ParameterIsMegaByte_ReturnsMegaByteString()
         {
             const long size = 1024 * 1024;
-            const string expected = "1,00 MB";
+            string expected = this.GetOne("MB");
 
             string actual = size.ToSizeString();
 
@@ -53,13 +54,18 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void ToSizeString_ParameterIsTeraByte_ReturnsTeraByteString()
         {
-            const long size = 1024L * 1024L * 1024L * 1024L;
+            const long size = 1024L * 1024 * 1024 * 1024;
 
-            const string expected = "1,00 TB";
+            string expected = this.GetOne("TB");
 
             string actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
+        }
+
+        private string GetOne(string magintude)
+        {
+            return string.Format("1{0}00 {1}", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, magintude);
         }
     }
 }
