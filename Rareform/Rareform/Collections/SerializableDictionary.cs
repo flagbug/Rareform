@@ -8,7 +8,7 @@ using Rareform.Validation;
 namespace Rareform.Collections
 {
     /// <summary>
-    /// Provides a serializable dictionary.
+    ///     Provides a serializable dictionary.
     /// </summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
@@ -17,10 +17,15 @@ namespace Rareform.Collections
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
     {
         /// <summary>
-        /// This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute"/> to the class.
+        ///     This method is reserved and should not be used. When implementing the IXmlSerializable interface, you should return
+        ///     null (Nothing in Visual Basic) from this method, and instead, if specifying a custom schema is required, apply the
+        ///     <see cref="T:System.Xml.Serialization.XmlSchemaProviderAttribute" /> to the class.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Xml.Schema.XmlSchema"/> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)"/> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)"/> method.
+        ///     An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is
+        ///     produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method
+        ///     and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+        ///     method.
         /// </returns>
         public XmlSchema GetSchema()
         {
@@ -28,9 +33,9 @@ namespace Rareform.Collections
         }
 
         /// <summary>
-        /// Generates an object from its XML representation.
+        ///     Generates an object from its XML representation.
         /// </summary>
-        /// <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the object is deserialized.</param>
+        /// <param name="reader">The <see cref="T:System.Xml.XmlReader" /> stream from which the object is deserialized.</param>
         public void ReadXml(XmlReader reader)
         {
             if (reader == null)
@@ -39,10 +44,10 @@ namespace Rareform.Collections
             var keySerializer = new XmlSerializer(typeof(TKey));
             var valueSerializer = new XmlSerializer(typeof(TValue));
 
-            bool wasEmpty = reader.IsEmptyElement;
+            var wasEmpty = reader.IsEmptyElement;
             reader.Read();
 
-            if (wasEmpty) { return; }
+            if (wasEmpty) return;
 
             while (reader.NodeType != XmlNodeType.EndElement)
             {
@@ -56,18 +61,19 @@ namespace Rareform.Collections
                 var value = (TValue)valueSerializer.Deserialize(reader);
                 reader.ReadEndElement();
 
-                this.Add(key, value);
+                Add(key, value);
 
                 reader.ReadEndElement();
                 reader.MoveToContent();
             }
+
             reader.ReadEndElement();
         }
 
         /// <summary>
-        /// Converts an object into its XML representation.
+        ///     Converts an object into its XML representation.
         /// </summary>
-        /// <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
+        /// <param name="writer">The <see cref="T:System.Xml.XmlWriter" /> stream to which the object is serialized.</param>
         public void WriteXml(XmlWriter writer)
         {
             if (writer == null)
@@ -76,7 +82,7 @@ namespace Rareform.Collections
             var keySerializer = new XmlSerializer(typeof(TKey));
             var valueSerializer = new XmlSerializer(typeof(TValue));
 
-            foreach (TKey key in this.Keys)
+            foreach (var key in Keys)
             {
                 writer.WriteStartElement("Item");
 
@@ -85,7 +91,7 @@ namespace Rareform.Collections
                 writer.WriteEndElement();
 
                 writer.WriteStartElement("Value");
-                TValue value = this[key];
+                var value = this[key];
                 valueSerializer.Serialize(writer, value);
                 writer.WriteEndElement();
 

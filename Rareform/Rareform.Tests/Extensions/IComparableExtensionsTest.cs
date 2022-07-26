@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Rareform.Extensions;
 using Rareform.Reflection;
-using System;
 
 namespace Rareform.Tests.Extensions
 {
@@ -11,7 +11,7 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ExceptionParamNameIsCorrect()
         {
-            int value = 10; // Do not make const! Reflection doesn't work properly with constant types.
+            var value = 10; // Do not make const! Reflection doesn't work properly with constant types.
             const int limit = 9;
 
             try
@@ -28,7 +28,7 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void ThrowIfGreaterThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
-            int value = 10; // Do not make const! Reflection doesn't work properly with constant types.
+            var value = 10; // Do not make const! Reflection doesn't work properly with constant types.
             const int limit = 9;
 
             Assert.Throws<ArgumentOutOfRangeException>(() => value.ThrowIfGreaterThan(limit, () => value));
@@ -68,7 +68,7 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ExceptionParamNameIsCorrect()
         {
-            int value = 9; // Do not make const! Reflection doesn't work properly with constant types.
+            var value = 9; // Do not make const! Reflection doesn't work properly with constant types.
             const int limit = 10;
 
             try
@@ -85,7 +85,7 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void ThrowIfLessThan_LimitIsLessAndParameterNameIsExpression_ThrowsArgumentOutOfRangeException()
         {
-            int value = 9; // Do not make const! Reflection doesn't work properly with constant types.
+            var value = 9; // Do not make const! Reflection doesn't work properly with constant types.
             const int limit = 10;
 
             Assert.Throws<ArgumentOutOfRangeException>(() => value.ThrowIfLessThan(limit, () => value));

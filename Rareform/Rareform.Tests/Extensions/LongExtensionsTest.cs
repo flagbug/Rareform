@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Globalization;
+using NUnit.Framework;
 using Rareform.Extensions;
-using System.Globalization;
 
 namespace Rareform.Tests.Extensions
 {
@@ -11,9 +11,9 @@ namespace Rareform.Tests.Extensions
         public void ToSizeString_ParameterGigaIsByte_ReturnsGigaByteString()
         {
             const long size = 1024 * 1024 * 1024;
-            string expected = this.GetOne("GB");
+            var expected = GetOne("GB");
 
-            string actual = size.ToSizeString();
+            var actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -24,7 +24,7 @@ namespace Rareform.Tests.Extensions
             const long size = 512;
             const string expected = "512 B";
 
-            string actual = size.ToSizeString();
+            var actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -33,9 +33,9 @@ namespace Rareform.Tests.Extensions
         public void ToSizeString_ParameterIsKiloByte_ReturnsKiloByteString()
         {
             const long size = 1024;
-            string expected = this.GetOne("KB");
+            var expected = GetOne("KB");
 
-            string actual = size.ToSizeString();
+            var actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -44,9 +44,9 @@ namespace Rareform.Tests.Extensions
         public void ToSizeString_ParameterIsMegaByte_ReturnsMegaByteString()
         {
             const long size = 1024 * 1024;
-            string expected = this.GetOne("MB");
+            var expected = GetOne("MB");
 
-            string actual = size.ToSizeString();
+            var actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
@@ -56,16 +56,17 @@ namespace Rareform.Tests.Extensions
         {
             const long size = 1024L * 1024 * 1024 * 1024;
 
-            string expected = this.GetOne("TB");
+            var expected = GetOne("TB");
 
-            string actual = size.ToSizeString();
+            var actual = size.ToSizeString();
 
             Assert.AreEqual(expected, actual);
         }
 
         private string GetOne(string magintude)
         {
-            return string.Format("1{0}00 {1}", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, magintude);
+            return string.Format("1{0}00 {1}", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                magintude);
         }
     }
 }

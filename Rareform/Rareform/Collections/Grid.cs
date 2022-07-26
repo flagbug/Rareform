@@ -7,15 +7,15 @@ using Rareform.Validation;
 namespace Rareform.Collections
 {
     /// <summary>
-    /// Provides a generic grid with rows and columns.
+    ///     Provides a generic grid with rows and columns.
     /// </summary>
-    /// <typeparam name="T">The type of the items in the <see cref="Grid&lt;T&gt;"/>.</typeparam>
+    /// <typeparam name="T">The type of the items in the <see cref="Grid&lt;T&gt;" />.</typeparam>
     public class Grid<T> : IEnumerable<T>
     {
         private readonly List<T> internFields;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Grid&lt;T&gt;"/> class.
+        ///     Initializes a new instance of the <see cref="Grid&lt;T&gt;" /> class.
         /// </summary>
         /// <param name="columns">The number of columns.</param>
         /// <param name="rows">The number of rows.</param>
@@ -27,34 +27,31 @@ namespace Rareform.Collections
             if (rows < 1)
                 Throw.ArgumentOutOfRangeException(() => rows, 1);
 
-            this.Rows = rows;
-            this.Columns = columns;
+            Rows = rows;
+            Columns = columns;
 
-            this.internFields = new List<T>(rows * columns);
+            internFields = new List<T>(rows * columns);
 
-            this.internFields.AddRange(Enumerable.Repeat(default(T), this.CellCount));
+            internFields.AddRange(Enumerable.Repeat(default(T), CellCount));
         }
 
         /// <summary>
-        /// Gets the number of cells.
+        ///     Gets the number of cells.
         /// </summary>
-        public int CellCount
-        {
-            get { return this.Rows * this.Columns; }
-        }
+        public int CellCount => Rows * Columns;
 
         /// <summary>
-        /// Gets the number of columns.
+        ///     Gets the number of columns.
         /// </summary>
-        public int Columns { get; private set; }
+        public int Columns { get; }
 
         /// <summary>
-        /// Gets the number of rows.
+        ///     Gets the number of rows.
         /// </summary>
-        public int Rows { get; private set; }
+        public int Rows { get; }
 
         /// <summary>
-        /// Gets or sets the element at the specified column and row.
+        ///     Gets or sets the element at the specified column and row.
         /// </summary>
         public T this[int column, int row]
         {
@@ -63,16 +60,16 @@ namespace Rareform.Collections
                 if (column < 0)
                     throw new IndexOutOfRangeException("column must be greater than 0.");
 
-                if (column > this.Columns - 1)
-                    throw new IndexOutOfRangeException("column must be less than " + (this.Columns - 1));
+                if (column > Columns - 1)
+                    throw new IndexOutOfRangeException("column must be less than " + (Columns - 1));
 
                 if (row < 0)
                     throw new IndexOutOfRangeException("row must be greater than 0.");
 
-                if (row > this.Rows - 1)
-                    throw new IndexOutOfRangeException("row must be less than " + (this.Rows - 1));
+                if (row > Rows - 1)
+                    throw new IndexOutOfRangeException("row must be less than " + (Rows - 1));
 
-                return this[row * this.Columns + column];
+                return this[row * Columns + column];
             }
 
             set
@@ -80,69 +77,65 @@ namespace Rareform.Collections
                 if (column < 0)
                     throw new IndexOutOfRangeException("column must be greater than 0.");
 
-                if (column > this.Columns - 1)
-                    throw new IndexOutOfRangeException("column must be less than " + (this.Columns - 1));
+                if (column > Columns - 1)
+                    throw new IndexOutOfRangeException("column must be less than " + (Columns - 1));
 
                 if (row < 0)
                     throw new IndexOutOfRangeException("row must be greater than 0.");
 
-                if (row > this.Rows - 1)
-                    throw new IndexOutOfRangeException("row must be less than " + (this.Rows - 1));
+                if (row > Rows - 1)
+                    throw new IndexOutOfRangeException("row must be less than " + (Rows - 1));
 
-                this[row * this.Columns + column] = value;
+                this[row * Columns + column] = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the element at the specified index.
+        ///     Gets or sets the element at the specified index.
         /// </summary>
         public T this[int index]
         {
-            get { return this.internFields[index]; }
-            set { this.internFields[index] = value; }
+            get => internFields[index];
+            set => internFields[index] = value;
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the collection.
+        ///     Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        ///     A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
         /// </returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return this.internFields.GetEnumerator();
+            return internFields.GetEnumerator();
         }
 
         /// <summary>
-        /// Traverses each row of the grid item per item from the origin and executes the specified action.
+        ///     Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>
+        ///     An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+        /// </returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return internFields.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Traverses each row of the grid item per item from the origin and executes the specified action.
         /// </summary>
         /// <param name="action">
-        /// The action to execute, the first argument is the current column,
-        /// the second argument is the current row.
+        ///     The action to execute, the first argument is the current column,
+        ///     the second argument is the current row.
         /// </param>
         public void Traverse(Action<int, int> action)
         {
             if (action == null)
                 Throw.ArgumentNullException(() => action);
 
-            for (int row = 0; row < this.Rows; row++)
-            {
-                for (int column = 0; column < this.Columns; column++)
-                {
-                    action(column, row);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Returns an enumerator that iterates through a collection.
-        /// </summary>
-        /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
-        /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.internFields.GetEnumerator();
+            for (var row = 0; row < Rows; row++)
+            for (var column = 0; column < Columns; column++)
+                action(column, row);
         }
     }
 }

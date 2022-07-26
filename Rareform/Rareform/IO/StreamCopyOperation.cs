@@ -7,11 +7,11 @@ using Rareform.Validation;
 namespace Rareform.IO
 {
     /// <summary>
-    /// Provides an operation to copy a stream to another stream.
+    ///     Provides an operation to copy a stream to another stream.
     /// </summary>
     /// <remarks>
-    /// Note that this class does not dispose the streams,
-    /// the caller has to do it himself.
+    ///     Note that this class does not dispose the streams,
+    ///     the caller has to do it himself.
     /// </remarks>
     public class StreamCopyOperation
     {
@@ -19,47 +19,53 @@ namespace Rareform.IO
         private TimeSpan elapsedTime;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StreamCopyOperation"/> class.
+        ///     Initializes a new instance of the <see cref="StreamCopyOperation" /> class.
         /// </summary>
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
         /// <remarks>This constructor uses a 32 kilobyte buffer and a dynamic update interval.</remarks>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream)
             : this(sourceStream, targetStream, 32 * 1024, true)
-        { }
+        {
+        }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StreamCopyOperation"/> class.
+        ///     Initializes a new instance of the <see cref="StreamCopyOperation" /> class.
         /// </summary>
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <param name="updateInterval">The interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.</param>
+        /// <param name="updateInterval">
+        ///     The interval, after how much copied bytes the <see cref="CopyProgressChanged" /> should be
+        ///     raised.
+        /// </param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, int updateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
             if (updateInterval < 1)
                 Throw.ArgumentOutOfRangeException(() => updateInterval, 1);
 
-            this.UpdateInterval = updateInterval;
+            UpdateInterval = updateInterval;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StreamCopyOperation"/> class.
+        ///     Initializes a new instance of the <see cref="StreamCopyOperation" /> class.
         /// </summary>
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
-        /// <param name="dynamicUpdateInterval">if set to true, the operation uses a dynamic update interval, based on the stream length.;
-        /// otherwise, it uses a predefined update interval.</param>
+        /// <param name="dynamicUpdateInterval">
+        ///     if set to true, the operation uses a dynamic update interval, based on the stream length.;
+        ///     otherwise, it uses a predefined update interval.
+        /// </param>
         public StreamCopyOperation(Stream sourceStream, Stream targetStream, int bufferSize, bool dynamicUpdateInterval)
             : this(sourceStream, targetStream, bufferSize)
         {
-            this.UpdateInterval = dynamicUpdateInterval ? (int)Math.Pow(sourceStream.Length, 1.0 / 1.5) : 256 * 1024;
+            UpdateInterval = dynamicUpdateInterval ? (int)Math.Pow(sourceStream.Length, 1.0 / 1.5) : 256 * 1024;
         }
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="StreamCopyOperation"/> class from being created.
+        ///     Prevents a default instance of the <see cref="StreamCopyOperation" /> class from being created.
         /// </summary>
         /// <param name="sourceStream">The source stream.</param>
         /// <param name="targetStream">The target stream.</param>
@@ -75,123 +81,118 @@ namespace Rareform.IO
             if (bufferSize < 1)
                 Throw.ArgumentOutOfRangeException(() => bufferSize, 1);
 
-            this.SourceStream = sourceStream;
-            this.TargetStream = targetStream;
-            this.BufferSize = bufferSize;
+            SourceStream = sourceStream;
+            TargetStream = targetStream;
+            BufferSize = bufferSize;
         }
 
         /// <summary>
-        /// Occurs when copy progress has changed.
+        ///     Gets the average speed in bytes per second.
         /// </summary>
-        public event EventHandler<DataTransferEventArgs<Stream, Stream>> CopyProgressChanged;
+        public long AverageSpeed => (long)(copiedBytes / elapsedTime.TotalSeconds);
 
         /// <summary>
-        /// Gets the average speed in bytes per second.
-        /// </summary>
-        public long AverageSpeed
-        {
-            get { return (long)(this.copiedBytes / this.elapsedTime.TotalSeconds); }
-        }
-
-        /// <summary>
-        /// Gets the size of the buffer in bytes.
+        ///     Gets the size of the buffer in bytes.
         /// </summary>
         /// <value>
-        /// The size of the buffer in bytes.
+        ///     The size of the buffer in bytes.
         /// </value>
-        public int BufferSize { get; private set; }
+        public int BufferSize { get; }
 
         /// <summary>
-        /// Gets the end time.
+        ///     Gets the end time.
         /// </summary>
         public DateTime EndTime { get; private set; }
 
         /// <summary>
-        /// Gets the source stream.
+        ///     Gets the source stream.
         /// </summary>
-        public Stream SourceStream { get; private set; }
+        public Stream SourceStream { get; }
 
         /// <summary>
-        /// Gets the start time.
+        ///     Gets the start time.
         /// </summary>
         public DateTime StartTime { get; private set; }
 
         /// <summary>
-        /// Gets the target stream.
+        ///     Gets the target stream.
         /// </summary>
-        public Stream TargetStream { get; private set; }
+        public Stream TargetStream { get; }
 
         /// <summary>
-        /// Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged"/> should be raised.
+        ///     Gets the interval, after how much copied bytes the <see cref="CopyProgressChanged" /> should be raised.
         /// </summary>
-        public int UpdateInterval { get; private set; }
+        public int UpdateInterval { get; }
 
         /// <summary>
-        /// Executes the stream copy operation.
+        ///     Occurs when copy progress has changed.
+        /// </summary>
+        public event EventHandler<DataTransferEventArgs<Stream, Stream>> CopyProgressChanged;
+
+        /// <summary>
+        ///     Executes the stream copy operation.
         /// </summary>
         public void Execute()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            this.StartTime = DateTime.Now;
+            var stopwatch = Stopwatch.StartNew();
+            StartTime = DateTime.Now;
 
-            var buffer = new byte[this.BufferSize];
+            var buffer = new byte[BufferSize];
             int bytes;
-            int updateCounter = 0; //The updateCounter is needed to know when the CopyProgressChanged event shall be called
-            bool cancel = false;
+            var updateCounter =
+                0; //The updateCounter is needed to know when the CopyProgressChanged event shall be called
+            var cancel = false;
 
-            while (!cancel && (bytes = this.SourceStream.Read(buffer, 0, buffer.Length)) > 0)
+            while (!cancel && (bytes = SourceStream.Read(buffer, 0, buffer.Length)) > 0)
             {
-                this.TargetStream.Write(buffer, 0, bytes);
+                TargetStream.Write(buffer, 0, bytes);
 
-                this.copiedBytes += bytes;
+                copiedBytes += bytes;
                 updateCounter += bytes;
 
-                if (updateCounter >= this.UpdateInterval)
+                if (updateCounter >= UpdateInterval)
                 {
                     updateCounter = 0;
 
-                    this.elapsedTime = stopwatch.Elapsed;
+                    elapsedTime = stopwatch.Elapsed;
 
-                    var eventArgs = this.CreateEventArgs();
+                    var eventArgs = CreateEventArgs();
 
-                    this.OnCopyProgressChanged(eventArgs);
+                    OnCopyProgressChanged(eventArgs);
 
-                    if (eventArgs.Cancel)
-                    {
-                        cancel = true;
-                    }
+                    if (eventArgs.Cancel) cancel = true;
                 }
             }
 
-            this.EndTime = DateTime.Now;
+            EndTime = DateTime.Now;
             stopwatch.Stop();
-            this.elapsedTime = stopwatch.Elapsed;
+            elapsedTime = stopwatch.Elapsed;
 
-            this.OnCopyProgressChanged(this.CreateEventArgs());
+            OnCopyProgressChanged(CreateEventArgs());
         }
 
         /// <summary>
-        /// Raises the <see cref="CopyProgressChanged"/> event.
+        ///     Raises the <see cref="CopyProgressChanged" /> event.
         /// </summary>
-        /// <param name="e">The <see cref="DataTransferEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="DataTransferEventArgs" /> instance containing the event data.</param>
         protected void OnCopyProgressChanged(DataTransferEventArgs<Stream, Stream> e)
         {
-            this.CopyProgressChanged.RaiseSafe(this, e);
+            CopyProgressChanged.RaiseSafe(this, e);
         }
 
         /// <summary>
-        /// Creates the event args.
+        ///     Creates the event args.
         /// </summary>
         /// <returns></returns>
         private DataTransferEventArgs<Stream, Stream> CreateEventArgs()
         {
             var eventArgs =
-                new DataTransferEventArgs<Stream, Stream>(this.SourceStream.Length, this.copiedBytes)
-                    {
-                        AverageSpeed = this.AverageSpeed,
-                        Source = this.SourceStream,
-                        Destination = this.TargetStream
-                    };
+                new DataTransferEventArgs<Stream, Stream>(SourceStream.Length, copiedBytes)
+                {
+                    AverageSpeed = AverageSpeed,
+                    Source = SourceStream,
+                    Destination = TargetStream
+                };
 
             return eventArgs;
         }

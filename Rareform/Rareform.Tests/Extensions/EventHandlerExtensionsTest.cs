@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Rareform.Extensions;
 using Rareform.IO;
-using System;
 
 namespace Rareform.Tests.Extensions
 {
@@ -15,11 +15,11 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void RaiseSafe_EventHasSubscriber_EventIsRaised()
         {
-            bool handled = false;
+            var handled = false;
 
-            this.TestEvent += (sender, e) => handled = true;
+            TestEvent += (sender, e) => handled = true;
 
-            this.TestEvent.RaiseSafe(this, EventArgs.Empty);
+            TestEvent.RaiseSafe(this, EventArgs.Empty);
 
             Assert.IsTrue(handled);
         }
@@ -27,16 +27,16 @@ namespace Rareform.Tests.Extensions
         [Test]
         public void RaiseSafeGeneric_EventHasSubscriver_EventIsRaised()
         {
-            bool handled = false;
+            var handled = false;
 
-            this.TestEventGeneric += (sender, e) =>
+            TestEventGeneric += (sender, e) =>
             {
                 Assert.AreEqual(e.TotalBytes, 1);
                 Assert.AreEqual(e.TransferredBytes, 100);
                 handled = true;
             };
 
-            this.TestEventGeneric.RaiseSafe(this, new DataTransferEventArgs(1, 100));
+            TestEventGeneric.RaiseSafe(this, new DataTransferEventArgs(1, 100));
 
             Assert.IsTrue(handled);
         }

@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using Rareform.Reflection;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using NUnit.Framework;
+using Rareform.Reflection;
 
 namespace Rareform.Tests.Reflection
 {
@@ -25,7 +25,7 @@ namespace Rareform.Tests.Reflection
 
             const string expected = "testMember";
 
-            string actual = InternGetMemberNameExpressionTest(() => testMember);
+            var actual = InternGetMemberNameExpressionTest(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -35,7 +35,7 @@ namespace Rareform.Tests.Reflection
         {
             const string expected = "testMember";
 
-            string actual = Reflector.GetMemberName(() => testMember);
+            var actual = Reflector.GetMemberName(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -55,11 +55,11 @@ namespace Rareform.Tests.Reflection
         [Test]
         public void GetMemberNameLocalScopeTest()
         {
-            int testMember = 0; // Do not make const! Reflection doesn't work properly with constant types.
+            var testMember = 0; // Do not make const! Reflection doesn't work properly with constant types.
 
             const string expected = "testMember";
 
-            string actual = Reflector.GetMemberName(() => testMember);
+            var actual = Reflector.GetMemberName(() => testMember);
 
             Assert.AreEqual(expected, actual);
         }
@@ -69,7 +69,7 @@ namespace Rareform.Tests.Reflection
         {
             const string expected = "TestProperty";
 
-            string actual = Reflector.GetMemberName(() => this.TestProperty);
+            var actual = Reflector.GetMemberName(() => TestProperty);
 
             Assert.AreEqual(expected, actual);
         }
@@ -78,7 +78,7 @@ namespace Rareform.Tests.Reflection
         {
             const string expected = "testArgument";
 
-            string actual = Reflector.GetMemberName(() => testArgument);
+            var actual = Reflector.GetMemberName(() => testArgument);
 
             Assert.AreEqual(expected, actual);
         }
