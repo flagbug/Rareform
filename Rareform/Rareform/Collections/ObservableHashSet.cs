@@ -13,88 +13,73 @@ namespace Rareform.Collections
 
         public ObservableHashSet()
         {
-            this.backingSet = new HashSet<T>();
-            this.backingCollection = new ObservableCollection<T>();
+            backingSet = new HashSet<T>();
+            backingCollection = new ObservableCollection<T>();
         }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged
-        {
-            add { this.backingCollection.CollectionChanged += value; }
-            remove { this.backingCollection.CollectionChanged -= value; }
-        }
+        public int Count => backingSet.Count;
 
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add { ((INotifyPropertyChanged)this.backingCollection).PropertyChanged += value; }
-            remove { ((INotifyPropertyChanged)this.backingCollection).PropertyChanged -= value; }
-        }
-
-        public int Count
-        {
-            get { return this.backingSet.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        public bool Add(T item)
-        {
-            bool added = this.backingSet.Add(item);
-
-            if (added)
-            {
-                this.backingCollection.Add(item);
-            }
-
-            return added;
-        }
+        public bool IsReadOnly => false;
 
         public void Clear()
         {
-            this.backingSet.Clear();
-            this.backingCollection.Clear();
+            backingSet.Clear();
+            backingCollection.Clear();
         }
 
         public bool Contains(T item)
         {
-            return this.backingSet.Contains(item);
+            return backingSet.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            this.backingSet.CopyTo(array, arrayIndex);
+            backingSet.CopyTo(array, arrayIndex);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.backingSet.GetEnumerator();
+            return backingSet.GetEnumerator();
         }
 
         void ICollection<T>.Add(T item)
         {
-            if (this.backingSet.Add(item))
-            {
-                this.backingCollection.Add(item);
-            }
+            if (backingSet.Add(item)) backingCollection.Add(item);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         public bool Remove(T item)
         {
-            bool removed = this.backingSet.Remove(item);
+            var removed = backingSet.Remove(item);
 
-            if (removed)
-            {
-                this.backingCollection.Remove(item);
-            }
+            if (removed) backingCollection.Remove(item);
 
             return removed;
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add => backingCollection.CollectionChanged += value;
+            remove => backingCollection.CollectionChanged -= value;
+        }
+
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        {
+            add => ((INotifyPropertyChanged)backingCollection).PropertyChanged += value;
+            remove => ((INotifyPropertyChanged)backingCollection).PropertyChanged -= value;
+        }
+
+        public bool Add(T item)
+        {
+            var added = backingSet.Add(item);
+
+            if (added) backingCollection.Add(item);
+
+            return added;
         }
 
         #region Future .NET 4.0 Support

@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Rareform.Extensions;
-using System;
 
 namespace Rareform.Tests.Extensions
 {

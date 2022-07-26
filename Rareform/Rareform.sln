@@ -1,21 +1,20 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rareform", "Rareform\Rareform.csproj", "{09E08024-AC20-4323-820E-5C33B4A46EFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rareform.Tests", "Rareform.Tests\Rareform.Tests.csproj", "{83EE23C3-AFCB-43AA-8446-1B2316469141}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89A8FBF5-0F68-424A-A1EC-D0FA7F4B2A0E}"
 	ProjectSection(SolutionItems) = preProject
-		Rareform.vsmdi = Rareform.vsmdi
 		Local.testsettings = Local.testsettings
+		Rareform.vsmdi = Rareform.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Rareform.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -48,5 +47,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61C47D09-45C3-4906-A36E-36DE78D4F116}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Rareform.vsmdi
 	EndGlobalSection
 EndGlobal

@@ -12,29 +12,29 @@ namespace Rareform.Collections
 
         public ReadOnlyObservableWrapper(TCollection list)
         {
-            this.wrapped = list;
+            wrapped = list;
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged
         {
-            add { this.wrapped.CollectionChanged += value; }
-            remove { this.wrapped.CollectionChanged -= value; }
+            add => wrapped.CollectionChanged += value;
+            remove => wrapped.CollectionChanged -= value;
         }
 
         public event PropertyChangedEventHandler PropertyChanged
         {
-            add { ((INotifyPropertyChanged)this.wrapped).PropertyChanged += value; }
-            remove { ((INotifyPropertyChanged)this.wrapped).PropertyChanged -= value; }
+            add => wrapped.PropertyChanged += value;
+            remove => wrapped.PropertyChanged -= value;
         }
 
         public IEnumerator<TType> GetEnumerator()
         {
-            return this.wrapped.GetEnumerator();
+            return wrapped.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

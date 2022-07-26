@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using Rareform.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assert = NUnit.Framework.Assert;
+using NUnit.Framework;
+using Rareform.Collections;
 
 namespace Rareform.Tests.Collections
 {
@@ -18,7 +17,7 @@ namespace Rareform.Tests.Collections
             var target = new Grid<int>(columns, rows);
 
             const int expected = 50;
-            int actual = target.CellCount;
+            var actual = target.CellCount;
 
             Assert.AreEqual(expected, actual);
         }
@@ -31,7 +30,7 @@ namespace Rareform.Tests.Collections
             var target = new Grid<int>(columns, rows);
 
             const int expected = 10;
-            int actual = target.Columns;
+            var actual = target.Columns;
 
             Assert.AreEqual(expected, actual);
         }
@@ -49,7 +48,7 @@ namespace Rareform.Tests.Collections
             const int expected = 25;
 
             target[cell] = expected;
-            int actual = target[cell];
+            var actual = target[cell];
 
             Assert.AreEqual(expected, actual);
         }
@@ -71,10 +70,7 @@ namespace Rareform.Tests.Collections
 
             var target = new Grid<string>(columns, rows);
 
-            foreach (string value in target)
-            {
-                Assert.AreEqual(null, value);
-            }
+            foreach (var value in target) Assert.AreEqual(null, value);
         }
 
         [Test]
@@ -85,10 +81,7 @@ namespace Rareform.Tests.Collections
 
             var target = new Grid<int>(columns, rows);
 
-            foreach (int value in target)
-            {
-                Assert.AreEqual(0, value);
-            }
+            foreach (var value in target) Assert.AreEqual(0, value);
         }
 
         [Test]
@@ -117,7 +110,7 @@ namespace Rareform.Tests.Collections
             var target = new Grid<int>(columns, rows);
 
             const int expected = 5;
-            int actual = target.Rows;
+            var actual = target.Rows;
 
             Assert.AreEqual(expected, actual);
         }
@@ -136,7 +129,7 @@ namespace Rareform.Tests.Collections
             const int expected = 25;
 
             target[column, row] = expected;
-            int actual = target[10];
+            var actual = target[10];
 
             Assert.AreEqual(expected, actual);
         }
@@ -162,10 +155,10 @@ namespace Rareform.Tests.Collections
             target[2, 3] = 11;
 
             target.Traverse((column, row) =>
-                {
-                    int debug = target[column, row];
-                    actual.Add(debug);
-                });
+            {
+                var debug = target[column, row];
+                actual.Add(debug);
+            });
 
             Assert.IsTrue(actual.SequenceEqual(expected));
         }

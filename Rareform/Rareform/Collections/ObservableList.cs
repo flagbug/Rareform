@@ -14,50 +14,112 @@ namespace Rareform.Collections
 
         public ObservableList()
         {
-            this.list = new List<T>();
-            this.resetThreshold = 0.3;
+            list = new List<T>();
+            resetThreshold = 0.3;
         }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public int Capacity => list.Capacity;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public int Count => list.Count;
 
-        public int Capacity
-        {
-            get { return this.list.Capacity; }
-        }
-
-        public int Count
-        {
-            get { return this.list.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+        public bool IsReadOnly => false;
 
         public T this[int index]
         {
-            get { return this.list[index]; }
+            get => list[index];
             set
             {
-                T objectToReplace = this.list[index];
+                var objectToReplace = list[index];
 
-                this.list[index] = value;
+                list[index] = value;
 
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value, objectToReplace, index));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, value,
+                    objectToReplace, index));
             }
         }
 
         public void Add(T item)
         {
-            this.list.Add(item);
+            list.Add(item);
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, this.list.Count - 1));
-            this.OnPropertyChanged("Count");
-            this.OnPropertyChanged("Item[]");
+            OnCollectionChanged(
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, list.Count - 1));
+            OnPropertyChanged("Count");
+            OnPropertyChanged("Item[]");
         }
+
+        public void Clear()
+        {
+            list.Clear();
+
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnPropertyChanged("Count");
+            OnPropertyChanged("Item[]");
+        }
+
+        public bool Contains(T item)
+        {
+            return list.Contains(item);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            list.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public int IndexOf(T item)
+        {
+            return list.IndexOf(item);
+        }
+
+        public void Insert(int index, T item)
+        {
+            list.Insert(index, item);
+
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+            OnPropertyChanged("Count");
+            OnPropertyChanged("Item[]");
+        }
+
+        public bool Remove(T item)
+        {
+            var removed = list.Remove(item);
+
+            if (removed)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+                OnPropertyChanged("Count");
+                OnPropertyChanged("Item[]");
+            }
+
+            return removed;
+        }
+
+        public void RemoveAt(int index)
+        {
+            var objectToRemove = list[index];
+
+            list.RemoveAt(index);
+
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                objectToRemove, index));
+            OnPropertyChanged("Count");
+            OnPropertyChanged("Item[]");
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void AddRange(IEnumerable<T> collection)
         {
@@ -65,106 +127,47 @@ namespace Rareform.Collections
 
             if (itemsToAdd.Count != 0)
             {
-                int currentCount = this.Count;
+                var currentCount = Count;
 
-                if (this.ShouldReset(itemsToAdd.Count, currentCount))
+                if (ShouldReset(itemsToAdd.Count, currentCount))
                 {
-                    this.list.AddRange(itemsToAdd);
-                    this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                    this.OnPropertyChanged("Count");
-                    this.OnPropertyChanged("Item[]");
+                    list.AddRange(itemsToAdd);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    OnPropertyChanged("Count");
+                    OnPropertyChanged("Item[]");
                 }
 
                 else
                 {
-                    foreach (T item in itemsToAdd)
-                    {
-                        this.Add(item);
-                    }
+                    foreach (var item in itemsToAdd) Add(item);
                 }
             }
-        }
-
-        public void Clear()
-        {
-            this.list.Clear();
-
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            this.OnPropertyChanged("Count");
-            this.OnPropertyChanged("Item[]");
-        }
-
-        public bool Contains(T item)
-        {
-            return this.list.Contains(item);
-        }
-
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            this.list.CopyTo(array, arrayIndex);
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return this.list.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
-        public int IndexOf(T item)
-        {
-            return this.list.IndexOf(item);
-        }
-
-        public void Insert(int index, T item)
-        {
-            this.list.Insert(index, item);
-
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
-            this.OnPropertyChanged("Count");
-            this.OnPropertyChanged("Item[]");
         }
 
         public void InsertRange(int index, IEnumerable<T> collection)
         {
             IList<T> collectionToInsert = collection.ToList();
 
-            this.list.InsertRange(index, collectionToInsert);
+            list.InsertRange(index, collectionToInsert);
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)collectionToInsert, index));
-            this.OnPropertyChanged("Count");
-            this.OnPropertyChanged("Item[]");
-        }
-
-        public bool Remove(T item)
-        {
-            bool removed = this.list.Remove(item);
-
-            if (removed)
-            {
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
-                this.OnPropertyChanged("Count");
-                this.OnPropertyChanged("Item[]");
-            }
-
-            return removed;
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                (IList)collectionToInsert, index));
+            OnPropertyChanged("Count");
+            OnPropertyChanged("Item[]");
         }
 
         public int RemoveAll(Func<T, bool> match)
         {
-            var removedList = new List<KeyValuePair<int, T>>(this.list.Capacity);
-            int previousCount = this.Count;
+            var removedList = new List<KeyValuePair<int, T>>(list.Capacity);
+            var previousCount = Count;
 
-            for (int i = 0; i < this.list.Count; i++)
+            for (var i = 0; i < list.Count; i++)
             {
-                T item = this.list[i];
+                var item = list[i];
 
                 if (match(item))
                 {
-                    this.list.RemoveAt(i);
+                    list.RemoveAt(i);
                     removedList.Add(new KeyValuePair<int, T>(i, item));
                     i--;
                 }
@@ -172,97 +175,75 @@ namespace Rareform.Collections
 
             if (removedList.Count != 0)
             {
-                if (this.ShouldReset(removedList.Count, previousCount))
-                {
-                    this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                }
+                if (ShouldReset(removedList.Count, previousCount))
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 
                 else
-                {
-                    foreach (KeyValuePair<int, T> pair in removedList)
-                    {
-                        this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, pair.Value, pair.Key));
-                    }
-                }
+                    foreach (var pair in removedList)
+                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                            pair.Value, pair.Key));
 
-                this.OnPropertyChanged("Count");
-                this.OnPropertyChanged("Item[]");
+                OnPropertyChanged("Count");
+                OnPropertyChanged("Item[]");
             }
 
             return removedList.Count;
         }
 
-        public void RemoveAt(int index)
-        {
-            T objectToRemove = this.list[index];
-
-            this.list.RemoveAt(index);
-
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, objectToRemove, index));
-            this.OnPropertyChanged("Count");
-            this.OnPropertyChanged("Item[]");
-        }
-
         public void Reverse()
         {
-            this.list.Reverse();
+            list.Reverse();
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            this.OnPropertyChanged("Item[]");
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnPropertyChanged("Item[]");
         }
 
         public void Shuffle()
         {
-            this.Shuffle(x => Guid.NewGuid());
+            Shuffle(x => Guid.NewGuid());
         }
 
         public void Shuffle<TKey>(Func<T, TKey> keySelector)
         {
-            var newList = new List<T>(this.Capacity);
+            var newList = new List<T>(Capacity);
             newList.AddRange(this.OrderBy(keySelector));
 
-            this.list.Clear();
-            this.list.AddRange(newList);
+            list.Clear();
+            list.AddRange(newList);
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            this.OnPropertyChanged("Item[]");
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnPropertyChanged("Item[]");
         }
 
         public void Sort()
         {
-            this.list.Sort();
+            list.Sort();
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            this.OnPropertyChanged("Item[]");
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnPropertyChanged("Item[]");
         }
 
         public void Sort(Func<T, T, int> comparison)
         {
-            this.list.Sort((x, y) => comparison(x, y));
+            list.Sort((x, y) => comparison(x, y));
 
-            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            this.OnPropertyChanged("Item[]");
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnPropertyChanged("Item[]");
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (this.CollectionChanged != null)
-            {
-                this.CollectionChanged(this, e);
-            }
+            if (CollectionChanged != null) CollectionChanged(this, e);
         }
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private bool ShouldReset(int changeLength, int currentLength)
         {
-            return (double)changeLength / currentLength > this.resetThreshold;
+            return (double)changeLength / currentLength > resetThreshold;
         }
     }
 }

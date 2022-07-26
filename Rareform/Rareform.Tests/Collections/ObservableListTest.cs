@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using Rareform.Collections;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Linq;
+using NUnit.Framework;
+using Rareform.Collections;
 
 namespace Rareform.Tests.Collections
 {
@@ -27,7 +27,7 @@ namespace Rareform.Tests.Collections
         public void AddRange_FiresCollectionChanged()
         {
             var list = new ObservableList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            int eventFireCount = 0;
+            var eventFireCount = 0;
 
             list.CollectionChanged += (sender, args) =>
             {
@@ -57,7 +57,8 @@ namespace Rareform.Tests.Collections
         {
             var list = new ObservableList<int> { 1, 2, 3, 4, 5 };
 
-            list.CollectionChanged += (sender, args) => Assert.AreEqual(NotifyCollectionChangedAction.Reset, args.Action);
+            list.CollectionChanged +=
+                (sender, args) => Assert.AreEqual(NotifyCollectionChangedAction.Reset, args.Action);
 
             list.AddRange(new[] { 6, 7, 8, 9, 10 });
         }
@@ -96,7 +97,8 @@ namespace Rareform.Tests.Collections
         {
             var list = new ObservableList<int> { 1, 2, 3, 4, 4, 3, 2, 1 };
 
-            list.CollectionChanged += (sender, args) => Assert.AreEqual(NotifyCollectionChangedAction.Reset, args.Action);
+            list.CollectionChanged +=
+                (sender, args) => Assert.AreEqual(NotifyCollectionChangedAction.Reset, args.Action);
 
             list.RemoveAll(item => item == 1 || item == 3);
         }
@@ -106,7 +108,7 @@ namespace Rareform.Tests.Collections
         {
             var list = new ObservableList<int> { 1, 2, 3, 4, 4, 3, 2, 1 };
 
-            int removedCount = list.RemoveAll(item => item == 1 || item == 3);
+            var removedCount = list.RemoveAll(item => item == 1 || item == 3);
 
             Assert.AreEqual(4, removedCount);
             Assert.IsTrue(new[] { 2, 4, 4, 2 }.SequenceEqual(list));
@@ -117,7 +119,7 @@ namespace Rareform.Tests.Collections
         {
             var list = new ObservableList<int> { 1, 2, 3 };
 
-            int removedCount = list.RemoveAll(item => item == 2);
+            var removedCount = list.RemoveAll(item => item == 2);
 
             Assert.AreEqual(1, removedCount);
             Assert.IsTrue(new[] { 1, 3 }.SequenceEqual(list));
@@ -127,7 +129,7 @@ namespace Rareform.Tests.Collections
         public void RemoveAll_RemovesItems_FiresCollectionChanges()
         {
             var list = new ObservableList<int> { 1, 2, 3, 4, 4, 3, 2, 1 };
-            int eventFireCount = 0;
+            var eventFireCount = 0;
 
             list.CollectionChanged += (sender, args) =>
             {

@@ -5,7 +5,7 @@ using Rareform.Extensions;
 namespace Rareform.IO
 {
     /// <summary>
-    /// Listens to the USB ports and raises events when a removable device has been insterted or removed.
+    ///     Listens to the USB ports and raises events when a removable device has been insterted or removed.
     /// </summary>
     public class RemovableDriveWatcher : IDisposable
     {
@@ -14,27 +14,38 @@ namespace Rareform.IO
         private ManagementEventWatcher removeWatcher;
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="RemovableDriveWatcher"/> class from being created.
+        ///     Prevents a default instance of the <see cref="RemovableDriveWatcher" /> class from being created.
         /// </summary>
         private RemovableDriveWatcher()
-        { }
+        {
+        }
 
         /// <summary>
-        /// Occurs when a removable drive has is inserted.
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            instance.insertWatcher.Dispose();
+            instance.removeWatcher.Dispose();
+            instance = null;
+        }
+
+        /// <summary>
+        ///     Occurs when a removable drive has is inserted.
         /// </summary>
         public event EventHandler DriveInserted;
 
         /// <summary>
-        /// Occurs when a removable drive is removed.
+        ///     Occurs when a removable drive is removed.
         /// </summary>
         public event EventHandler DriveRemoved;
 
         /// <summary>
-        /// Creates a new <see cref="RemovableDriveWatcher"/>.
+        ///     Creates a new <see cref="RemovableDriveWatcher" />.
         /// </summary>
         /// <returns>
-        /// A new instance of the <see cref="RemovableDriveWatcher"/> class,
-        /// if none has been created yet; otherwise, the singleton instance.
+        ///     A new instance of the <see cref="RemovableDriveWatcher" /> class,
+        ///     if none has been created yet; otherwise, the singleton instance.
         /// </returns>
         public static RemovableDriveWatcher Create()
         {
@@ -48,16 +59,6 @@ namespace Rareform.IO
             return instance;
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            instance.insertWatcher.Dispose();
-            instance.removeWatcher.Dispose();
-            instance = null;
-        }
-
         private void StartInsertWatcher()
         {
             var scope = new ManagementScope("root\\CIMV2") { Options = { EnablePrivileges = true } };
@@ -69,10 +70,10 @@ namespace Rareform.IO
                 Condition = "TargetInstance ISA 'Win32_USBControllerdevice'"
             };
 
-            this.insertWatcher = new ManagementEventWatcher(scope, query);
-            this.insertWatcher.EventArrived += (sender, e) => this.DriveInserted.RaiseSafe(this, EventArgs.Empty);
+            insertWatcher = new ManagementEventWatcher(scope, query);
+            insertWatcher.EventArrived += (sender, e) => DriveInserted.RaiseSafe(this, EventArgs.Empty);
 
-            this.insertWatcher.Start();
+            insertWatcher.Start();
         }
 
         private void StartRemoveWatcher()
@@ -86,10 +87,10 @@ namespace Rareform.IO
                 Condition = "TargetInstance ISA 'Win32_USBControllerdevice'"
             };
 
-            this.removeWatcher = new ManagementEventWatcher(scope, query);
-            this.removeWatcher.EventArrived += (sender, e) => this.DriveRemoved.RaiseSafe(this, EventArgs.Empty);
+            removeWatcher = new ManagementEventWatcher(scope, query);
+            removeWatcher.EventArrived += (sender, e) => DriveRemoved.RaiseSafe(this, EventArgs.Empty);
 
-            this.removeWatcher.Start();
+            removeWatcher.Start();
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using Rareform.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
+using Rareform.Collections;
 
 namespace Rareform.Tests.Collections
 {

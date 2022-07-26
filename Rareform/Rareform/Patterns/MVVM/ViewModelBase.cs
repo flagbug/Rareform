@@ -6,19 +6,19 @@ using Rareform.Validation;
 namespace Rareform.Patterns.MVVM
 {
     /// <summary>
-    /// Provides an abstract and generic view model base class, which
-    /// implements the <see cref="INotifyPropertyChanged"/> interface.
+    ///     Provides an abstract and generic view model base class, which
+    ///     implements the <see cref="INotifyPropertyChanged" /> interface.
     /// </summary>
     /// <typeparam name="T">Type of the concrete view model.</typeparam>
     public abstract class ViewModelBase<T> : INotifyPropertyChanged
     {
         /// <summary>
-        /// Occurs when a property value changes.
+        ///     Occurs when a property value changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Called when a property has changed.
+        ///     Called when a property has changed.
         /// </summary>
         /// <typeparam name="TValue">The type of the property.</typeparam>
         /// <param name="propertySelector">The property selector.</param>
@@ -27,14 +27,12 @@ namespace Rareform.Patterns.MVVM
             if (propertySelector == null)
                 Throw.ArgumentNullException(() => propertySelector);
 
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 var memberExpression = propertySelector.Body as MemberExpression;
 
-                if (memberExpression != null && this.PropertyChanged != null)
-                {
-                    this.PropertyChanged(this, new PropertyChangedEventArgs(memberExpression.Member.Name));
-                }
+                if (memberExpression != null && PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(memberExpression.Member.Name));
             }
         }
     }

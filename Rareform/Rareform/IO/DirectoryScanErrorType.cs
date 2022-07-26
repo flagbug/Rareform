@@ -24,23 +24,23 @@ using System;
 namespace Rareform.IO
 {
     /// <summary>
-    /// Specifies which error occured during the directory scan.
+    ///     Specifies which error occured during the directory scan.
     /// </summary>
     [Serializable]
     public enum DirectoryScanErrorType
     {
         /// <summary>
-        /// Indicates a security exception during the directory scan.
+        ///     Indicates a security exception during the directory scan.
         /// </summary>
         SecurityError,
 
         /// <summary>
-        /// Indicates an access exception during the directory scan.
+        ///     Indicates an access exception during the directory scan.
         /// </summary>
         AccessError,
 
         /// <summary>
-        /// Indicates that a directory could not be found during the scan.
+        ///     Indicates that a directory could not be found during the scan.
         /// </summary>
         DirectoryNotFoundError
     }

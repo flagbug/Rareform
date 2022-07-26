@@ -7,17 +7,17 @@ using Rareform.Validation;
 namespace Rareform.Serialization
 {
     /// <summary>
-    /// Provides a static and generic xml serializer to serialize collections an single objects.
+    ///     Provides a static and generic xml serializer to serialize collections an single objects.
     /// </summary>
     public static class GenericXmlSerializer
     {
         /// <summary>
-        /// Deserializes the collection from the specified path.
+        ///     Deserializes the collection from the specified path.
         /// </summary>
         /// <typeparam name="T">The type of the serialized items</typeparam>
         /// <param name="path">The path of the file with the deserialized data.</param>
         /// <returns>
-        /// The deserialized collection.
+        ///     The deserialized collection.
         /// </returns>
         public static ICollection<T> DeserializeCollection<T>(string path) where T : class, new()
         {
@@ -28,12 +28,12 @@ namespace Rareform.Serialization
         }
 
         /// <summary>
-        /// Deserializes the item at the specified path.
+        ///     Deserializes the item at the specified path.
         /// </summary>
         /// <typeparam name="T">The type of the serialized item</typeparam>
         /// <param name="path">The path of the file with the serialized data.</param>
         /// <returns>
-        /// The deserialized item.
+        ///     The deserialized item.
         /// </returns>
         public static T DeserializeItem<T>(string path) where T : class, new()
         {
@@ -44,7 +44,7 @@ namespace Rareform.Serialization
         }
 
         /// <summary>
-        /// Serializes the specified collection at the specified path.
+        ///     Serializes the specified collection at the specified path.
         /// </summary>
         /// <typeparam name="T">Type of the items to serialize.</typeparam>
         /// <param name="collection">The items to serialize.</param>
@@ -61,7 +61,7 @@ namespace Rareform.Serialization
         }
 
         /// <summary>
-        /// Serializes the specified item to the specified path.
+        ///     Serializes the specified item to the specified path.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="item">The item to serialize.</param>
@@ -78,7 +78,7 @@ namespace Rareform.Serialization
         }
 
         /// <summary>
-        /// Executes the intern Serialize method.
+        ///     Executes the intern Serialize method.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="object">The object to serialize.</param>
@@ -86,7 +86,7 @@ namespace Rareform.Serialization
         private static void InternalSerialize<T>(T @object, string path) where T : class
         {
             if (@object == null)
-                Throw.ArgumentNullException(() => @path);
+                Throw.ArgumentNullException(() => path);
 
             if (path == null)
                 Throw.ArgumentNullException(() => path);
@@ -100,7 +100,7 @@ namespace Rareform.Serialization
         }
 
         /// <summary>
-        /// Executes the intern Deserialize method.
+        ///     Executes the intern Deserialize method.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="path">The path of the file with the serialized data.</param>

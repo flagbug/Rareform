@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Rareform.Patterns.MVVM;
-using System;
 
 namespace Rareform.Tests.Patterns.MVVM
 {
@@ -12,14 +12,13 @@ namespace Rareform.Tests.Patterns.MVVM
         {
             const bool expected = true;
 
-            Action<object> execute = (arg) =>
-                { };
+            Action<object> execute = arg => { };
 
-            Predicate<object> canExecute = (arg) => true;
+            Predicate<object> canExecute = arg => true;
 
             var target = new RelayCommand(execute, canExecute);
 
-            bool actual = target.CanExecute(null);
+            var actual = target.CanExecute(null);
 
             Assert.AreEqual(expected, actual);
         }
@@ -30,12 +29,9 @@ namespace Rareform.Tests.Patterns.MVVM
             const bool expected = true;
             bool actual;
 
-            Action<object> execute = (arg) =>
-            {
-                actual = true;
-            };
+            Action<object> execute = arg => { actual = true; };
 
-            Predicate<object> canExecute = (arg) => true;
+            Predicate<object> canExecute = arg => true;
 
             var target = new RelayCommand(execute, canExecute);
 

@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using Rareform.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
+using Rareform.Extensions;
 
 namespace Rareform.Tests.Extensions
 {
@@ -17,7 +17,7 @@ namespace Rareform.Tests.Extensions
 
             const bool expected = false;
 
-            bool actual = value.ContainsAny(items);
+            var actual = value.ContainsAny(items);
 
             Assert.AreEqual(expected, actual);
         }
@@ -30,7 +30,7 @@ namespace Rareform.Tests.Extensions
 
             const bool expected = true;
 
-            bool actual = value.ContainsAny(items);
+            var actual = value.ContainsAny(items);
 
             Assert.AreEqual(expected, actual);
         }
@@ -50,7 +50,7 @@ namespace Rareform.Tests.Extensions
 
             const bool expected = false;
 
-            bool actual = value.ContainsAny(6, 7);
+            var actual = value.ContainsAny(6, 7);
 
             Assert.AreEqual(expected, actual);
         }
@@ -62,7 +62,7 @@ namespace Rareform.Tests.Extensions
 
             const bool expected = true;
 
-            bool actual = value.ContainsAny(1, 2);
+            var actual = value.ContainsAny(1, 2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -92,7 +92,7 @@ namespace Rareform.Tests.Extensions
         {
             IEnumerable<int> current = new[] { 1, 2, 3, 4 };
 
-            IEnumerable<int> skipped = current.SkipWhileInclusive(i => i != 3);
+            var skipped = current.SkipWhileInclusive(i => i != 3);
 
             Assert.IsTrue(new[] { 3, 4 }.SequenceEqual(skipped));
         }
@@ -104,7 +104,7 @@ namespace Rareform.Tests.Extensions
 
             Func<int, int> creationFunc = i => i;
 
-            int created = current.CreateUnique(creationFunc);
+            var created = current.CreateUnique(creationFunc);
 
             Assert.AreEqual(4, created);
             Assert.IsFalse(current.Contains(created));
